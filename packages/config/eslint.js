@@ -108,7 +108,11 @@ export async function dssEslint({ kind = 'site', ignores = [] } = {}) {
       js.configs.recommended,
       ...tseslint.configs.recommended,
       shared,
-      { files: ['cli/**/*.ts', 'scripts/**/*.{js,mjs,ts}'], rules: { 'no-console': 'off' } },
+      {
+        files: ['cli/**/*.ts', 'scripts/**/*.{js,mjs,ts}'],
+        languageOptions: { globals: { console: 'readonly', process: 'readonly', URL: 'readonly' } },
+        rules: { 'no-console': 'off' },
+      },
     ])
   }
   const { default: vitals } = await import('eslint-config-next/core-web-vitals')
