@@ -50,6 +50,8 @@ def summarize(transcript: Path) -> dict:
             text = message["content"].strip()
             if skill is None and "<command-name>/dss-" in text:
                 skill = text.split("<command-name>/", 1)[1].split("<", 1)[0]
+            elif skill is None and text.startswith("/dss-"):  # headless: plain "/dss-x args"
+                skill = text[1:].split()[0]
         usage = message.get("usage")
         message_id = message.get("id")
         if entry.get("type") == "assistant" and usage and message_id not in seen:

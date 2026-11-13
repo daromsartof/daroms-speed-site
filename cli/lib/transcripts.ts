@@ -64,7 +64,10 @@ function usageOf(raw: Record<string, unknown>): Usage {
 export function stepMarker(entry: Entry): string | undefined {
   const content = entry.message?.content
   if (entry.type === 'user' && typeof content === 'string') {
-    const name = /<command-name>\/((?:dss|site)-[\w-]+)<\/command-name>/.exec(content)?.[1]
+    // Interactive sessions wrap the command in <command-name>; headless (`claude -p "/dss-x"`) keeps plain text.
+    const name =
+      /<command-name>\/((?:dss|site)-[\w-]+)<\/command-name>/.exec(content)?.[1] ??
+      /^\/((?:dss|site)-[\w-]+)(?:\s|$)/.exec(content.trim())?.[1]
     return name && !HELPERS.has(name) ? name : undefined
   }
   if (entry.type !== 'assistant' || !Array.isArray(content)) return undefined

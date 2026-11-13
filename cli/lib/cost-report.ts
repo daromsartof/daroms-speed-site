@@ -175,7 +175,7 @@ export function renderReport(name: string, s: CostSummary, now = new Date()): st
         `| \`${x.id.slice(0, 8)}\` | ${localTime(x.started)} | ${duration(x.seconds)} | ${x.totals.turns} | ${money(x.totals.cost)} |`,
     ),
     '',
-    '## À retenir',
+    '## Key points',
     '',
     ...highlights(s).map((l) => `- ${l}`),
     '',

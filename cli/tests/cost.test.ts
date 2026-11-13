@@ -104,6 +104,24 @@ describe('transcripts', () => {
     expect(summary.total.cost).toBeCloseTo(7 * 20)
   })
 
+  it('detects headless slash commands', () => {
+    const headless = parseSession(
+      's2',
+      [
+        line({
+          type: 'user',
+          timestamp: '2026-11-13T12:00:00Z',
+          cwd: '/sites/kora',
+          message: { content: '/dss-copy home' },
+        }),
+        reply('h1', '2026-11-13T12:00:05Z'),
+      ].join('\n'),
+      [],
+      '/sites/kora',
+    )
+    expect(headless.turns.map((t) => t.step)).toEqual(['dss-copy'])
+  })
+
   it('writes the report in English', () => {
     const report = renderReport('Kora', summarize([session]), new Date('2026-11-13T18:00:00Z'))
     expect(report).toContain('# Cost of Kora')
@@ -112,6 +130,7 @@ describe('transcripts', () => {
     expect(report).toContain('Most expensive step: `dss-new`')
     expect(money(1234.5)).toBe('$1,234.50')
     expect(money(0.001)).toBe('< $0.01')
+    expect(report).toContain('## Key points')
     expect(tokens(559_283)).toBe('559k')
   })
 })
