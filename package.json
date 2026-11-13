@@ -41,6 +41,9 @@
   "devDependencies": {
     "@dss/config": "workspace:*",
     "@dss/design": "workspace:*",
+    "@dss/security": "workspace:*",
+    "@dss/seo": "workspace:*",
+    "@dss/site": "workspace:*",
     "@eslint/js": "9.39.5",
     "@types/node": "26.6.6",
     "@types/react": "19.3.0",

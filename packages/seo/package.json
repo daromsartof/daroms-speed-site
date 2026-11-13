@@ -1,0 +1,18 @@
+{
+  "name": "@dss/seo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "SEO and GEO from the site manifest: page metadata (canonical, hreflang, noindex on previews), JSON-LD graph builders, robots, sitemap and llms.txt.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./react": "./src/react.tsx"
+  },
+  "dependencies": {
+    "@dss/site": "workspace:*"
+  },
+  "peerDependencies": {
+    "next": ">=16.4.5",
+    "react": ">=19"
+  }
+}

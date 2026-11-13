@@ -1,0 +1,18 @@
+{
+  "name": "@dss/security",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Security defaults: CSP and headers (Node-safe, used by next.config.ts), safeAction for Server Actions (zod, honeypot, Turnstile, rate limit), env validation, client IP.",
+  "exports": {
+    "./headers": "./src/headers.ts",
+    "./server": "./src/server.ts"
+  },
+  "dependencies": {
+    "server-only": "0.0.1",
+    "zod": "4.6.7"
+  },
+  "peerDependencies": {
+    "next": ">=16.4.5"
+  }
+}

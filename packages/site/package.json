@@ -1,0 +1,17 @@
+{
+  "name": "@dss/site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Site manifest (zod) and withDss(): the Next.js config built from it (security headers, CSP, images, redirects, deploy target). Node-safe: imported by next.config.ts and the CLI.",
+  "exports": {
+    "./config": "./src/config.ts"
+  },
+  "dependencies": {
+    "@dss/security": "workspace:*",
+    "zod": "4.6.7"
+  },
+  "peerDependencies": {
+    "next": ">=16.4.5"
+  }
+}
