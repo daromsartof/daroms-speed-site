@@ -49,7 +49,7 @@ AimKit, factory and the CLI reference. Agents can read [docs/llms.txt](docs/llms
 ```bash
 pnpm install
 pnpm check              # types, lint, format, Vitest, hook tests
-pnpm catalog && pnpm docs
+pnpm catalog && pnpm run docs   # `pnpm docs` alone is npm docs
 node cli/dss.ts new demo --link     # try changes in a linked site
 pnpm verify:registry <site-dir>     # type-check every registry section inside a site
 ```

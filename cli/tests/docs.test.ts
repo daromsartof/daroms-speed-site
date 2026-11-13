@@ -15,7 +15,7 @@ import { CORE_DIR } from '../lib/paths.ts'
 const docs = join(CORE_DIR, 'docs')
 
 describe('docs', () => {
-  it('generated files are up to date (run pnpm docs)', () => {
+  it('generated files are up to date (run pnpm run docs)', () => {
     expect(readFileSync(join(docs, 'cli.md'), 'utf8')).toBe(buildCliDoc())
     expect(readFileSync(join(docs, 'llms.txt'), 'utf8')).toBe(buildLlms(docs))
     expect(readFileSync(join(docs, 'llms-full.txt'), 'utf8')).toBe(buildLlmsFull(docs, CORE_DIR))
