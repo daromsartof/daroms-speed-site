@@ -29,3 +29,10 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
   - `@dss/data`: Drizzle on SQLite (D1 binding, libSQL), id/timestamp columns, drizzle-kit config per driver.
 - Template now uses the manifest, the DNA and the packages. Golden page: Lighthouse mobile 96 performance,
   100 accessibility, 100 best practices, 100 SEO; OpenNext build green.
+- `dss` CLI (TypeScript run by Node in a site, esbuild bundle for npm): `new` (template copy, core as submodule pinned
+  to the creating commit, `--copy` snapshot or `--link`, install, DNA roll with history, preset pages), `dna roll|show`,
+  `theme`, `g page|section`, `add list|section`, `doctor` (manifest, theme freshness, pages, placeholders, types, lint),
+  `dev`. Verified: vitrine and landing presets build fully static in submodule, copy, link and npm-installed modes.
+- Section registry (10 sections: hero, features, services, story, testimonials, cta, faq, contact, stats, steps) with
+  version stamps, JSON placeholder copy and archetype fit; presets `vitrine`, `landing`, `blank`; site chrome (header
+  with no-JS mobile menu, footer, skip link) and placeholder images flagged by `dss doctor`.
