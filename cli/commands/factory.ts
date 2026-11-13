@@ -3,7 +3,7 @@ import { join, resolve } from 'node:path'
 import { bool, flag, type Args } from '../lib/args.ts'
 import { capture, run } from '../lib/exec.ts'
 import { fail, log } from '../lib/log.ts'
-import { CORE_DIR } from '../lib/paths.ts'
+import { brainDir, CORE_DIR } from '../lib/paths.ts'
 
 export type Brief = {
   slug: string
@@ -29,21 +29,38 @@ export function parseBrief(text: string, fallbackSlug: string): Brief {
 
 type AgentResult = { cost?: number; turns?: number; result?: string }
 
-async function runAgent(site: string, name: string, maxTurns: string): Promise<AgentResult> {
-  const result = await capture(
-    [
-      'claude',
-      '-p',
-      '--permission-mode',
-      'acceptEdits',
-      '--max-turns',
-      maxTurns,
-      '--output-format',
-      'json',
-      `/dss-site --auto ${name}`,
-    ],
-    { cwd: site, env: { CLAUDE_PROJECT_DIR: site } },
+/**
+ * The headless Claude command for one site. A fresh folder is not a trusted workspace, so Claude ignores the
+ * project's `permissions.allow`: the same rules are passed on the command line, with the brain as an extra dir.
+ */
+export function agentCommand(site: string, name: string, maxTurns: string): string[] {
+  const settings = [join(site, '.claude/settings.json'), join(site, 'core/_ai/settings.json')].find(
+    (f) => existsSync(f),
   )
+  const allow = settings
+    ? ((JSON.parse(readFileSync(settings, 'utf8')) as { permissions?: { allow?: string[] } })
+        .permissions?.allow ?? [])
+    : []
+  return [
+    'claude',
+    '-p',
+    `/dss-site --auto ${name}`,
+    '--permission-mode',
+    'acceptEdits',
+    '--max-turns',
+    maxTurns,
+    '--output-format',
+    'json',
+    ...(existsSync(brainDir()) ? ['--add-dir', brainDir()] : []),
+    ...(allow.length ? [`--allowedTools=${allow.join(',')}`] : []),
+  ]
+}
+
+async function runAgent(site: string, name: string, maxTurns: string): Promise<AgentResult> {
+  const result = await capture(agentCommand(site, name, maxTurns), {
+    cwd: site,
+    env: { CLAUDE_PROJECT_DIR: site },
+  })
   const json = result.out
     .split('\n')
     .reverse()

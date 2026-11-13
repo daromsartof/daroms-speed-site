@@ -203,6 +203,20 @@ describe('factory and upgrade helpers', () => {
     expect(parseBrief('# No front matter', 'fallback').slug).toBe('fallback')
   })
 
+  it('passes the site permissions to headless Claude (untrusted folders ignore them)', async () => {
+    const { agentCommand } = await import('../commands/factory.ts')
+    const site = mkdtempSync(join(tmpdir(), 'dss-agent-'))
+    mkdirSync(join(site, '.claude'))
+    writeFileSync(
+      join(site, '.claude/settings.json'),
+      JSON.stringify({ permissions: { allow: ['Bash(pnpm dss:*)', 'Bash(git status:*)'] } }),
+    )
+    const cmd = agentCommand(site, 'Acme', '50')
+    expect(cmd.slice(0, 3)).toEqual(['claude', '-p', '/dss-site --auto Acme'])
+    expect(cmd).toContain('--allowedTools=Bash(pnpm dss:*),Bash(git status:*)')
+    expect(cmd[cmd.indexOf('--max-turns') + 1]).toBe('50')
+  })
+
   it('aligns only shared, non-workspace dependencies', async () => {
     const { alignVersions } = await import('../commands/upgrade.ts')
     const site = {

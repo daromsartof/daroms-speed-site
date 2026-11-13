@@ -105,3 +105,5 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
 - GitHub Actions on Node 24 (framework and site templates): checkout v7, setup-node v7, setup-python v7,
   pnpm/action-setup v6; checkouts drop persisted credentials, and the publish and deploy jobs run without a dependency
   cache.
+- `dss factory run --agent` passes the site's permission rules to headless Claude Code (untrusted folders ignore project
+  `permissions.allow`, which blocked every `pnpm dss` command) and adds the brain directory.

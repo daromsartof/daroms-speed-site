@@ -27,7 +27,9 @@ pnpm dss factory run ./briefs --out ./sites --agent    # plus /dss-site --auto i
 ```
 
 A brief is Markdown with front matter (`slug`, `name`, `preset`, `industry`, `mood`, `url`, `modules`); the body
-becomes `site.spec.md`. Results and costs go to `factory.log.jsonl`.
+becomes `site.spec.md`. Results and costs go to `factory.log.jsonl`. A new site folder is not a trusted Claude Code
+workspace, so the agent run passes the site's `permissions.allow` on the command line (and the brain with `--add-dir`);
+edits are accepted, every other command still needs those rules. The run stops before deploy.
 
 ## Upgrades and releases
 
