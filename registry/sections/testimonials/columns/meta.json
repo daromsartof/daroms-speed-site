@@ -1,0 +1,18 @@
+{
+  "id": "testimonials",
+  "variant": "columns",
+  "component": "Testimonials",
+  "title": "Testimonial columns",
+  "description": "Three equal ruled columns of quotes. Calmer than a lead quote; good for services and products.",
+  "fits": [
+    "swiss",
+    "institutional",
+    "tech-noir",
+    "playful",
+    "minimal-mono",
+    "retro-print",
+    "kinetic-type",
+    "brutalist"
+  ],
+  "client": false
+}

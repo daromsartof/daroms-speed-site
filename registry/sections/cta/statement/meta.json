@@ -1,0 +1,17 @@
+{
+  "id": "cta",
+  "variant": "statement",
+  "component": "Cta",
+  "title": "Statement CTA",
+  "description": "A display-size sentence that is itself the link. Quiet, confident close for refined brands.",
+  "fits": [
+    "editorial",
+    "luxury",
+    "architectural",
+    "craft",
+    "organic",
+    "minimal-mono",
+    "institutional"
+  ],
+  "client": false
+}

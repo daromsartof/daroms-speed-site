@@ -59,6 +59,7 @@ Without a variant, a variant that fits the DNA archetype is picked with the site
 |---|---|---|---|
 | contact/details | Contact | Channels as a definition list plus hours. Page-level h1 (use on the contact page). | editorial, swiss, craft, institutional, organic, luxury, architectural, minimal-mono |
 | cta/band | Cta | Ink background, one line, one button. Ends a page. | editorial, swiss, brutalist, institutional, magazine, tech-noir, kinetic-type, craft |
+| cta/statement | Cta | A display-size sentence that is itself the link. Quiet, confident close for refined brands. | editorial, luxury, architectural, craft, organic, minimal-mono, institutional |
 | faq/accordion | Faq | Radix accordion with FAQPage structured data. | editorial, swiss, institutional, organic, playful, tech-noir, minimal-mono, craft |
 | features/bento | Features | Uneven tile grid (one large tile, optional metrics), staggered reveal. Products and studios. | tech-noir, playful, kinetic-type, brutalist |
 | features/numbered | Features | Ruled, numbered list beside a title column. Avoids the three-equal-cards pattern. | editorial, swiss, institutional, minimal-mono, magazine, tech-noir |
@@ -68,15 +69,19 @@ Without a variant, a variant that fits the DNA archetype is picked with the site
 | hero/mono-index | Hero | Monospace statement, factual lines and a numbered link index. Portfolios, consultants, studios. | minimal-mono, swiss, tech-noir, brutalist |
 | hero/scene | Hero | Text left, a lazy three.js shader panel right (poster fallback). For DNA three level hero or immersive. | tech-noir, kinetic-type, playful |
 | hero/split-editorial | Hero | Oversized display title left, body and actions right. Text-led, no image required. | editorial, craft, institutional, architectural, luxury, swiss |
+| hero/split-media | Hero | Text and actions beside a portrait photo, optional proof facts under a rule. Needs one real photo. | institutional, editorial, craft, organic, luxury, retro-print |
 | logos/marquee | Logos | Real clients or partners only. Monochrome SVG logos or names in the display face. | swiss, tech-noir, magazine, kinetic-type, playful, brutalist, institutional, editorial |
 | pricing/columns | Pricing | Joined columns on hairlines, one featured plan. Products, memberships, packages. | swiss, tech-noir, playful, minimal-mono, institutional, editorial, organic |
 | projects/index | Projects | Lead project with a wide image, then a ruled table. Architects, agencies, builders, portfolios. | architectural, editorial, swiss, minimal-mono, brutalist, craft |
 | quote/manifesto | Manifesto | Display-size belief statement with one accent phrase. Brand pause between dense sections. | editorial, luxury, craft, architectural, kinetic-type, organic, magazine |
+| services/grid-numbered | Services | Two-column numbered list on rules with price lines. Practices, consultancies, products with tiers of service. | swiss, institutional, minimal-mono, brutalist, magazine, tech-noir, playful |
 | services/rows | Services | Full-width ruled rows with optional links and prices. Good for agencies, trades, clinics, restaurants (as a menu). | editorial, craft, institutional, swiss, luxury, architectural, retro-print |
 | stats/figures | Stats | Display-size numbers over a rule. Proof, not decoration. | swiss, magazine, institutional, tech-noir, editorial, brutalist, kinetic-type |
 | steps/timeline | Steps | Horizontal timeline with accent dots. Only for real sequences. | editorial, swiss, craft, tech-noir, playful, organic, institutional |
 | story/split-media | Story | Portrait photo beside a short narrative. Needs a real photo before launch. | editorial, craft, organic, luxury, architectural, institutional |
+| story/stacked | Story | Title, two text columns, then a wide captioned image. Architecture, institutions, magazines. | architectural, editorial, magazine, institutional, swiss, minimal-mono |
 | team/portraits | Team | Portrait grid with roles and one-line bios. Real photos only. | editorial, craft, institutional, organic, architectural, luxury, swiss |
+| testimonials/columns | Testimonials | Three equal ruled columns of quotes. Calmer than a lead quote; good for services and products. | swiss, institutional, tech-noir, playful, minimal-mono, retro-print, kinetic-type, brutalist |
 | testimonials/quotes | Testimonials | One display-size quote, then a two-column list. No avatars or stars by default. | editorial, luxury, craft, institutional, magazine, organic, architectural |
 
 ## Archetypes (design.dna.ts `archetype`)

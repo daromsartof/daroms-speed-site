@@ -1,0 +1,17 @@
+{
+  "id": "services",
+  "variant": "grid-numbered",
+  "component": "Services",
+  "title": "Numbered service grid",
+  "description": "Two-column numbered list on rules with price lines. Practices, consultancies, products with tiers of service.",
+  "fits": [
+    "swiss",
+    "institutional",
+    "minimal-mono",
+    "brutalist",
+    "magazine",
+    "tech-noir",
+    "playful"
+  ],
+  "client": false
+}

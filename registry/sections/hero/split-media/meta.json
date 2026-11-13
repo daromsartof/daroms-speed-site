@@ -1,0 +1,9 @@
+{
+  "id": "hero",
+  "variant": "split-media",
+  "component": "Hero",
+  "title": "Split hero with photo",
+  "description": "Text and actions beside a portrait photo, optional proof facts under a rule. Needs one real photo.",
+  "fits": ["institutional", "editorial", "craft", "organic", "luxury", "retro-print"],
+  "client": false
+}

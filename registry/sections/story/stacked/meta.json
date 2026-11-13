@@ -1,0 +1,9 @@
+{
+  "id": "story",
+  "variant": "stacked",
+  "component": "Story",
+  "title": "Stacked story",
+  "description": "Title, two text columns, then a wide captioned image. Architecture, institutions, magazines.",
+  "fits": ["architectural", "editorial", "magazine", "institutional", "swiss", "minimal-mono"],
+  "client": false
+}

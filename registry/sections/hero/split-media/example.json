@@ -1,0 +1,9 @@
+{
+  "eyebrow": "[Who it is for]",
+  "title": "[The outcome you deliver, in under ten words]",
+  "body": "[Two sentences: what you do, how, and one concrete proof.]",
+  "primary": { "label": "[Main action]", "href": "/contact" },
+  "secondary": { "label": "[Second action]", "href": "/#services" },
+  "image": { "src": "/placeholders/portrait.svg", "alt": "[Describe the real photo]" },
+  "facts": ["[Fact: years]", "[Fact: clients or projects]", "[Fact: location]"]
+}

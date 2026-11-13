@@ -62,7 +62,8 @@
     "build:cli": "node scripts/build-cli.mjs",
     "prepublishOnly": "pnpm check && pnpm build:cli",
     "catalog": "node cli/dss.ts catalog",
-    "test:hooks": "python3 -m unittest discover -s _ai/hooks/tests"
+    "test:hooks": "python3 -m unittest discover -s _ai/hooks/tests",
+    "verify:registry": "node scripts/verify-registry.mjs"
   },
   "devDependencies": {
     "@dss/config": "workspace:*",

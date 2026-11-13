@@ -6,21 +6,36 @@ import { tokenColor } from '@dss/three'
 
 const COUNT = 1400
 
-/** A slowly rotating cloud of points; positions are generated once on the client. */
+/** Seeded generator: the same cloud on every render and every visit (render stays pure). */
+function seeded(seed: number) {
+  let a = seed
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0
+    let t = a
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+/** Points on a thick sphere shell, computed once when the module loads. */
+const POSITIONS = (() => {
+  const random = seeded(7)
+  const array = new Float32Array(COUNT * 3)
+  for (let i = 0; i < COUNT; i++) {
+    const radius = 1.5 + random() * 2.5
+    const theta = random() * Math.PI * 2
+    const phi = Math.acos(2 * random() - 1)
+    array[i * 3] = radius * Math.sin(phi) * Math.cos(theta)
+    array[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
+    array[i * 3 + 2] = radius * Math.cos(phi)
+  }
+  return array
+})()
+
+/** A slowly rotating cloud of points in the DNA accent, tilting with the pointer. */
 export default function ParticlesContent() {
   const points = useRef<Points>(null)
-  const positions = useMemo(() => {
-    const array = new Float32Array(COUNT * 3)
-    for (let i = 0; i < COUNT; i++) {
-      const radius = 1.5 + Math.random() * 2.5
-      const theta = Math.random() * Math.PI * 2
-      const phi = Math.acos(2 * Math.random() - 1)
-      array[i * 3] = radius * Math.sin(phi) * Math.cos(theta)
-      array[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
-      array[i * 3 + 2] = radius * Math.cos(phi)
-    }
-    return array
-  }, [])
   const color = useMemo(() => new Color().setRGB(...tokenColor('accent'), SRGBColorSpace), [])
   useFrame((state, delta) => {
     const cloud = points.current
@@ -31,7 +46,7 @@ export default function ParticlesContent() {
   return (
     <points ref={points}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+        <bufferAttribute attach="attributes-position" args={[POSITIONS, 3]} />
       </bufferGeometry>
       <pointsMaterial
         size={0.035}
