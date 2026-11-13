@@ -9,5 +9,7 @@ export default dssEslint({
     'modules/*/files/**',
     'docs/**',
     '_ai/**',
+    'packages/aimkit/dist/**',
+    'packages/aimkit/extension/**',
   ],
 })

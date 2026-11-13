@@ -21,6 +21,7 @@
     "dss": "node core/cli/dss.ts"
   },
   "dependencies": {
+    "@dss/aimkit": "workspace:*",
     "@dss/design": "workspace:*",
     "@dss/motion": "workspace:*",
     "@dss/security": "workspace:*",

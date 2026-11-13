@@ -11,3 +11,6 @@ generators/**/files/**
 _ai/**/*.md
 _ai/context/*.json
 _ai/skills/vendor/**
+# Vendored AimKit build
+packages/aimkit/dist/**
+packages/aimkit/extension/**

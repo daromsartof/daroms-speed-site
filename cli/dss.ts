@@ -12,7 +12,7 @@ const COMMANDS: Record<string, Command> = {
     run: async (a) => (await import('./commands/new.ts')).newSite(a),
   },
   dev: {
-    describe: 'dev [--port 3000 --https]: next dev',
+    describe: 'dev [--port 3000 --https --no-aimkit]: next dev + AimKit bridge (element picker)',
     run: async (a) => (await import('./commands/dev.ts')).dev(a),
   },
   doctor: {
@@ -48,6 +48,11 @@ const COMMANDS: Record<string, Command> = {
     describe:
       'db init [--driver d1|libsql|postgres]: Drizzle schema, client, config, migrations scripts',
     run: async (a) => (await import('./commands/db.ts')).db(a),
+  },
+  aimkit: {
+    describe:
+      'aimkit setup | token | init: install the Chrome extension once, pair it, print the token (vendored AimKit)',
+    run: async (a) => (await import('./commands/dev.ts')).aimkit(a),
   },
   catalog: {
     describe: 'catalog: regenerate core/CATALOG.md and _ai/digest.md (core repository)',

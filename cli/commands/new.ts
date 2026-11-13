@@ -50,6 +50,7 @@ export async function newSite(args: Args) {
   renameSync(join(dest, 'npmrc'), join(dest, '.npmrc'))
   renameSync(join(dest, 'mcp.json'), join(dest, '.mcp.json'))
   renameSync(join(dest, 'env.example'), join(dest, '.env.example'))
+  renameSync(join(dest, 'aimkit.json'), join(dest, '.aimkit.json'))
   const git = !bool(args, 'no-git')
   if (git) await run(['git', 'init', '-q', '-b', 'main'], { cwd: dest })
   await attachCore(dest, args)

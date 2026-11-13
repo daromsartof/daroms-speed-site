@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AimKit</title>
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+<main>
+	<header class="intro">
+		<h1><span class="mark" aria-hidden="true"></span>AimKit</h1>
+		<p data-i18n="lead">Vise un élément de ta page en dev : son HTML, son CSS avec fichier:ligne et sa source sont écrits dans le projet, et Claude Code les lit.</p>
+		<p class="saved" id="saved" role="status" aria-live="polite"></p>
+	</header>
+
+	<section aria-labelledby="h-setup">
+		<h2 id="h-setup" data-i18n="setup">Mise en route</h2>
+		<ol class="steps">
+			<li class="step" id="step-bridge" data-state="todo">
+				<span class="step-mark" aria-hidden="true">1</span>
+				<div class="step-body">
+					<h3 data-i18n="step.bridge">Lancer le bridge dans le projet</h3>
+					<p class="step-state" id="step-bridge-state"></p>
+					<p class="help"><span data-i18n="step.bridge.help">À la racine du projet, là où tourne Claude Code :</span> <code>aimkit</code></p>
+					<ul id="bridges" class="list" aria-live="polite"></ul>
+					<button type="button" id="scan" class="ghost" data-i18n="scan">Rechercher les bridges</button>
+				</div>
+			</li>
+			<li class="step" id="step-token" data-state="todo">
+				<span class="step-mark" aria-hidden="true">2</span>
+				<div class="step-body">
+					<h3 data-i18n="step.token">Lier l'extension au bridge</h3>
+					<p class="step-state" id="step-token-state"></p>
+					<p class="help" data-i18n="step.token.help">Ouvre le lien affiché au premier démarrage du bridge (ou par <code>aimkit token</code>), ou colle son jeton. Le jeton est le même pour tous tes projets.</p>
+					<div class="row">
+						<label class="vh" for="token" data-i18n="token">Jeton du bridge</label>
+						<input id="token" name="token" type="password" autocomplete="off" spellcheck="false" placeholder="3q2-7rD…">
+						<button type="button" id="token-show" class="ghost" data-i18n="show">Afficher</button>
+						<button type="button" id="token-save" data-i18n="token.save">Enregistrer le jeton</button>
+					</div>
+				</div>
+			</li>
+			<li class="step" id="captures" data-state="todo">
+				<span class="step-mark" aria-hidden="true">3</span>
+				<div class="step-body">
+					<h3 data-i18n="captures">Autoriser les captures d'écran</h3>
+					<p class="step-state" id="captures-state"></p>
+					<p class="help" data-i18n="captures.help">Les aperçus des éléments en ont besoin. Chrome ne laisse une extension capturer l'onglet qu'avec l'accès à tous les sites, ou juste après un clic sur son icône.</p>
+					<button type="button" id="captures-allow" data-i18n="captures.allow">Autoriser les captures</button>
+				</div>
+			</li>
+			<li class="step" id="step-mcp" data-state="optional">
+				<span class="step-mark" aria-hidden="true">4</span>
+				<div class="step-body">
+					<h3 data-i18n="step.mcp">Facultatif : Claude Code sans coller de ligne</h3>
+					<p class="help" data-i18n="step.mcp.help">Dans le projet, une fois. Ensuite&nbsp;: «&nbsp;regarde le dernier élément que j'ai visé&nbsp;».</p>
+					<div class="row">
+						<code class="command" id="mcp-command">claude mcp add aimkit -- aimkit mcp</code>
+						<button type="button" id="mcp-copy" class="ghost" data-i18n="mcp.copy">Copier la commande</button>
+					</div>
+				</div>
+			</li>
+		</ol>
+	</section>
+
+	<section aria-labelledby="h-settings">
+		<h2 id="h-settings" data-i18n="settings">Réglages</h2>
+		<div class="setting">
+			<label class="setting-label" for="lang"><span data-i18n="lang">Langue</span><small data-i18n="lang.help">Interface et context.md</small></label>
+			<select id="lang" name="lang"><option value="fr">Français</option><option value="en">English</option></select>
+		</div>
+		<div class="setting">
+			<label class="setting-label" for="theme"><span data-i18n="theme">Thème du dock</span></label>
+			<select id="theme" name="theme"><option value="auto" data-i18n="theme.auto">Comme le système</option><option value="light" data-i18n="theme.light">Clair</option><option value="dark" data-i18n="theme.dark">Sombre</option></select>
+		</div>
+		<div class="setting">
+			<label class="setting-label" for="dockPosition"><span data-i18n="position">Position du dock</span><small data-i18n="position.help">Par défaut ; chaque site garde la sienne</small></label>
+			<select id="dockPosition" name="dockPosition">
+				<option value="bottom-center" data-i18n="pos.bc">En bas, au centre</option><option value="bottom-left" data-i18n="pos.bl">En bas, à gauche</option><option value="bottom-right" data-i18n="pos.br">En bas, à droite</option>
+				<option value="top-center" data-i18n="pos.tc">En haut, au centre</option><option value="top-left" data-i18n="pos.tl">En haut, à gauche</option><option value="top-right" data-i18n="pos.tr">En haut, à droite</option>
+			</select>
+		</div>
+		<div class="setting">
+			<label class="setting-label" for="htmlDepth"><span data-i18n="htmlDepth">Profondeur du HTML abrégé</span><small data-i18n="htmlDepth.help">Niveaux d'enfants montrés, de 1 à 8</small></label>
+			<input id="htmlDepth" name="htmlDepth" type="number" min="1" max="8" inputmode="numeric">
+		</div>
+		<div class="setting">
+			<label class="setting-label" for="rulesMax"><span data-i18n="rulesMax">Règles CSS montrées</span><small data-i18n="rulesMax.help">Au plus, par élément</small></label>
+			<input id="rulesMax" name="rulesMax" type="number" min="4" max="80" inputmode="numeric">
+		</div>
+		<div class="setting">
+			<label class="setting-label" for="multiMax"><span data-i18n="multiMax">Éléments dans le panier</span><small data-i18n="multiMax.help">De 1 à 10</small></label>
+			<input id="multiMax" name="multiMax" type="number" min="1" max="10" inputmode="numeric">
+		</div>
+		<div class="setting">
+			<label class="setting-label" for="sourceAttrs"><span data-i18n="attrs">Attributs de source en plus</span><small data-i18n="attrs.help">Un par ligne, valeur fichier:ligne(:colonne). Déjà reconnus : code-inspector-plugin, react-dev-inspector, vite-plugin-vue-inspector, Astro, solid-devtools, data-source.</small></label>
+			<textarea id="sourceAttrs" name="sourceAttrs" rows="3" spellcheck="false" placeholder="data-loc"></textarea>
+		</div>
+		<div class="setting">
+			<span class="setting-label"><span data-i18n="keys">Raccourcis</span><small><kbd>Alt</kbd>+<kbd>Maj</kbd>+<kbd>E</kbd> <span data-i18n="key.pick">viser</span>, <kbd>Alt</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd> <span data-i18n="key.capture">capture avec contexte</span>, <kbd>Alt</kbd>+<kbd>Maj</kbd>+<kbd>D</kbd> <span data-i18n="key.dock">afficher le dock</span></small></span>
+			<button type="button" id="shortcuts" class="ghost" data-i18n="keys.change">Modifier les raccourcis</button>
+		</div>
+	</section>
+
+	<section aria-labelledby="h-origins">
+		<h2 id="h-origins" data-i18n="origins">Sites où le dock apparaît</h2>
+		<p class="help" data-i18n="origins.help">D'office sur localhost, 127.0.0.1, *.localhost et *.test. Pour une préproduction, ajoute son origine : Chrome demande la permission. Ailleurs, un clic sur l'icône de l'extension l'affiche sur l'onglet courant.</p>
+		<ul class="chips" aria-label="Origines locales">
+			<li><code>http://localhost</code></li><li><code>http://127.0.0.1</code></li><li><code>http://*.localhost</code></li><li><code>http://*.test</code></li>
+		</ul>
+		<div class="row">
+			<label class="vh" for="origin" data-i18n="origin">Origine à ajouter</label>
+			<input id="origin" name="origin" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://staging.monsite.com">
+			<button type="button" id="origin-add" class="ghost" data-i18n="origin.add">Ajouter l'origine</button>
+		</div>
+		<ul id="origin-list" class="list"></ul>
+	</section>
+
+	<section aria-labelledby="h-map">
+		<h2 id="h-map" data-i18n="mapping">Plusieurs projets ouverts</h2>
+		<p class="help" data-i18n="mapping.help">Chaque projet a son bridge. L'extension choisit celui dont la liste «&nbsp;origins&nbsp;» contient le site. Sinon, associe le site à un projet ici&nbsp;: l'association tient même si le port du bridge change.</p>
+		<div class="row">
+			<label class="vh" for="map-origin" data-i18n="map.origin">Site</label>
+			<input id="map-origin" name="map-origin" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="http://localhost:5173">
+			<label class="vh" for="map-project" data-i18n="map.project">Projet</label>
+			<select id="map-project" name="map-project"></select>
+			<button type="button" id="map-add" class="ghost" data-i18n="map.add">Associer</button>
+		</div>
+		<ul id="maps" class="list"></ul>
+	</section>
+
+	<footer class="credit">
+		<p><span data-i18n="credit">Un outil de</span> <a href="https://daromsart.xyz/" target="_blank" rel="noopener">Daroms'Art</a></p>
+	</footer>
+</main>
+<script src="options.js"></script>
+</body>
+</html>

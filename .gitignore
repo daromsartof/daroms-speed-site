@@ -17,3 +17,4 @@ _ai/hooks/__pycache__/
 _ai/hooks/tests/__pycache__/
 test-results/
 playwright-report/
+!packages/aimkit/dist/

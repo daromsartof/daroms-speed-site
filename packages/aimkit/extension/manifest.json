@@ -1,0 +1,92 @@
+{
+  "manifest_version": 3,
+  "name": "AimKit",
+  "short_name": "AimKit",
+  "version": "0.3.0",
+  "description": "Vise un élément de ta page en dev, écrit son contexte (HTML, CSS fichier:ligne, source) dans le projet pour Claude Code.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlsnAKFK4i/bt49I2CZ71X3rtLTCye+QZUGOvC0DpH/Fqm4obBCIuhKZxfTngyTAAAo8WE1DbLy/UixSN3DXWrWlhCghdX1xRAfivW9bNIEZqEi0iW95bhHVlUwRuBIG0MH0IpWE2FXp3liOBt+cfdjRE49lwJfy/Du/RD4Z05oLWhphjsS11p/Y81344xw/1+ZPJZGMD4GFXJYVdkCjL1tQ3HYKxPiti1dtD/N9F+oJWtXGkB9NekwIZ5GrI8OuYjBJpLa2HMngXO+nbDQEt+gQuWxBWVrh/LPySYQNkuN4UFdOVUJkG3l37Yu0aneN/DrtbkaxaRVD3KkfBWHoQawIDAQAB",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "offscreen",
+    "clipboardWrite",
+    "declarativeNetRequestWithHostAccess",
+    "cookies"
+  ],
+  "host_permissions": [
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "http://*.localhost/*",
+    "http://*.test/*"
+  ],
+  "optional_host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "http://*.localhost/*",
+        "http://*.test/*"
+      ],
+      "js": [
+        "main-world.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "http://*.localhost/*",
+        "http://*.test/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "toggle-picker": {
+      "suggested_key": {
+        "default": "Alt+Shift+E"
+      },
+      "description": "Viser un élément"
+    },
+    "capture-context": {
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      },
+      "description": "Capture avec contexte"
+    },
+    "toggle-dock": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "Afficher / masquer le dock"
+    }
+  },
+  "action": {
+    "default_title": "AimKit : afficher / masquer le dock",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}

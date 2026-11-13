@@ -1,5 +1,6 @@
 # Core packages this site uses. `dss module add` / `dss db` append the ones they need.
 packages:
+  - core/packages/aimkit
   - core/packages/config
   - core/packages/design
   - core/packages/motion
