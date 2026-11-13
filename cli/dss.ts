@@ -49,6 +49,21 @@ const COMMANDS: Record<string, Command> = {
       'db init [--driver d1|libsql|postgres]: Drizzle schema, client, config, migrations scripts',
     run: async (a) => (await import('./commands/db.ts')).db(a),
   },
+  deploy: {
+    describe:
+      'deploy [--prod] [--target cloudflare|vercel|docker] [--force]: noindexed preview by default, production on --prod',
+    run: async (a) => (await import('./commands/deploy.ts')).deploy(a),
+  },
+  sites: {
+    describe:
+      'sites: every site produced on this machine and its last deployment (~/.dss/sites.json)',
+    run: async (a) => (await import('./commands/sites.ts')).sites(a),
+  },
+  brain: {
+    describe:
+      'brain init | query "<topic>" | status | log <op> <site> "<summary>": the factory memory shared by all sites',
+    run: async (a) => (await import('./commands/brain.ts')).brain(a),
+  },
   mcp: {
     describe:
       'mcp list | add <motionsites|60fps|context7|playwright|gbrain> | remove <name>: opt-in MCP servers in .mcp.json',

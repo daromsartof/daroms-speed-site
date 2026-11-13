@@ -34,7 +34,10 @@
       "WebFetch(domain:godly.website)",
       "WebFetch(domain:land-book.com)",
       "WebFetch(domain:www.lapa.ninja)",
-      "WebFetch(domain:fonts.google.com)"
+      "WebFetch(domain:fonts.google.com)",
+      "Read(~/.dss/brain/**)",
+      "Edit(~/.dss/brain/**)",
+      "Write(~/.dss/brain/**)"
     ],
     "deny": [
       "Read(./.env)",
@@ -54,7 +57,8 @@
       "Edit(./content/meta.ts)",
       "Bash(git push --force:*)",
       "Bash(rm -rf:*)"
-    ]
+    ],
+    "additionalDirectories": ["~/.dss/brain"]
   },
   "hooks": {
     "SessionStart": [

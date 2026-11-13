@@ -9,8 +9,8 @@ model: haiku
 # /dss-research: what already works
 
 1. Read `site.spec.md` (Pitch, Market, SEO targets).
-2. Brain: if `~/.dss/brain/index.md` exists, run `/dss-brain-query <industry> <market>` style lookup: read `index.md`, then at most
-   3 matching pages; keep only lessons that change a decision.
+2. Brain: `pnpm dss brain query "<industry> <market>"`, then read at most 3 listed pages; keep only lessons that change
+   a decision.
 3. Competitors: WebSearch 2-3 of the SEO targets; open at most 5 result sites; for each note one line: positioning, page structure,
    what they do well, what to avoid copying.
 4. Queries: classify each SEO target (informational, local, transactional); map each to a page.

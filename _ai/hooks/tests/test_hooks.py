@@ -139,6 +139,20 @@ class ContextTest(unittest.TestCase):
             self.assertTrue(any("FAQ accordion" in l for l in lines))
 
 
+class BrainHintTest(unittest.TestCase):
+    def test_hint_needs_two_shared_words(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            brain = Path(tmp)
+            (brain / "index.md").write_text(
+                "## Industries\n- [Restaurants](wiki/industries/restaurant.md): menu rows, opening hours (restaurant, menu)\n",
+                encoding="utf-8",
+            )
+            hint = context.brain_hint("add the restaurant menu with prices", brain)
+            self.assertIn("wiki/industries/restaurant.md", hint)
+            self.assertIsNone(context.brain_hint("change the font", brain))
+            self.assertIsNone(context.brain_hint("restaurant", Path(tmp) / "missing"))
+
+
 class SyncTest(unittest.TestCase):
     def test_copies_dss_entries_and_flattens_vendor(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -11,6 +11,7 @@ French and other prompts reach English code through dss-alias.json.
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -133,6 +134,30 @@ def route(prompt: str, index: dict) -> list[str]:
     return lines[:6]
 
 
+def brain_dir() -> Path:
+    env = os.environ.get("DSS_BRAIN")
+    return Path(env) if env else Path.home() / ".dss" / "brain"
+
+
+def brain_hint(prompt: str, brain: Path | None = None) -> str | None:
+    """The best brain index line sharing at least two words with the prompt (index-first, no embeddings)."""
+    index = (brain or brain_dir()) / "index.md"
+    if not index.is_file():
+        return None
+    wanted = {w for w in tokens(prompt) if len(w) > 2}
+    best, best_score = None, 1
+    for line in index.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("- ["):
+            continue
+        score = len(wanted & {w for w in tokens(line) if len(w) > 2})
+        if score > best_score:
+            best, best_score = line, score
+    if not best:
+        return None
+    match = re.match(r"- \[([^\]]+)\]\(([^)]+)\)", best)
+    return f"- brain: {match.group(2)} ({match.group(1)}), /dss-brain-query for details" if match else None
+
+
 def load_index(root: Path) -> dict:
     cached = load_json(root / ".claude" / "context" / CACHE, None)
     return cached if cached else build(root)
@@ -158,6 +183,9 @@ def main() -> int:
     if prompt.strip().startswith("/") and not prompt.strip().startswith(("/dss-page", "/dss-edit", "/dss-fix")):
         return 0
     lines = route(prompt, load_index(root))
+    hint = brain_hint(prompt)
+    if hint:
+        lines = (lines[:5] if lines else ["dss-context:"]) + [hint]
     if lines:
         print("\n".join(lines))
     return 0

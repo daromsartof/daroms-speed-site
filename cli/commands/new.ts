@@ -9,6 +9,7 @@ import { color, fail, log } from '../lib/log.ts'
 import { generatePage, type PageSpec } from '../lib/pages.ts'
 import { CORE_DIR } from '../lib/paths.ts'
 import { addModule } from '../lib/modules.ts'
+import { upsertSite } from '../lib/sites.ts'
 import { ensureCorePackage } from '../lib/workspace.ts'
 import {
   loadDna,
@@ -51,6 +52,7 @@ export async function newSite(args: Args) {
   renameSync(join(dest, 'mcp.json'), join(dest, '.mcp.json'))
   renameSync(join(dest, 'env.example'), join(dest, '.env.example'))
   renameSync(join(dest, 'aimkit.json'), join(dest, '.aimkit.json'))
+  renameSync(join(dest, 'github'), join(dest, '.github'))
   const git = !bool(args, 'no-git')
   if (git) await run(['git', 'init', '-q', '-b', 'main'], { cwd: dest })
   await attachCore(dest, args)
@@ -92,6 +94,14 @@ export async function newSite(args: Args) {
   saveDna(dest, dna)
   writeTheme(dest, await loadDna(dest), name)
   if (!bool(args, 'no-history')) recordHistory(slug, dna)
+  upsertSite({
+    slug,
+    name,
+    path: dest,
+    preset: presetName,
+    industry,
+    created: new Date().toISOString(),
+  })
   log.ok(designRead(dna))
 
   const needed = new Set<string>()
