@@ -59,3 +59,18 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
   fitting the archetype, 3D variants skipped when DNA three is `none`; `portfolio` preset.
 - Verified: 5 briefs produced 5 archetypes (minimum pairwise DNA distance 0.70), all static, rule gate clean, types and
   lint green; the 3D site scores Lighthouse mobile 100 performance (LCP 0.8 s, TBT 70 ms) and desktop 100.
+- Modules (`dss module add|remove|list`, also `dss new --modules` and per-preset defaults): site-owned files, npm
+  dependencies, `.env.example` documentation, CSP presets (config-driven for analytics), manifest pages and nav labels,
+  a section appended to a page, and generated slots (`lib/modules.ts` for sitemap and llms.txt entries,
+  `components/site/module-slots.tsx` for end-of-body scripts). Removal deletes unmodified files and empty folders and
+  keeps presets other modules need. v1 modules: `forms` (Server Action via safeAction, Resend REST, Turnstile, accessible
+  form), `legal` (legal notice and privacy pages, GDPR and nLPD structure, footer links), `analytics` (Plausible, Umami or
+  Cloudflare, production only), `blog` (Markdown articles, Article JSON-LD, RSS, sitemap and llms.txt entries).
+- `dss db init --driver d1|libsql|postgres`: @dss/data and Drizzle in the site, schema, client, drizzle.config.ts,
+  D1 binding in wrangler.jsonc, env docs, `db:generate`, `db:migrate`, `db:studio`; Postgres client and pg columns;
+  Cloudflare bindings available in `next dev` for D1 sites.
+- `dss new` names the Worker and the Docker image after the site.
+- Verified: a vitrine site with forms, legal, analytics and blog builds static/SSG; footer legal links, form fields,
+  sitemap and llms.txt entries, CSP presets and the analytics script are served; the form returns field errors from the
+  server and a generic failure without email credentials (real browser); removing blog and analytics rebuilds green;
+  libSQL and local D1 migrations apply.

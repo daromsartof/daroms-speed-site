@@ -84,6 +84,14 @@ Without a variant, a variant that fits the DNA archetype is picked with the site
 | testimonials/columns | Testimonials | Three equal ruled columns of quotes. Calmer than a lead quote; good for services and products. | swiss, institutional, tech-noir, playful, minimal-mono, retro-print, kinetic-type, brutalist |
 | testimonials/quotes | Testimonials | One display-size quote, then a two-column list. No avatars or stars by default. | editorial, luxury, craft, institutional, magazine, organic, architectural |
 
+## Modules (`pnpm dss module add <slug>`; read core/modules/<slug>/README.md after adding)
+
+- `analytics`: Cookieless audience measurement (Plausible, Umami or Cloudflare Web Analytics), production builds only, no consent banner needed.
+- `blog`: Markdown articles in content/blog: index, article pages with Article JSON-LD, RSS, sitemap and llms.txt entries.
+- `forms`: Contact form: Server Action (zod, honeypot, rate limit, Turnstile) sending email through Resend.
+- `legal`: Legal notice and privacy policy (GDPR, Swiss nLPD) pages linked from the footer, structured placeholders to fill.
+- Database: `pnpm dss db init [--driver d1|libsql|postgres]` (schema in server/db/schema.ts, `db()` from server/db/client.ts).
+
 ## Archetypes (design.dna.ts `archetype`)
 
 - **editorial**: a considered publication: big serif headlines, generous measure, asymmetric columns. Signature: pull quotes, drop caps, captions under images, one oversized headline per page. Avoid: card grids, icons in circles, centered everything.
