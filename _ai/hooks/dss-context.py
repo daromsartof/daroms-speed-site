@@ -62,6 +62,7 @@ def page_zones(root: Path) -> list[dict]:
         if route == "/":
             words |= {"home", "homepage", "landing"}
         zones.append({
+            "kind": "page",
             "name": f"page {route}",
             "keywords": sorted(w for w in words if w),
             "paths": [page_file(route), f"content/{name}.ts"],
@@ -77,6 +78,7 @@ def section_zones(root: Path) -> list[dict]:
         text = file.read_text(encoding="utf-8")
         summary = CATALOG_LINE.search(text)
         zones.append({
+            "kind": "section",
             "name": f"section {file.stem}",
             "keywords": sorted({file.stem, *file.stem.split("-")}),
             "paths": [f"components/sections/{file.name}"],
@@ -97,27 +99,31 @@ def build(root: Path) -> dict:
     return index
 
 
+def score_zone(zone: dict, words: set[str], text: str, prompt: str) -> int:
+    weight = 1 if zone.get("kind") == "section" else 2  # a section name alone is weak evidence
+    score = 0
+    for keyword in zone.get("keywords", []):
+        kw = norm(keyword)
+        if " " in kw:
+            score += weight if kw in text else 0
+        elif kw in words:
+            score += weight
+    return score + sum(5 for p in zone.get("paths", []) if p.rstrip("/") in prompt)
+
+
 def route(prompt: str, index: dict) -> list[str]:
     words = set(tokens(prompt))
     for word in list(words):
         words.update(norm(a) for a in index.get("aliases", {}).get(word, []))
     text = " ".join(tokens(prompt))
-    scored = []
-    for zone in index["zones"]:
-        score = 0
-        for keyword in zone.get("keywords", []):
-            kw = norm(keyword)
-            if " " in kw:
-                score += 2 if kw in text else 0
-            elif kw in words:
-                score += 2
-        score += sum(5 for p in zone.get("paths", []) if p.rstrip("/") in prompt)
-        if score:
-            scored.append((score, zone))
+    scored = [(s, z) for z in index["zones"] if (s := score_zone(z, words, text, prompt))]
     scored.sort(key=lambda item: -item[0])
-    if not scored or scored[0][0] < 2 or (len(scored) > 1 and scored[1][0] == scored[0][0]):
+    # A page or section of this site beats a generic zone: it names the exact files.
+    specific = [item for item in scored if item[1].get("kind") in ("page", "section")]
+    pool = specific if specific and specific[0][0] >= 2 else scored
+    if not pool or pool[0][0] < 2 or (len(pool) > 1 and pool[1][0] == pool[0][0]):
         return []
-    zone = scored[0][1]
+    zone = pool[0][1]
     lines = [f"dss-context: likely zone '{zone['name']}'"]
     lines += [f"- {path}" for path in zone.get("paths", [])[:4]]
     if zone.get("files"):

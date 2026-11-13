@@ -123,6 +123,15 @@ class ContextTest(unittest.TestCase):
             index = context.build(self.make_site(tmp))
             self.assertEqual(context.route("make it nicer", index), [])
 
+    def test_page_beats_section_and_generic_zone(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self.make_site(tmp)
+            (root / "core" / "_ai" / "context" / "dss-zones.json").write_text(
+                json.dumps({"zones": [{"name": "faq blocks", "keywords": ["faq"], "paths": ["components/sections/"]}]}), encoding="utf-8"
+            )
+            lines = context.route("add a faq to the pricing page", context.build(root))
+            self.assertIn("page /pricing", lines[0])
+
     def test_sections_carry_their_catalog_line(self):
         with tempfile.TemporaryDirectory() as tmp:
             index = context.build(self.make_site(tmp))

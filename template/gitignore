@@ -19,3 +19,5 @@ cloudflare-env.d.ts
 .claude/context/*.cache.json
 test-results/
 playwright-report/
+.claude/hooks/__pycache__/
+site.cost.md.tmp

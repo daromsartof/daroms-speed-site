@@ -43,6 +43,11 @@ const COMMANDS: Record<string, Command> = {
     describe: 'catalog: regenerate core/CATALOG.md and _ai/digest.md (core repository)',
     run: async (a) => (await import('./commands/ai.ts')).catalog(a),
   },
+  cost: {
+    describe:
+      'cost [--print --out file]: tokens and API-equivalent price of the site per step, model and session (site.cost.md)',
+    run: async (a) => (await import('./commands/cost.ts')).cost(a),
+  },
   'sync-ai': {
     describe: 'sync-ai: copy core/_ai into .claude/ and rebuild the routing index',
     run: async (a) => (await import('./commands/ai.ts')).syncAi(a),
