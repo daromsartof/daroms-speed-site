@@ -3,6 +3,21 @@
   "compilerOptions": {
     "types": ["node"]
   },
-  "include": ["packages/**/*.ts", "packages/**/*.tsx", "modules/**/*.ts", "modules/**/*.tsx", "cli/**/*.ts", "*.ts"],
-  "exclude": ["node_modules", "**/node_modules", "template", "generators/**/files", "registry", "docs", "**/dist"]
+  "include": [
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "modules/**/*.ts",
+    "modules/**/*.tsx",
+    "cli/**/*.ts",
+    "*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    "template",
+    "generators/**/files",
+    "registry",
+    "docs",
+    "**/dist"
+  ]
 }

@@ -18,7 +18,15 @@ export const ARCHETYPE_IDS = [
 ] as const
 export type ArchetypeId = (typeof ARCHETYPE_IDS)[number]
 
-export const GRIDS = ['centered', 'asymmetric', 'editorial-12', 'swiss', 'bento', 'fullbleed', 'split'] as const
+export const GRIDS = [
+  'centered',
+  'asymmetric',
+  'editorial-12',
+  'swiss',
+  'bento',
+  'fullbleed',
+  'split',
+] as const
 export const RADII = ['none', 'subtle', 'soft', 'pill'] as const
 export const RULES = ['none', 'hairline', 'bold'] as const
 export const TEXTURES = ['none', 'grain', 'paper', 'mesh', 'halftone', 'grid-lines'] as const

@@ -54,11 +54,15 @@ export function colorTokens(dna: Dna): ColorTokens {
   const surface3: Oklch = { ...surface, l: surface.l + (dark ? 0.1 : -0.075), c: nc * 1.1 }
   const bgs = [surface, surface2]
 
-  const ink = adjustUntil({ l: dark ? 0.94 : 0.21, c: Math.min(nc * 1.2, 0.03), h: nh }, toward, (c) =>
-    contrastAll(c, bgs, CONTRAST.ink),
+  const ink = adjustUntil(
+    { l: dark ? 0.94 : 0.21, c: Math.min(nc * 1.2, 0.03), h: nh },
+    toward,
+    (c) => contrastAll(c, bgs, CONTRAST.ink),
   )
-  const inkMuted = adjustUntil({ l: dark ? 0.72 : 0.47, c: Math.min(nc * 1.3, 0.035), h: nh }, toward, (c) =>
-    contrastAll(c, bgs, CONTRAST.inkMuted),
+  const inkMuted = adjustUntil(
+    { l: dark ? 0.72 : 0.47, c: Math.min(nc * 1.3, 0.035), h: nh },
+    toward,
+    (c) => contrastAll(c, bgs, CONTRAST.inkMuted),
   )
   const line: Oklch = { l: surface.l + (dark ? 0.14 : -0.12), c: nc, h: nh }
   const rule: Oklch = dna.rules === 'bold' ? ink : line
@@ -69,7 +73,11 @@ export function colorTokens(dna: Dna): ColorTokens {
   const useLight = contrastOklch(light, accent) >= contrastOklch(darkInk, accent)
   const accentInk = useLight ? light : darkInk
   // If neither ink reaches 4.5 on the accent, move the accent away from the chosen ink.
-  accent = adjustUntil(accent, useLight ? -1 : 1, (c) => contrastOklch(accentInk, c) >= CONTRAST.accentInk)
+  accent = adjustUntil(
+    accent,
+    useLight ? -1 : 1,
+    (c) => contrastOklch(accentInk, c) >= CONTRAST.accentInk,
+  )
 
   const accentText = adjustUntil({ l: p.lightness, c: p.chroma, h: p.hue }, toward, (c) =>
     contrastAll(c, bgs, CONTRAST.accentText),

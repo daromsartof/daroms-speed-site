@@ -26,6 +26,7 @@ export type FontPair = {
 
 // Curated pairings. Deliberately absent as defaults: Inter, Roboto, Open Sans, Montserrat,
 // Poppins, Playfair Display + Lato. They are the fastest tell of a generated site.
+// prettier-ignore
 export const FONT_PAIRS: readonly FontPair[] = [
   { id: 'fraunces-instrument', display: { family: 'Fraunces', axes: ['opsz', 'SOFT'] }, body: { family: 'Instrument Sans' }, fits: ['editorial', 'organic', 'craft'], note: 'soft optical serif, warm and contemporary' },
   { id: 'newsreader-hanken', display: { family: 'Newsreader', axes: ['opsz'], italic: true }, body: { family: 'Hanken Grotesk' }, fits: ['editorial', 'magazine', 'institutional'], note: 'news serif with a neutral grotesk' },

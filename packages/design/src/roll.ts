@@ -47,7 +47,9 @@ export function dnaDistance(a: Dna, b: Dna): number {
 function moodScore(archetype: Archetype, moods: readonly string[]): number {
   if (moods.length === 0) return 0
   const words = moods.map((m) => m.toLowerCase())
-  return words.filter((w) => archetype.moods.some((m) => m === w || m.startsWith(w) || w.startsWith(m))).length
+  return words.filter((w) =>
+    archetype.moods.some((m) => m === w || m.startsWith(w) || w.startsWith(m)),
+  ).length
 }
 
 function pickHue(rng: Rng, industry: Industry): number {
@@ -120,7 +122,13 @@ export function rollDna(opts: RollOptions): Dna {
     })
     if (nearest < MIN_DISTANCE) score -= 6 // near-duplicate of a recent site: last resort only
     const { hue, chroma } = dna.palette
-    if (!wantsViolet && !opts.lock?.hue && hue >= SLOP_HUES[0] && hue <= SLOP_HUES[1] && chroma > 0.12) {
+    if (
+      !wantsViolet &&
+      !opts.lock?.hue &&
+      hue >= SLOP_HUES[0] &&
+      hue <= SLOP_HUES[1] &&
+      chroma > 0.12
+    ) {
       score -= 2.5
     }
     if (score > bestScore) {

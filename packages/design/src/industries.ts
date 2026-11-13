@@ -12,6 +12,7 @@ export type Industry = {
   hues: readonly HueRange[]
 }
 
+// prettier-ignore
 export const INDUSTRIES: readonly Industry[] = [
   { id: 'restaurant', keywords: ['restaurant', 'bistro', 'brasserie', 'food', 'chef', 'dining', 'cuisine'], affinity: { editorial: 3, craft: 3, 'retro-print': 2, luxury: 2, magazine: 2, organic: 2, 'tech-noir': 0, 'minimal-mono': 0 }, hues: [[20, 70], [120, 155], [345, 360]] },
   { id: 'cafe-bakery', keywords: ['cafe', 'coffee', 'bakery', 'boulangerie', 'patisserie', 'cake', 'tea'], affinity: { craft: 3, 'retro-print': 3, organic: 2, playful: 2, editorial: 2, 'tech-noir': 0, institutional: 0 }, hues: [[25, 75], [140, 170]] },

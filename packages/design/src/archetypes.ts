@@ -41,6 +41,7 @@ export type Archetype = {
   avoid: string
 }
 
+// prettier-ignore
 export const ARCHETYPES: Record<ArchetypeId, Archetype> = {
   editorial: {
     id: 'editorial', label: 'Editorial',

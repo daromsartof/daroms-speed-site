@@ -36,12 +36,16 @@ const shared = {
 
 const bannedImports = [
   { name: 'framer-motion', message: 'Use `motion/react` (Motion v12+), or @dss/motion presets.' },
-  { name: 'gsap', message: 'GSAP is excluded (license). Use @dss/motion (Motion + CSS scroll timelines).' },
+  {
+    name: 'gsap',
+    message: 'GSAP is excluded (license). Use @dss/motion (Motion + CSS scroll timelines).',
+  },
 ]
 const threePatterns = [
   {
     group: ['three', 'three/*', '@react-three/*'],
-    message: 'three.js only in components/3d/** (lazy, client-only). Render it through <Scene> from @dss/three.',
+    message:
+      'three.js only in components/3d/** (lazy, client-only). Render it through <Scene> from @dss/three.',
   },
 ]
 
@@ -60,7 +64,8 @@ const siteRules = [
         },
         {
           selector: "JSXAttribute[name.name='style'] > JSXExpressionContainer > ObjectExpression",
-          message: 'Inline style object: use Tailwind token classes. CSS variables only via a reasoned disable.',
+          message:
+            'Inline style object: use Tailwind token classes. CSS variables only via a reasoned disable.',
         },
       ],
     },
