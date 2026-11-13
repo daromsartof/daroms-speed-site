@@ -53,6 +53,22 @@ const words = (text: string) =>
     .replace(/[̀-ͯ]/g, '')
     .match(/[a-z0-9]{3,}/g) ?? []
 
+/** Same word, or a shared stem of 5+ letters ("architect" ~ "architecture", "restaurant" ~ "restaurants"). */
+export function overlap(query: Set<string>, line: Set<string>): number {
+  let score = 0
+  for (const q of query) {
+    for (const w of line) {
+      const short = q.length < w.length ? q : w
+      const long = short === q ? w : q
+      if (q === w || (short.length >= 5 && long.startsWith(short))) {
+        score++
+        break
+      }
+    }
+  }
+  return score
+}
+
 export type BrainHit = { line: string; score: number }
 
 /** Index lines ranked by shared words with the query (index-first retrieval, no embeddings). */
@@ -63,7 +79,7 @@ export function queryIndex(query: string, dir = brainDir(), limit = 8): BrainHit
   return readFileSync(file, 'utf8')
     .split('\n')
     .filter((l) => l.startsWith('- ['))
-    .map((line) => ({ line, score: words(line).filter((w) => wanted.has(w)).length }))
+    .map((line) => ({ line, score: overlap(wanted, new Set(words(line))) }))
     .filter((h) => h.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)

@@ -84,3 +84,12 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
   Context7, Playwright MCP, gbrain.
 - Verified: in a generated site, `dss dev` serves Next and starts the bridge on 7457 (unsigned requests refused); the
   aimkit MCP server answers `tools/list` and returns the latest context (request and exact source line) in English.
+- Factory brain (`~/.dss/brain`, Karpathy LLM wiki with gbrain-style pages): `dss brain init|query|status|log`, schema,
+  index-first retrieval with stem matching, skills `/dss-brain-query` (Haiku), `/dss-brain-ingest` (Sonnet, privacy
+  rules), `/dss-brain-lint`; the prompt router adds a one-line brain hint; access through `additionalDirectories`.
+- `dss sites` registry (`~/.dss/sites.json`, recorded by `dss new` and `dss deploy`); `dss deploy` (Cloudflare upload or
+  deploy, Vercel, Docker) with noindexed previews and production gated by `doctor --strict` and a real domain;
+  `/dss-handoff`; site workflows `ci.yml` (submodules, doctor, lint, types, build) and opt-in Cloudflare `deploy.yml`.
+- Verified: a Docker preview built by the deploy flow serves `Disallow: /` and `noindex`; Claude Code (headless, Sonnet,
+  $0.19) ingested a site into a scratch brain (site, industry and voice pages, indexed, no orphan) and a second site's
+  `dss brain query` returned them.

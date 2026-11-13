@@ -139,6 +139,18 @@ def brain_dir() -> Path:
     return Path(env) if env else Path.home() / ".dss" / "brain"
 
 
+def overlap(query: set[str], line: set[str]) -> int:
+    """Same word, or a shared stem of 5+ letters (architect ~ architecture)."""
+    score = 0
+    for q in query:
+        for w in line:
+            short, long = (q, w) if len(q) < len(w) else (w, q)
+            if q == w or (len(short) >= 5 and long.startswith(short)):
+                score += 1
+                break
+    return score
+
+
 def brain_hint(prompt: str, brain: Path | None = None) -> str | None:
     """The best brain index line sharing at least two words with the prompt (index-first, no embeddings)."""
     index = (brain or brain_dir()) / "index.md"
@@ -149,7 +161,7 @@ def brain_hint(prompt: str, brain: Path | None = None) -> str | None:
     for line in index.read_text(encoding="utf-8").splitlines():
         if not line.startswith("- ["):
             continue
-        score = len(wanted & {w for w in tokens(line) if len(w) > 2})
+        score = overlap(wanted, {w for w in tokens(line) if len(w) > 2})
         if score > best_score:
             best, best_score = line, score
     if not best:
