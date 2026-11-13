@@ -11,6 +11,8 @@ export const PageSchema = z.object({
   /** Section ids in render order (registry ids or bespoke names). */
   sections: z.array(z.string()).default([]),
   nav: z.boolean().default(true),
+  /** Listed in the footer even when not in the main navigation (legal pages). */
+  footer: z.boolean().default(false),
   noindex: z.boolean().default(false),
   priority: z.number().min(0).max(1).optional(),
   changeFrequency: z

@@ -1,0 +1,10 @@
+{
+  "title": "Blog",
+  "description": "Markdown articles in content/blog: index, article pages with Article JSON-LD, RSS, sitemap and llms.txt entries.",
+  "dependencies": { "react-markdown": "10.1.0", "remark-gfm": "4.0.1" },
+  "pages": [{ "route": "/blog", "name": "blog", "label": "Journal", "nav": true, "sections": [] }],
+  "hooks": {
+    "sitemap": { "import": "blogSitemap", "from": "@/lib/blog" },
+    "llms": { "import": "blogLlms", "from": "@/lib/blog" }
+  }
+}

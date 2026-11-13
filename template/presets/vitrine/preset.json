@@ -1,9 +1,55 @@
 {
   "description": "Business showcase: home, services, about, contact. For agencies, studios, trades, clinics, practices.",
   "pages": [
-    { "route": "/", "name": "home", "label": "Home", "sections": ["hero", "services", "quote", "stats", "testimonials", "cta"] },
-    { "route": "/services", "name": "services", "label": "Services", "sections": ["hero", "services", "steps", "faq", "cta"] },
-    { "route": "/about", "name": "about", "label": "About", "sections": ["hero", "story", "team", "features", "cta"] },
-    { "route": "/contact", "name": "contact", "label": "Contact", "sections": ["contact", "faq"] }
+    {
+      "route": "/",
+      "name": "home",
+      "label": "Home",
+      "sections": [
+        "hero",
+        "services",
+        "quote",
+        "stats",
+        "testimonials",
+        "cta"
+      ]
+    },
+    {
+      "route": "/services",
+      "name": "services",
+      "label": "Services",
+      "sections": [
+        "hero",
+        "services",
+        "steps",
+        "faq",
+        "cta"
+      ]
+    },
+    {
+      "route": "/about",
+      "name": "about",
+      "label": "About",
+      "sections": [
+        "hero",
+        "story",
+        "team",
+        "features",
+        "cta"
+      ]
+    },
+    {
+      "route": "/contact",
+      "name": "contact",
+      "label": "Contact",
+      "sections": [
+        "contact",
+        "faq"
+      ]
+    }
+  ],
+  "modules": [
+    "forms",
+    "legal"
   ]
 }

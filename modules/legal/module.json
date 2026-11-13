@@ -1,0 +1,22 @@
+{
+  "title": "Legal pages",
+  "description": "Legal notice and privacy policy (GDPR, Swiss nLPD) pages linked from the footer, structured placeholders to fill.",
+  "pages": [
+    {
+      "route": "/legal",
+      "name": "legal",
+      "label": "Legal notice",
+      "nav": false,
+      "footer": true,
+      "sections": ["legal-text"]
+    },
+    {
+      "route": "/privacy",
+      "name": "privacy",
+      "label": "Privacy",
+      "nav": false,
+      "footer": true,
+      "sections": ["legal-text"]
+    }
+  ]
+}

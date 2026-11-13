@@ -18,6 +18,7 @@
     "generators/**/files",
     "registry",
     "docs",
-    "**/dist"
+    "**/dist",
+    "modules/*/files"
   ]
 }

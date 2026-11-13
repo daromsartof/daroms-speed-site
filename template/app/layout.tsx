@@ -5,6 +5,7 @@ import { JsonLd } from '@dss/seo/react'
 import { SkipLink } from '@dss/ui'
 import { Footer } from '@/components/site/footer'
 import { Header } from '@/components/site/header'
+import { ModuleBodyEnd } from '@/components/site/module-slots'
 import { site } from '@/content/site'
 import manifest from '@/site.manifest'
 import { fontVariables } from './fonts'
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Header />
         {children}
         <Footer />
+        <ModuleBodyEnd />
         <JsonLd
           nodes={[
             organizationSchema(manifest, site.description),

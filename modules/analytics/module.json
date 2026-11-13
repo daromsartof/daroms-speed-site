@@ -1,0 +1,10 @@
+{
+  "title": "Analytics",
+  "description": "Cookieless audience measurement (Plausible, Umami or Cloudflare Web Analytics), production builds only, no consent banner needed.",
+  "config": { "provider": "plausible" },
+  "cspFrom": {
+    "key": "provider",
+    "map": { "plausible": ["plausible"], "umami": ["umami"], "cloudflare": ["cloudflareAnalytics"] }
+  },
+  "hooks": { "bodyEnd": { "import": "Analytics", "from": "@/components/site/analytics" } }
+}

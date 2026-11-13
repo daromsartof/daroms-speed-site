@@ -1,0 +1,51 @@
+{
+  "title": "Contact form",
+  "description": "Contact form: Server Action (zod, honeypot, rate limit, Turnstile) sending email through Resend.",
+  "env": [
+    { "name": "RESEND_API_KEY", "description": "Resend API key (server only)", "example": "" },
+    {
+      "name": "CONTACT_TO",
+      "description": "Inbox that receives the messages",
+      "example": "hello@example.com"
+    },
+    {
+      "name": "CONTACT_FROM",
+      "description": "Verified sender in Resend, e.g. Site <site@yourdomain.com>",
+      "example": ""
+    },
+    {
+      "name": "TURNSTILE_SECRET_KEY",
+      "description": "Cloudflare Turnstile secret (server only); leave empty to disable",
+      "example": ""
+    },
+    {
+      "name": "NEXT_PUBLIC_TURNSTILE_SITE_KEY",
+      "description": "Cloudflare Turnstile site key (public)",
+      "example": ""
+    }
+  ],
+  "csp": ["turnstile"],
+  "config": { "provider": "resend" },
+  "section": {
+    "component": "ContactForm",
+    "importPath": "@/components/sections/contact-form",
+    "key": "contactForm",
+    "page": "/contact",
+    "example": {
+      "eyebrow": "[Write to us]",
+      "title": "[What to include in a first message]",
+      "intro": "[Reply time and what happens next.]",
+      "form": {
+        "labels": {
+          "name": "Name",
+          "email": "Email",
+          "message": "Message",
+          "submit": "Send the message",
+          "sending": "Sending",
+          "honeypot": "Leave this field empty"
+        },
+        "success": "[Thank you line: when you will answer]"
+      }
+    }
+  }
+}

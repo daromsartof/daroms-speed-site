@@ -5,7 +5,20 @@
       "route": "/",
       "name": "home",
       "label": "Home",
-      "sections": ["hero", "logos", "features", "steps", "stats", "testimonials", "pricing", "faq", "cta"]
+      "sections": [
+        "hero",
+        "logos",
+        "features",
+        "steps",
+        "stats",
+        "testimonials",
+        "pricing",
+        "faq",
+        "cta"
+      ]
     }
+  ],
+  "modules": [
+    "legal"
   ]
 }

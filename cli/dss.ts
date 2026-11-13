@@ -8,7 +8,7 @@ type Command = { describe: string; run: (args: Args) => Promise<void> }
 const COMMANDS: Record<string, Command> = {
   new: {
     describe:
-      'new <slug> [--name --preset vitrine|landing|blank --industry --mood a,b --seed --url --target --copy|--link|--core <url>]',
+      'new <slug> [--name --preset vitrine|landing|blank --industry --mood a,b --seed --url --target --modules a,b --copy|--link|--core <url>]',
     run: async (a) => (await import('./commands/new.ts')).newSite(a),
   },
   dev: {
@@ -38,6 +38,11 @@ const COMMANDS: Record<string, Command> = {
     describe:
       'add list | add section <id[/variant]> [--page /route --force] | add scene <id>: copy registry code into the site',
     run: async (a) => (await import('./commands/add.ts')).add(a),
+  },
+  module: {
+    describe:
+      'module list | add <slug> [--config k=v --page /route] | remove <slug>: forms, legal, analytics, blog...',
+    run: async (a) => (await import('./commands/module.ts')).moduleCommand(a),
   },
   catalog: {
     describe: 'catalog: regenerate core/CATALOG.md and _ai/digest.md (core repository)',

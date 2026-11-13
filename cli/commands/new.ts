@@ -7,6 +7,7 @@ import { copyDir, readJson, writeJson } from '../lib/fsx.ts'
 import { color, fail, log } from '../lib/log.ts'
 import { generatePage, type PageSpec } from '../lib/pages.ts'
 import { CORE_DIR } from '../lib/paths.ts'
+import { addModule } from '../lib/modules.ts'
 import { ensureCorePackage } from '../lib/workspace.ts'
 import {
   loadDna,
@@ -23,7 +24,7 @@ const CORE_SKIP =
 const TEMPLATE_SKIP =
   /^(presets|node_modules|\.next|\.open-next|\.wrangler)(\/|$)|next-env\.d\.ts$|tsbuildinfo$/
 
-type Preset = { description: string; industry?: string; pages: PageSpec[] }
+type Preset = { description: string; industry?: string; pages: PageSpec[]; modules?: string[] }
 
 function loadPreset(name: string): Preset {
   const file = join(CORE_DIR, 'template', 'presets', name, 'preset.json')
@@ -121,6 +122,7 @@ export async function newSite(args: Args) {
   renameSync(join(dest, 'gitignore'), join(dest, '.gitignore'))
   renameSync(join(dest, 'npmrc'), join(dest, '.npmrc'))
   renameSync(join(dest, 'mcp.json'), join(dest, '.mcp.json'))
+  renameSync(join(dest, 'env.example'), join(dest, '.env.example'))
   const git = !bool(args, 'no-git')
   if (git) await run(['git', 'init', '-q', '-b', 'main'], { cwd: dest })
   await attachCore(dest, args)
@@ -158,8 +160,11 @@ export async function newSite(args: Args) {
   for (const page of preset.pages) {
     for (const name of await generatePage(dest, page, dna, true)) needed.add(name)
   }
-  if ([...needed].some((name) => ensureCorePackage(dest, name))) {
-    log.step(`adding core packages: ${[...needed].join(', ')} (pnpm install)`)
+  let install = [...needed].some((name) => ensureCorePackage(dest, name))
+  const modules = [...new Set([...(preset.modules ?? []), ...list(args, 'modules')])]
+  for (const slug of modules) install = (await addModule(dest, slug)) || install
+  if (install) {
+    log.step('installing added packages (pnpm install)')
     await run(['pnpm', 'install'], { cwd: dest, quiet: !bool(args, 'verbose') })
   }
 

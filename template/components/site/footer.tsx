@@ -6,7 +6,7 @@ import manifest from '@/site.manifest'
 
 /** Site footer: name, tagline, nav, legal line. The year is set at build time. */
 export function Footer() {
-  const links = manifest.pages.filter((p) => p.nav)
+  const links = manifest.pages.filter((p) => p.nav || p.footer)
   return (
     <footer className="rule-t py-16">
       <Container className="grid gap-10 md:grid-cols-12">
