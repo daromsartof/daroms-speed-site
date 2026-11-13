@@ -8,6 +8,8 @@ export const site = {
   footer: {
     legal: '[Legal name or owner]',
     note: '[One line: location, registration number or a sign-off]',
+    // Studio credit: keep it on every site (dss doctor --strict checks it).
+    credit: { label: "Site by Daroms'Art", href: 'https://daromsart.xyz/' },
   },
   notFound: {
     title: 'This page has moved or never existed.',

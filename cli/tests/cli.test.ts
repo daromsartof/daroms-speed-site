@@ -217,6 +217,15 @@ describe('factory and upgrade helpers', () => {
     expect(cmd[cmd.indexOf('--max-turns') + 1]).toBe('50')
   })
 
+  it('ships the studio credit in the template and checks it', async () => {
+    const { hasStudioCredit } = await import('../commands/doctor.ts')
+    expect(hasStudioCredit(join(import.meta.dirname, '../../template'))).toBe(true)
+    const site = mkdtempSync(join(tmpdir(), 'dss-credit-'))
+    mkdirSync(join(site, 'content'))
+    writeFileSync(join(site, 'content/site.ts'), "export const site = { footer: { legal: 'X' } }")
+    expect(hasStudioCredit(site)).toBe(false)
+  })
+
   it('recognises the first Cloudflare preview of a new Worker', async () => {
     const { workerMissing } = await import('../commands/deploy.ts')
     const wrangler =

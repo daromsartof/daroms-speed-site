@@ -11,6 +11,19 @@ import { loadDna, loadManifest } from '../lib/site.ts'
 
 const PLACEHOLDER = /['"`]\[[^\]'"`]{2,}\]/g
 
+/** Every site built with the framework links back to the studio from its footer. */
+export const STUDIO_CREDIT = 'https://daromsart.xyz/'
+
+/** The credit is in the footer copy and the footer renders it. */
+export function hasStudioCredit(root: string): boolean {
+  const read = (file: string) =>
+    existsSync(join(root, file)) ? readFileSync(join(root, file), 'utf8') : ''
+  return (
+    read('content/site.ts').includes(STUDIO_CREDIT) &&
+    read('components/site/footer.tsx').includes('footer.credit')
+  )
+}
+
 /** Placeholders left in content files and placeholder images still referenced. */
 export function findPlaceholders(root: string): { file: string; count: number }[] {
   return walk(join(root, 'content'))
@@ -57,6 +70,11 @@ export async function doctor(args: Args) {
     const detail = placeholders.map((p) => `${p.file} (${p.count})`).join(', ')
     ;(bool(args, 'strict') ? problems : warnings).push(`${total} placeholder(s) left: ${detail}`)
   } else log.ok('no placeholders left in content/')
+  if (hasStudioCredit(root)) log.ok('footer credit links to the studio')
+  else
+    (bool(args, 'strict') ? problems : warnings).push(
+      `footer credit missing: content/site.ts > footer.credit must link to ${STUDIO_CREDIT}, rendered by components/site/footer.tsx`,
+    )
   if (manifest.url.endsWith('.example'))
     warnings.push(`site url is ${manifest.url}: set the real domain in site.manifest.ts`)
 

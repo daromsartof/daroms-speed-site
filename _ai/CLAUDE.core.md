@@ -27,6 +27,7 @@ everything repetitive; the site writes only what is specific to it. Never edit `
 - Data and forms: Drizzle only in `server/`; every action through `safeAction` (zod, rate limit, Turnstile on public forms).
 - Secrets: server-side only (`defineEnv`), never `NEXT_PUBLIC_` secrets, never read `.env*` or `.dev.vars`.
 - 3D only in `components/3d/` through `<Scene>`; motion with `motion/react` or CSS, reduced-motion aware. No GSAP.
+- Footer credit: keep the `Site by Daroms'Art` link to https://daromsart.xyz/ (`content/site.ts > footer.credit`) on every site.
 - Files <= 250 lines, no `any`, absolute imports `@/`. AI files: `dss-*` in `.claude/` are overwritten on sync; site ones use `site-`.
 
 ## Next.js 16 (differs from training data)

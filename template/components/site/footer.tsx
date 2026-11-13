@@ -4,7 +4,7 @@ import { Container, Text } from '@dss/ui'
 import { site } from '@/content/site'
 import manifest from '@/site.manifest'
 
-/** Site footer: name, tagline, nav, legal line. The year is set at build time. */
+/** Site footer: name, tagline, nav, legal line and the studio credit link. The year is set at build time. */
 export function Footer() {
   const links = manifest.pages.filter((p) => p.nav || p.footer)
   return (
@@ -27,9 +27,17 @@ export function Footer() {
             ))}
           </ul>
         </nav>
-        <Text size="sm" tone="muted" className="md:col-span-12">
-          © {new Date().getFullYear()} {site.footer.legal}. {site.footer.note}
-        </Text>
+        <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-2 md:col-span-12">
+          <Text size="sm" tone="muted">
+            © {new Date().getFullYear()} {site.footer.legal}. {site.footer.note}
+          </Text>
+          <a
+            href={site.footer.credit.href}
+            className="inline-flex min-h-11 items-center text-sm text-ink-muted underline-offset-4 hover:text-accent-text hover:underline"
+          >
+            {site.footer.credit.label}
+          </a>
+        </div>
       </Container>
     </footer>
   )

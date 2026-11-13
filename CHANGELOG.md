@@ -114,3 +114,6 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
   turns or a usage limit instead of "ready", and allows WebFetch so headless research can open competitor sites.
 - `dss deploy` (Cloudflare preview) creates the Worker on the first preview: wrangler refuses `versions upload` before
   a first deploy. Found on the first real deploy (Clear to Board preview on workers.dev, noindex verified).
+- Studio credit on every site: the template footer links to https://daromsart.xyz/ ("Site by Daroms'Art", from
+  `content/site.ts > footer.credit`), the kernel tells agents to keep it, and `dss doctor` checks it (warning, error with
+  `--strict`, so production deploys need it).
