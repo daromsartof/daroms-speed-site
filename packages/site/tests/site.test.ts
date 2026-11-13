@@ -103,3 +103,13 @@ describe('withDss', () => {
     expect(headers.some((h) => h.key === 'Strict-Transport-Security')).toBe(false)
   })
 })
+
+describe('manifest input', () => {
+  it('keeps the raw input for the CLI, hidden from enumeration', async () => {
+    const { MANIFEST_INPUT } = await import('../src/config.ts')
+    const m = defineManifest(base)
+    expect((m as unknown as Record<symbol, unknown>)[MANIFEST_INPUT]).toBe(base)
+    expect(Object.keys(m)).not.toContain(String(MANIFEST_INPUT))
+    expect(JSON.stringify(m)).not.toContain('input')
+  })
+})

@@ -125,5 +125,6 @@ export function defineManifest(input: ManifestInput): Manifest {
   const duplicate = routes.find((r, i) => routes.indexOf(r) !== i)
   if (duplicate)
     throw new Error(`site.manifest.ts is invalid:\n  - pages: duplicate route ${duplicate}`)
+  Object.defineProperty(result.data, MANIFEST_INPUT, { value: input, enumerable: false })
   return result.data
 }

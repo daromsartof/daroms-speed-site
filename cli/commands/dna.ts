@@ -55,7 +55,7 @@ export async function dna(args: Args) {
     return
   }
   saveDna(root, next)
-  const written = writeTheme(root, next, site)
+  const written = writeTheme(root, await loadDna(root), site)
   recordHistory(site, next)
   log.ok(designRead(next))
   log.info(`wrote design.dna.ts, ${written.join(', ')}`)

@@ -68,8 +68,11 @@ function candidate(rng: Rng, opts: RollOptions, industry: Industry, moods: reado
       })
   const pairs = FONT_PAIRS.filter((p) => p.fits.includes(archetype.id))
   const fonts = lock.fonts ?? pick(rng, pairs).id
-  const hue = lock.hue ?? pickHue(rng, industry)
-  const neutralHue = rng() < 0.25 ? (hue + 180) % 360 : (hue + between(rng, [-20, 20]) + 360) % 360
+  // Rounded so the DNA serialised in design.dna.ts renders exactly the same theme.
+  const r1 = (v: number) => Math.round(v * 10) / 10
+  const r3 = (v: number) => Math.round(v * 1000) / 1000
+  const hue = r1(lock.hue ?? pickHue(rng, industry))
+  const neutralHue = r1(rng() < 0.25 ? (hue + 180) % 360 : (hue + between(rng, [-20, 20]) + 360) % 360)
   return DnaSchema.parse({
     version: 1,
     seed: opts.seed,
@@ -79,10 +82,10 @@ function candidate(rng: Rng, opts: RollOptions, industry: Industry, moods: reado
     palette: {
       mode: lock.mode ?? pick(rng, archetype.modes),
       hue,
-      chroma: between(rng, archetype.accentChroma),
-      lightness: between(rng, archetype.accentLightness),
+      chroma: r3(between(rng, archetype.accentChroma)),
+      lightness: r3(between(rng, archetype.accentLightness)),
       neutralHue,
-      neutralChroma: between(rng, archetype.neutralChroma),
+      neutralChroma: r3(between(rng, archetype.neutralChroma)),
       secondaryOffset: pick(rng, [-150, -30, 30, 150, 180]),
     },
     scale: pick(rng, archetype.scales),

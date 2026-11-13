@@ -184,3 +184,14 @@ describe('icon', () => {
     expect(svg).not.toContain('<atelier')
   })
 })
+
+describe('serialisation', () => {
+  it('rolls DNA values that survive a 4-decimal round trip', () => {
+    for (let i = 0; i < 50; i++) {
+      const dna = rollDna({ seed: `round-${i}` })
+      const round = (v: number) => Number(v.toFixed(4))
+      const p = dna.palette
+      expect([p.hue, p.chroma, p.lightness, p.neutralHue, p.neutralChroma].every((v) => round(v) === v)).toBe(true)
+    }
+  })
+})

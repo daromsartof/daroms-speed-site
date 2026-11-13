@@ -7,7 +7,14 @@ import { copyDir, readJson, writeJson } from '../lib/fsx.ts'
 import { color, fail, log } from '../lib/log.ts'
 import { generatePage, type PageSpec } from '../lib/pages.ts'
 import { CORE_DIR } from '../lib/paths.ts'
-import { readHistory, recordHistory, saveDna, saveManifest, writeTheme } from '../lib/site.ts'
+import {
+  loadDna,
+  readHistory,
+  recordHistory,
+  saveDna,
+  saveManifest,
+  writeTheme,
+} from '../lib/site.ts'
 
 const DEFAULT_CORE_URL = 'https://github.com/daromsartof/daroms-speed-site.git'
 const CORE_SKIP =
@@ -137,7 +144,7 @@ export async function newSite(args: Args) {
     history: readHistory(slug),
   })
   saveDna(dest, dna)
-  writeTheme(dest, dna, name)
+  writeTheme(dest, await loadDna(dest), name)
   if (!bool(args, 'no-history')) recordHistory(slug, dna)
   log.ok(designRead(dna))
 
