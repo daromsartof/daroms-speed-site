@@ -1,0 +1,17 @@
+{
+  "name": "@dss/website",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The daroms-speed-site documentation site, built from ../docs with Starlight.",
+  "scripts": {
+    "sync": "node scripts/sync-docs.mjs",
+    "dev": "node scripts/sync-docs.mjs && astro dev",
+    "build": "node scripts/sync-docs.mjs && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.42.8",
+    "astro": "7.3.8"
+  }
+}

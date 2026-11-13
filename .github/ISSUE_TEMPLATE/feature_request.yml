@@ -1,0 +1,20 @@
+name: Feature request
+description: A section, module, command or agent capability that would help produce better sites.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you are trying to build, and what gets in the way today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: The change you have in mind (command, section variant, module, rule...).
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

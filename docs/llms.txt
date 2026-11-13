@@ -4,17 +4,23 @@
 
 ## Docs
 
-- [daroms-speed-site](https://github.com/daromsartof/daroms-speed-site/blob/main/docs/index.md): A Next.js framework and Claude Code workflow that turns a brief into a varied, production-grade website at low token cost.
-- [Getting started](https://github.com/daromsartof/daroms-speed-site/blob/main/docs/getting-started.md): Create a site with one command, open it in Claude Code, and let the /dss-site skill take it from brief to deploy.
-- [Architecture](https://github.com/daromsartof/daroms-speed-site/blob/main/docs/architecture.md): Versioned infrastructure in core packages, owned visual code in the site, data files the CLI rewrites, generated files nobody edits.
-- [Design DNA](https://github.com/daromsartof/daroms-speed-site/blob/main/docs/design-dna.md): Each site rolls a deterministic, accessible design identity that avoids the combinations of recent sites and the usual generated-site tells.
-- [AI layer](https://github.com/daromsartof/daroms-speed-site/blob/main/docs/ai-layer.md): How dss keeps Claude Code fast and cheap: small always-on context, rules by path, forked workers, guard hooks, a router and a shared brain.
-- [Modules and data](https://github.com/daromsartof/daroms-speed-site/blob/main/docs/modules.md): Optional features install site-owned code, environment documentation, CSP sources and manifest entries, and plug into generated slots.
-- [Deploy, security and SEO](https://github.com/daromsartof/daroms-speed-site/blob/main/docs/deploy.md): Static by default, secure headers and CSP from the manifest, previews never indexed, one command per target.
-- [Visual edits with AimKit](https://github.com/daromsartof/daroms-speed-site/blob/main/docs/aimkit.md): Pick an element in the browser, type the change, and Claude Code opens the exact file and line.
-- [Factory: brain, sites, batch, upgrades](https://github.com/daromsartof/daroms-speed-site/blob/main/docs/factory.md): What makes dss a production line: a memory shared by all sites, a registry, batch creation, upgrades and releases.
-- [CLI reference](https://github.com/daromsartof/daroms-speed-site/blob/main/docs/cli.md): Every dss command, generated from the CLI itself. In a site run them as `pnpm dss <command>`.
+- [daroms-speed-site](https://daromsartof.github.io/daroms-speed-site/index.md): A Next.js framework and Claude Code workflow that turns a brief into a varied, production-grade website at low token cost.
+- [Getting started](https://daromsartof.github.io/daroms-speed-site/getting-started.md): Create a site with one command, open it in Claude Code, and let the /dss-site skill take it from brief to deploy.
+- [For AI agents](https://daromsartof.github.io/daroms-speed-site/agents.md): The operating manual for an agent (Claude Code or any coding agent): what to read, how to start a site, the contract every site follows and the checks to run before saying done.
+- [Architecture](https://daromsartof.github.io/daroms-speed-site/architecture.md): Versioned infrastructure in core packages, owned visual code in the site, data files the CLI rewrites, generated files nobody edits.
+- [Design DNA](https://daromsartof.github.io/daroms-speed-site/design-dna.md): Each site rolls a deterministic, accessible design identity that avoids the combinations of recent sites and the usual generated-site tells.
+- [AI layer](https://daromsartof.github.io/daroms-speed-site/ai-layer.md): How dss keeps Claude Code fast and cheap: small always-on context, rules by path, forked workers, guard hooks, a router and a shared brain.
+- [Modules and data](https://daromsartof.github.io/daroms-speed-site/modules.md): Optional features install site-owned code, environment documentation, CSP sources and manifest entries, and plug into generated slots.
+- [Deploy, security and SEO](https://daromsartof.github.io/daroms-speed-site/deploy.md): Static by default, secure headers and CSP from the manifest, previews never indexed, one command per target.
+- [Visual edits with AimKit](https://daromsartof.github.io/daroms-speed-site/aimkit.md): Pick an element in the browser, type the change, and Claude Code opens the exact file and line.
+- [Factory: brain, sites, batch, upgrades](https://daromsartof.github.io/daroms-speed-site/factory.md): What makes dss a production line: a memory shared by all sites, a registry, batch creation, upgrades and releases.
+- [CLI reference](https://daromsartof.github.io/daroms-speed-site/cli.md): Every dss command, generated from the CLI itself. In a site run them as `pnpm dss <command>`.
 
 ## Catalog
 
-- [CATALOG.md](https://github.com/daromsartof/daroms-speed-site/blob/main/CATALOG.md): tokens, components, sections, modules, archetypes, font pairs, package APIs
+- [Catalog](https://daromsartof.github.io/daroms-speed-site/catalog.md): tokens, components, sections, modules, archetypes, font pairs, package APIs
+
+## Optional
+
+- [Everything in one file](https://daromsartof.github.io/daroms-speed-site/llms-full.txt): all pages, the CLI reference and the catalog
+- [Source code](https://github.com/daromsartof/daroms-speed-site): the framework repository

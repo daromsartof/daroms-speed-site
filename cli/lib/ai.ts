@@ -54,7 +54,7 @@ const TOKENS = `## Tokens (Tailwind classes generated from design.dna.ts)
 - Layout: \`py-section\` (DNA density), \`px-gutter\`, \`max-w-content\`, \`max-w-prose\`; corners \`rounded-card\`, \`rounded-control\`,
   \`rounded-media\`; rules \`rule-t\`, \`rule-b\` (width and color from the DNA).
 - Motion: \`duration-(--duration-brand) ease-brand\`. Textures: \`texture-grain\`, \`texture-halftone\`, \`texture-grid\`, \`texture-mesh\`.
-- <html> carries \`data-archetype\`, \`data-motion\`, \`data-three\`, \`data-texture\`, \`data-radius\` for variant styling.
+- \`<html>\` carries \`data-archetype\`, \`data-motion\`, \`data-three\`, \`data-texture\`, \`data-radius\` for variant styling.
 - Scroll motion (pure CSS, off for reduced motion and DNA motion none): \`reveal\`, \`reveal-fade\`, \`reveal-scale\`,
   \`reveal-stagger\` (children; index via \`style={stagger(i)}\` from @dss/motion), \`parallax\`, \`marquee\`, \`split-words\`.
 `
@@ -117,7 +117,7 @@ export function buildCatalog(core: string): string {
         `| ${s.id}/${s.variant} | ${s.component} | ${cell(s.description)} | ${s.fits.join(', ')} |`,
     ),
     '',
-    '## Modules (`pnpm dss module add <slug>`; read core/modules/<slug>/README.md after adding)',
+    '## Modules (`pnpm dss module add <slug>`; read `core/modules/<slug>/README.md` after adding)',
     '',
     ...listModules().map((m) => `- \`${m.slug}\`: ${m.description}`),
     '- Database: `pnpm dss db init [--driver d1|libsql|postgres]` (schema in server/db/schema.ts, `db()` from server/db/client.ts).',

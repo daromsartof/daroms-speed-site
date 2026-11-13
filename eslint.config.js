@@ -11,5 +11,6 @@ export default dssEslint({
     '_ai/**',
     'packages/aimkit/dist/**',
     'packages/aimkit/extension/**',
+    'website/**',
   ],
 })

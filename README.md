@@ -1,5 +1,9 @@
 # daroms-speed-site
 
+[![npm](https://img.shields.io/npm/v/@daromsart/daroms-speed-site)](https://www.npmjs.com/package/@daromsart/daroms-speed-site)
+[![ci](https://github.com/daromsartof/daroms-speed-site/actions/workflows/ci.yml/badge.svg)](https://github.com/daromsartof/daroms-speed-site/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
 A Next.js website framework built for Claude Code. It turns a brief into a varied, production-grade website (design,
 copy, SEO, security, data, deployment) at low token cost, so sites can be produced on a line.
 
@@ -14,7 +18,7 @@ cd atelier-nord && pnpm dev
 - **Varied by construction.** Every site rolls a Design DNA (14 archetypes, 42 font pairings, OKLCH palettes with WCAG
   contrast guaranteed, grid, texture, motion, 3D level) that avoids the combinations of recent sites. A rule hook and a
   critic agent refuse the usual generated-site tells: default Tailwind palette, purple gradients, cliche copy, emoji.
-- **Cheap for Claude.** A 57-line kernel, rules loaded by file path, a generated catalog instead of source reading,
+- **Cheap for Claude.** A kernel under 60 lines, rules loaded by file path, a generated catalog instead of source reading,
   deterministic generators, forked Sonnet/Haiku skills, a prompt router, guard hooks that refuse bad writes before they
   land, and `dss cost` reports per step.
 - **A production line.** A factory brain shared by all sites (what worked per industry, patterns, fixes), a sites
@@ -40,9 +44,10 @@ Cloudflare Workers (OpenNext), Vercel or Docker. AimKit for visual edits from th
 
 ## Docs
 
-Start with [docs/index.md](docs/index.md): getting started, architecture, Design DNA, AI layer, modules, deploy,
-AimKit, factory and the CLI reference. Agents can read [docs/llms.txt](docs/llms.txt) and
-[docs/llms-full.txt](docs/llms-full.txt).
+**[daromsartof.github.io/daroms-speed-site](https://daromsartof.github.io/daroms-speed-site/)**, also in [docs/](docs/index.md): getting started, architecture, Design DNA, AI layer, modules, deploy,
+AimKit, factory and the CLI reference. Agents: start with [For AI agents](https://daromsartof.github.io/daroms-speed-site/agents/), then
+[llms.txt](https://daromsartof.github.io/daroms-speed-site/llms.txt) or
+[llms-full.txt](https://daromsartof.github.io/daroms-speed-site/llms-full.txt); every page also exists as raw Markdown (`<page>.md`).
 
 ## Develop the framework
 
@@ -56,4 +61,4 @@ pnpm verify:registry <site-dir>     # type-check every registry section inside a
 
 ## License
 
-MIT. Vendored third-party skills keep their own licenses (see `_ai/skills/vendor/README.md`).
+MIT, made by [Daroms'Art](https://daromsart.xyz/). Vendored third-party skills keep their own licenses (see `_ai/skills/vendor/README.md`).

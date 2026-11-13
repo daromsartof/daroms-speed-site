@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "Next.js website framework built for Claude Code: design DNA, sections, SEO, security, data, deploy adapters, the dss CLI and a low-token AI layer to produce varied, production-grade sites on a line.",
   "license": "MIT",
-  "author": "Daroms",
+  "author": "Daroms'Art (https://daromsart.xyz/)",
+  "homepage": "https://daromsartof.github.io/daroms-speed-site/",
   "type": "module",
   "repository": {
     "type": "git",
@@ -24,7 +25,11 @@
     "threejs",
     "cloudflare",
     "drizzle",
-    "ai"
+    "ai",
+    "ai-agents",
+    "llms-txt",
+    "website-generator",
+    "starter"
   ],
   "engines": {
     "node": ">=22.18"
@@ -93,5 +98,8 @@
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.2",
     "vitest": "5.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

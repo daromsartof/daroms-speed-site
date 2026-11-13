@@ -13,7 +13,7 @@ Read this file, never the core sources. Site sections: `grep -h @catalog compone
 - Layout: `py-section` (DNA density), `px-gutter`, `max-w-content`, `max-w-prose`; corners `rounded-card`, `rounded-control`,
   `rounded-media`; rules `rule-t`, `rule-b` (width and color from the DNA).
 - Motion: `duration-(--duration-brand) ease-brand`. Textures: `texture-grain`, `texture-halftone`, `texture-grid`, `texture-mesh`.
-- <html> carries `data-archetype`, `data-motion`, `data-three`, `data-texture`, `data-radius` for variant styling.
+- `<html>` carries `data-archetype`, `data-motion`, `data-three`, `data-texture`, `data-radius` for variant styling.
 - Scroll motion (pure CSS, off for reduced motion and DNA motion none): `reveal`, `reveal-fade`, `reveal-scale`,
   `reveal-stagger` (children; index via `style={stagger(i)}` from @dss/motion), `parallax`, `marquee`, `split-words`.
 
@@ -84,7 +84,7 @@ Without a variant, a variant that fits the DNA archetype is picked with the site
 | testimonials/columns | Testimonials | Three equal ruled columns of quotes. Calmer than a lead quote; good for services and products. | swiss, institutional, tech-noir, playful, minimal-mono, retro-print, kinetic-type, brutalist |
 | testimonials/quotes | Testimonials | One display-size quote, then a two-column list. No avatars or stars by default. | editorial, luxury, craft, institutional, magazine, organic, architectural |
 
-## Modules (`pnpm dss module add <slug>`; read core/modules/<slug>/README.md after adding)
+## Modules (`pnpm dss module add <slug>`; read `core/modules/<slug>/README.md` after adding)
 
 - `analytics`: Cookieless audience measurement (Plausible, Umami or Cloudflare Web Analytics), production builds only, no consent banner needed.
 - `blog`: Markdown articles in content/blog: index, article pages with Article JSON-LD, RSS, sitemap and llms.txt entries.

@@ -117,3 +117,8 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
 - Studio credit on every site: the template footer links to https://daromsart.xyz/ ("Site by Daroms'Art", from
   `content/site.ts > footer.credit`), the kernel tells agents to keep it, and `dss doctor` checks it (warning, error with
   `--strict`, so production deploys need it).
+- Docs site for people and agents: Starlight in `website/` built from `docs/` (single source) and published to GitHub
+  Pages; every page has a raw Markdown twin (`<page>.md`, linked as `rel="alternate"`), `llms.txt` and `llms-full.txt`
+  point to those twins; new "For AI agents" page; catalog generator no longer emits raw `<html>`/`<slug>` tags.
+- Repository: SECURITY.md (private vulnerability reporting), CONTRIBUTING.md, issue and pull request templates,
+  Dependabot, CODEOWNERS; npm metadata (homepage, author, public access).

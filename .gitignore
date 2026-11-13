@@ -18,3 +18,8 @@ _ai/hooks/tests/__pycache__/
 test-results/
 playwright-report/
 !packages/aimkit/dist/
+# Docs site: content and twins are generated from docs/ by website/scripts/sync-docs.mjs
+website/src/content/docs/
+website/public/*.md
+website/public/llms*.txt
+website/.astro/

@@ -14,12 +14,13 @@ sites and want each one to look designed for its business, rank, load fast and s
 - A **section registry** copied into each site (owned code) and versioned **core packages** for SEO, security, data,
   motion and 3D.
 - The **dss CLI**: deterministic generators for pages, sections, themes, modules, databases and deployments.
-- An **AI layer** for Claude Code: a 57-line kernel, rules loaded by file path, forked Sonnet/Haiku skills, guard hooks
+- An **AI layer** for Claude Code: a kernel under 60 lines, rules loaded by file path, forked Sonnet/Haiku skills, guard hooks
   that refuse bad writes, a prompt router, a factory brain shared by all sites, and cost reports.
 
 ## Pages
 
 - [Getting started](getting-started.md)
+- [For AI agents](agents.md)
 - [Architecture](architecture.md)
 - [Design DNA](design-dna.md)
 - [AI layer](ai-layer.md)
@@ -28,3 +29,5 @@ sites and want each one to look designed for its business, rank, load fast and s
 - [Visual edits with AimKit](aimkit.md)
 - [Factory: brain, sites, batch, upgrades](factory.md)
 - [CLI reference](cli.md)
+
+Made by [Daroms'Art](https://daromsart.xyz/), MIT licensed.

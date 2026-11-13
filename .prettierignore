@@ -17,3 +17,8 @@ packages/aimkit/extension/**
 docs/llms.txt
 docs/llms-full.txt
 docs/cli.md
+# Docs site build and generated content
+website/dist/**
+website/.astro/**
+website/src/content/docs/**
+website/public/**

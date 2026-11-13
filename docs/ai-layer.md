@@ -4,7 +4,7 @@
 
 ## Context loading
 
-- `CLAUDE.md` imports `AGENTS.md` (Next.js), the 57-line kernel `core/_ai/CLAUDE.core.md` and the generated digest
+- `CLAUDE.md` imports `AGENTS.md` (Next.js), the kernel `core/_ai/CLAUDE.core.md` (under 60 lines) and the generated digest
   (one line per rule).
 - Rules in `.claude/rules/` load only for the files being touched (`paths:` front matter); on-demand rules are read when
   the topic comes up.
