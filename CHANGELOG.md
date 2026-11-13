@@ -102,3 +102,6 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
 - Verified: `npm publish --dry-run` (675 kB, 556 files, AimKit build and docs included, no tests); a vitrine site created
   from the packed tarball builds static with forms and legal, passes doctor, takes a 3D scene, and type-checks all 26
   registry sections and both scenes.
+- GitHub Actions on Node 24 (framework and site templates): checkout v7, setup-node v7, setup-python v7,
+  pnpm/action-setup v6; checkouts drop persisted credentials, and the publish and deploy jobs run without a dependency
+  cache.

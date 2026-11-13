@@ -19,14 +19,16 @@ jobs:
     if: ${{ vars.DSS_DEPLOY == 'cloudflare' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+          persist-credentials: false
+      - uses: pnpm/action-setup@v6
+      # No dependency cache in a job holding deploy secrets: a pull request could poison it.
+      - uses: actions/setup-node@v7
         with:
           node-version: 22.18
-          cache: pnpm
+          package-manager-cache: false
       - run: pnpm install --frozen-lockfile
       - run: pnpm dss doctor --quick --strict
       - run: pnpm cf:deploy
