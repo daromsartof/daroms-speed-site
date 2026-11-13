@@ -3,3 +3,7 @@ _ai/digest.md
 **/CATALOG.md
 template/**/*.json
 generators/**/files/**
+# Generated from design.dna.ts by dss theme
+**/app/fonts.ts
+**/app/theme.css
+**/app/theme.ts

@@ -1,45 +1,6 @@
-import type { NextConfig } from 'next'
+import { withDss } from '@dss/site/config'
+import manifest from './site.manifest.ts'
 
-const isDev = process.env.NODE_ENV === 'development'
-
-// Static CSP: pages stay static and CDN-cacheable. A nonce CSP forces dynamic rendering
-// (see the csp-nonce rule before switching).
-const csp = [
-  "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' blob: data:",
-  "font-src 'self'",
-  "connect-src 'self'",
-  "object-src 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-  "frame-ancestors 'none'",
-  'upgrade-insecure-requests',
-].join('; ')
-
-const securityHeaders = [
-  { key: 'Content-Security-Policy', value: csp },
-  { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
-  { key: 'X-Content-Type-Options', value: 'nosniff' },
-  { key: 'X-Frame-Options', value: 'DENY' },
-  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-  {
-    key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
-  },
-  { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
-]
-
-const config: NextConfig = {
-  poweredByHeader: false,
-  reactStrictMode: true,
-  typedRoutes: true,
-  output: process.env.DSS_DEPLOY_TARGET === 'docker' ? 'standalone' : undefined,
-  images: { formats: ['image/avif', 'image/webp'] },
-  async headers() {
-    return [{ source: '/:path*', headers: securityHeaders }]
-  },
-}
-
-export default config
+// Security headers, CSP, images, redirects and deploy output come from site.manifest.ts.
+// Pass Next.js options as the second argument; never add a webpack() hook (Turbopack).
+export default withDss(manifest)

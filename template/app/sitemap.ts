@@ -1,6 +1,6 @@
-import type { MetadataRoute } from 'next'
-import { site } from '@/content/site'
+import { sitemap } from '@dss/seo'
+import manifest from '@/site.manifest'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: `${site.url}/`, changeFrequency: 'monthly', priority: 1 }]
+export default function sitemapXml() {
+  return sitemap(manifest)
 }

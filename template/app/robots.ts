@@ -1,10 +1,6 @@
-import type { MetadataRoute } from 'next'
-import { site } from '@/content/site'
+import { robots } from '@dss/seo'
+import manifest from '@/site.manifest'
 
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: [{ userAgent: '*', allow: '/' }],
-    sitemap: `${site.url}/sitemap.xml`,
-    host: site.url,
-  }
+export default function robotsTxt() {
+  return robots(manifest)
 }

@@ -1,3 +1,7 @@
+# Core packages this site uses. `dss module add` / `dss db` append the ones they need.
 packages:
-  - core/packages/*
-  - core/modules/*
+  - core/packages/config
+  - core/packages/design
+  - core/packages/security
+  - core/packages/seo
+  - core/packages/site

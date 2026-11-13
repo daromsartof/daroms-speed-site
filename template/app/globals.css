@@ -5,6 +5,7 @@
 @source '../app';
 @source '../components';
 @source '../content';
+@source '../core/packages/ui/src';
 
 @layer base {
   html {

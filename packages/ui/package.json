@@ -1,0 +1,19 @@
+{
+  "name": "@dss/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Token-driven UI primitives. They read Design DNA tokens (app/theme.css), so the same component looks different on every site. Server components unless marked client.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./accordion": "./src/accordion.tsx"
+  },
+  "dependencies": {
+    "radix-ui": "1.8.1"
+  },
+  "peerDependencies": {
+    "next": ">=16.4.5",
+    "react": ">=19",
+    "react-dom": ">=19"
+  }
+}
