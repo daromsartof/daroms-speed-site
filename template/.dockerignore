@@ -1,0 +1,15 @@
+node_modules
+**/node_modules
+.next
+.open-next
+.wrangler
+.git
+.env
+.env.*
+.dev.vars
+.claude
+.claude-context
+core/template
+core/generators
+core/registry
+core/docs

@@ -1,0 +1,29 @@
+@import 'tailwindcss' source(none);
+@import './theme.css';
+
+/* Explicit sources: never scan core/ (templates, registry, generators). */
+@source '../app';
+@source '../components';
+@source '../content';
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-surface text-ink font-body antialiased;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
