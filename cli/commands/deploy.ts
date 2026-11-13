@@ -8,6 +8,11 @@ import { loadManifest } from '../lib/site.ts'
 
 const URL_RE = /https:\/\/[\w.-]+\.(?:workers\.dev|vercel\.app)[^\s]*/
 
+/** Wrangler refuses `versions upload` before the Worker's first deploy. */
+export function workerMissing(output: string): boolean {
+  return /upload a new version of a Worker that does not yet exist/i.test(output)
+}
+
 /**
  * dss deploy [--prod] [--target cloudflare|vercel|docker] [--force]
  * Preview builds run with DSS_ENV=preview (robots disallow, noindex); production rebuilds without it.
@@ -35,10 +40,16 @@ export async function deploy(args: Args) {
   let output = ''
   if (target === 'cloudflare') {
     await run(['pnpm', 'exec', 'opennextjs-cloudflare', 'build'], { cwd: root, env: buildEnv })
-    const result = await capture(
-      ['pnpm', 'exec', 'opennextjs-cloudflare', prod ? 'deploy' : 'upload'],
-      { cwd: root, env: buildEnv },
-    )
+    const ship = (command: 'deploy' | 'upload') =>
+      capture(['pnpm', 'exec', 'opennextjs-cloudflare', command], { cwd: root, env: buildEnv })
+    let result = await ship(prod ? 'deploy' : 'upload')
+    if (!prod && result.code !== 0 && workerMissing(result.out)) {
+      // Versions can only be uploaded to an existing Worker: the first preview creates it on workers.dev.
+      log.info(
+        'first preview: the Worker does not exist yet, deploying this noindexed build to create it',
+      )
+      result = await ship('deploy')
+    }
     output = result.out
     process.stdout.write(output.split('\n').slice(-15).join('\n'))
     if (result.code !== 0) {

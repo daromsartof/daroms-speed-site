@@ -12,7 +12,8 @@
 
 Preview builds set `DSS_ENV=preview`: robots disallow everything and every page is noindex. Production requires the
 real domain in the manifest and a strict doctor (no placeholders left). The first Cloudflare deploy needs
-`pnpm exec wrangler login`; secrets go through `wrangler secret put`.
+`pnpm exec wrangler login`; secrets go through `wrangler secret put`. The first preview of a site creates its Worker
+(the noindexed build goes live on `<name>.<account>.workers.dev`); later previews upload versions with their own URLs.
 
 Sites ship `.github/workflows/ci.yml` (doctor, lint, types, build) and an opt-in `deploy.yml` for Cloudflare
 (repository variable `DSS_DEPLOY=cloudflare`).

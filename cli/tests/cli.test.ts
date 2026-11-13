@@ -217,6 +217,14 @@ describe('factory and upgrade helpers', () => {
     expect(cmd[cmd.indexOf('--max-turns') + 1]).toBe('50')
   })
 
+  it('recognises the first Cloudflare preview of a new Worker', async () => {
+    const { workerMissing } = await import('../commands/deploy.ts')
+    const wrangler =
+      '✘ [ERROR] You cannot upload a new version of a Worker that does not yet exist. Please run the `deploy` command first.'
+    expect(workerMissing(wrangler)).toBe(true)
+    expect(workerMissing('✘ [ERROR] Authentication error [code: 10000]')).toBe(false)
+  })
+
   it('flags agent runs that stopped early', async () => {
     const { agentFailed } = await import('../commands/factory.ts')
     expect(agentFailed({ result: "You've hit your 5-hour limit · resets 3pm" })).toBe(true)

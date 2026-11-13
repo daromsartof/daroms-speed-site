@@ -112,3 +112,5 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
   (`pnpm start`, Lighthouse, `curl` on localhost, `pnpm cf:build`, wrangler dry run); the `any` rule ignores string
   literals (copy like "Fake sites: any payment" was refused); `factory run` reports a run stopped by an error, max
   turns or a usage limit instead of "ready", and allows WebFetch so headless research can open competitor sites.
+- `dss deploy` (Cloudflare preview) creates the Worker on the first preview: wrangler refuses `versions upload` before
+  a first deploy. Found on the first real deploy (Clear to Board preview on workers.dev, noindex verified).
