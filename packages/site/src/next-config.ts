@@ -1,3 +1,5 @@
+import { existsSync, lstatSync, realpathSync } from 'node:fs'
+import { dirname, relative, resolve, sep } from 'node:path'
 import type { NextConfig } from 'next'
 import {
   buildCsp,
@@ -25,6 +27,21 @@ function manifestCsp(manifest: Manifest): CspSources {
 }
 
 /**
+ * `dss new --link` symlinks core/ to a framework checkout outside the site. Turbopack only reads
+ * files under its root, so the root moves up to the common ancestor (development only).
+ */
+export function linkedCoreRoot(cwd: string): string | undefined {
+  const core = resolve(cwd, 'core')
+  if (!existsSync(core) || !lstatSync(core).isSymbolicLink()) return undefined
+  const real = realpathSync(core)
+  if (!relative(cwd, real).startsWith('..')) return undefined
+  let ancestor = cwd
+  while (!real.startsWith(ancestor + sep) && dirname(ancestor) !== ancestor)
+    ancestor = dirname(ancestor)
+  return ancestor
+}
+
+/**
  * The Next.js config for a dss site, derived from site.manifest.ts. Pass project-specific
  * options as `config`; headers and redirects are merged, never replaced. Never adds a webpack()
  * hook: Turbopack builds fail with one.
@@ -47,6 +64,7 @@ export function withDss(
   })
   const headers = securityHeaders({ csp, hsts: !dev })
   const target = env.DSS_DEPLOY_TARGET ?? manifest.deploy.target
+  const linkedRoot = linkedCoreRoot(process.cwd())
 
   return {
     ...config,
@@ -56,6 +74,9 @@ export function withDss(
     trailingSlash: manifest.seo.trailingSlash,
     cacheComponents: manifest.cacheComponents,
     ...(target === 'docker' ? { output: 'standalone' as const } : {}),
+    ...(linkedRoot
+      ? { turbopack: { ...config.turbopack, root: linkedRoot }, outputFileTracingRoot: linkedRoot }
+      : {}),
     images: {
       formats: ['image/avif', 'image/webp'],
       ...config.images,

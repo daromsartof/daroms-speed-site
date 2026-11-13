@@ -9,4 +9,4 @@ export {
   type ManifestInput,
   type Page,
 } from './manifest.ts'
-export { withDss, type WithDssOptions } from './next-config.ts'
+export { withDss, linkedCoreRoot, type WithDssOptions } from './next-config.ts'

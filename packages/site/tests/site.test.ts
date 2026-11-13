@@ -113,3 +113,18 @@ describe('manifest input', () => {
     expect(JSON.stringify(m)).not.toContain('input')
   })
 })
+
+describe('linkedCoreRoot', () => {
+  it('finds the common ancestor of a site and a symlinked core outside it', async () => {
+    const { mkdtempSync, mkdirSync, symlinkSync } = await import('node:fs')
+    const { join } = await import('node:path')
+    const { tmpdir } = await import('node:os')
+    const { linkedCoreRoot } = await import('../src/config.ts')
+    const base = mkdtempSync(join(tmpdir(), 'dss-link-'))
+    mkdirSync(join(base, 'framework'))
+    mkdirSync(join(base, 'sites', 'acme'), { recursive: true })
+    expect(linkedCoreRoot(join(base, 'sites', 'acme'))).toBeUndefined()
+    symlinkSync(join(base, 'framework'), join(base, 'sites', 'acme', 'core'))
+    expect(linkedCoreRoot(join(base, 'sites', 'acme'))).toBe(base)
+  })
+})

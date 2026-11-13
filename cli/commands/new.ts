@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, realpathSync, renameSync, symlinkSync } from 'node:fs'
+import { existsSync, readFileSync, realpathSync, renameSync, rmSync, symlinkSync } from 'node:fs'
 import { basename, join, resolve } from 'node:path'
 import { rollDna, designRead, type Dna } from '../../packages/design/src/index.ts'
 import { bool, flag, list, type Args } from '../lib/args.ts'
@@ -60,6 +60,10 @@ async function attachCore(dest: string, args: Args) {
     log.warn(
       `${url} unreachable: copying the installed core instead (pass --core <url> for a submodule)`,
     )
+    // A failed clone leaves core/.git and .git/modules/core behind: git would see an empty submodule.
+    for (const leftover of ['core', '.git/modules/core', '.gitmodules']) {
+      rmSync(join(dest, leftover), { recursive: true, force: true })
+    }
     copy()
     return
   }

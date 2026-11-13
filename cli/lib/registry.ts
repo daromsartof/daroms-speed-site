@@ -1,6 +1,5 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { pathToFileURL } from 'node:url'
 import type { ArchetypeId } from '../../packages/design/src/index.ts'
 import { readJson, writeFile } from './fsx.ts'
 import { fail } from './log.ts'
@@ -81,10 +80,7 @@ export function installSection(root: string, meta: SectionMeta, force = false): 
   return { ...result, status: 'added' }
 }
 
-/** Placeholder copy for a section (registry example.ts default export). */
+/** Placeholder copy for a section (registry example.json: data only, loadable from node_modules). */
 export async function sectionExample(meta: SectionMeta): Promise<Record<string, unknown>> {
-  const mod = (await import(pathToFileURL(join(meta.dir, 'example.ts')).href)) as {
-    default: Record<string, unknown>
-  }
-  return structuredClone(mod.default)
+  return readJson<Record<string, unknown>>(join(meta.dir, 'example.json'))
 }

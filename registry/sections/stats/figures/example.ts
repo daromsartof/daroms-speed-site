@@ -1,8 +1,0 @@
-export default {
-  items: [
-    { value: '[12]', label: '[years of practice]' },
-    { value: '[340]', label: '[projects delivered]' },
-    { value: '[48 h]', label: '[average reply time]' },
-  ],
-  note: '[Source or date of the figures]',
-}

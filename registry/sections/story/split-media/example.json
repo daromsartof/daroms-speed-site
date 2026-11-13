@@ -1,0 +1,13 @@
+{
+  "eyebrow": "[Our story]",
+  "title": "[Why you started, in one line]",
+  "paragraphs": [
+    "[Where and when it began, with a real detail.]",
+    "[What you do differently today, and for whom.]"
+  ],
+  "image": {
+    "src": "/placeholders/portrait.svg",
+    "alt": "[Describe the real photo: who, where, doing what]"
+  },
+  "caption": "[Optional caption: name, place, year]"
+}

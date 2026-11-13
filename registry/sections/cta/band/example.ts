@@ -1,5 +1,0 @@
-export default {
-  title: '[The next step, phrased as the visitor’s decision]',
-  body: '[What happens after they click, and how fast.]',
-  action: { label: '[Action]', href: '/contact' },
-}
