@@ -1,0 +1,10 @@
+// @dss/design: Design DNA. Node-safe (no JSX, explicit .ts imports): the CLI imports it directly.
+export * from './schema.ts'
+export * from './color.ts'
+export { FONT_PAIRS, fontPair, fontImportName, type FontPair, type FontSpec } from './fonts.ts'
+export { ARCHETYPES, ARCHETYPE_LIST, type Archetype } from './archetypes.ts'
+export { INDUSTRIES, matchIndustry, type Industry } from './industries.ts'
+export { colorTokens, COLOR_TOKENS, CONTRAST, type ColorToken, type ColorTokens } from './tokens.ts'
+export { rollDna, dnaDistance, type RollOptions } from './roll.ts'
+export { renderThemeCss, renderFontsTs, renderThemeTs, designRead, hueName } from './render.ts'
+export { createRng, hashString } from './random.ts'
