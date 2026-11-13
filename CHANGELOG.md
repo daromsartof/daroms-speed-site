@@ -48,3 +48,14 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
 - Verified live with Claude Code headless in a generated site: a non-compliant write was refused by the hook and reported
   verbatim; `/dss-copy home` (forked Sonnet) replaced placeholders with brief facts, kept unknown testimonials as open
   facts, doctor and build stayed green; `dss cost` reported the sessions.
+- `@dss/motion`: scroll reveals, stagger, parallax, marquee and split words in pure CSS (`animation-timeline: view()`),
+  disabled for reduced motion and DNA motion `none`; client `CountUp`.
+- `@dss/three`: `<Scene>` loads three.js and the scene only near the viewport and when the main thread is idle, pauses
+  offscreen, keeps a server-rendered poster on phones, data saver, reduced motion, no WebGL or DNA three `none`.
+  Registry scenes `gradient` (shader in DNA colors) and `particles`; `dss add scene`; adding @dss/three also adds
+  `three`/`@react-three/fiber` to the site.
+- Registry grows to 21 variants (hero: split-editorial, scene, kinetic, fullbleed-image, mono-index; features: numbered,
+  bento; logos, gallery, projects, team, pricing, manifesto); variant picked per site with the DNA seed among the ones
+  fitting the archetype, 3D variants skipped when DNA three is `none`; `portfolio` preset.
+- Verified: 5 briefs produced 5 archetypes (minimum pairwise DNA distance 0.70), all static, rule gate clean, types and
+  lint green; the 3D site scores Lighthouse mobile 100 performance (LCP 0.8 s, TBT 70 ms) and desktop 100.
