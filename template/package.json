@@ -25,6 +25,7 @@
     "@dss/security": "workspace:*",
     "@dss/seo": "workspace:*",
     "@dss/site": "workspace:*",
+    "@dss/ui": "workspace:*",
     "next": "16.4.6",
     "react": "19.3.1",
     "react-dom": "19.3.1",

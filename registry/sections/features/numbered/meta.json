@@ -1,0 +1,9 @@
+{
+  "id": "features",
+  "variant": "numbered",
+  "component": "Features",
+  "title": "Numbered features",
+  "description": "Ruled, numbered list beside a title column. Avoids the three-equal-cards pattern.",
+  "fits": ["editorial", "swiss", "institutional", "minimal-mono", "magazine", "tech-noir"],
+  "client": false
+}

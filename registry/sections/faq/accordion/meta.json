@@ -1,0 +1,18 @@
+{
+  "id": "faq",
+  "variant": "accordion",
+  "component": "Faq",
+  "title": "FAQ accordion",
+  "description": "Radix accordion with FAQPage structured data.",
+  "fits": [
+    "editorial",
+    "swiss",
+    "institutional",
+    "organic",
+    "playful",
+    "tech-noir",
+    "minimal-mono",
+    "craft"
+  ],
+  "client": false
+}

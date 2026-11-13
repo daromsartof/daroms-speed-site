@@ -1,0 +1,18 @@
+{
+  "id": "cta",
+  "variant": "band",
+  "component": "Cta",
+  "title": "Inverse CTA band",
+  "description": "Ink background, one line, one button. Ends a page.",
+  "fits": [
+    "editorial",
+    "swiss",
+    "brutalist",
+    "institutional",
+    "magazine",
+    "tech-noir",
+    "kinetic-type",
+    "craft"
+  ],
+  "client": false
+}

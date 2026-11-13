@@ -231,7 +231,7 @@ export function renderIconSvg(dna: Dna, siteName: string): string {
   const serif = SERIF.test(fontPair(dna.fonts).display.family)
   const family = serif ? 'Georgia, serif' : 'Helvetica, Arial, sans-serif'
   return [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><!-- dss-monogram -->',
     `<rect width="64" height="64" rx="${radius}" fill="${oklchToHex(colors.accent)}"/>`,
     `<text x="32" y="44" text-anchor="middle" font-family="${family}" font-size="38" font-weight="600" fill="${oklchToHex(colors['accent-ink'])}">${letter}</text>`,
     '</svg>',

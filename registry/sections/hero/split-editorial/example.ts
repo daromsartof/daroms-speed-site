@@ -1,0 +1,7 @@
+export default {
+  eyebrow: '[Who it is for, in a few words]',
+  title: '[The outcome you deliver, in under ten words]',
+  body: '[Two sentences: what you do, how, and one concrete proof (a number, a place, a name).]',
+  primary: { label: '[Main action]', href: '/contact' },
+  secondary: { label: '[Second action]', href: '/#services' },
+}

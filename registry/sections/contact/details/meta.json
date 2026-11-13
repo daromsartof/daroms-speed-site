@@ -1,0 +1,18 @@
+{
+  "id": "contact",
+  "variant": "details",
+  "component": "Contact",
+  "title": "Contact details",
+  "description": "Channels as a definition list plus hours. Page-level h1 (use on the contact page).",
+  "fits": [
+    "editorial",
+    "swiss",
+    "craft",
+    "institutional",
+    "organic",
+    "luxury",
+    "architectural",
+    "minimal-mono"
+  ],
+  "client": false
+}

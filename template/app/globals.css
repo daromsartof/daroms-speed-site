@@ -9,7 +9,6 @@
 
 @layer base {
   html {
-    color-scheme: light;
     -webkit-text-size-adjust: 100%;
   }
   body {

@@ -5,3 +5,4 @@ packages:
   - core/packages/security
   - core/packages/seo
   - core/packages/site
+  - core/packages/ui

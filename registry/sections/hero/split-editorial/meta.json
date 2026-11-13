@@ -1,0 +1,9 @@
+{
+  "id": "hero",
+  "variant": "split-editorial",
+  "component": "Hero",
+  "title": "Split editorial hero",
+  "description": "Oversized display title left, body and actions right. Text-led, no image required.",
+  "fits": ["editorial", "craft", "institutional", "architectural", "luxury", "swiss"],
+  "client": false
+}

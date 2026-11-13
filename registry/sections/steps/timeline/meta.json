@@ -1,0 +1,9 @@
+{
+  "id": "steps",
+  "variant": "timeline",
+  "component": "Steps",
+  "title": "Timeline steps",
+  "description": "Horizontal timeline with accent dots. Only for real sequences.",
+  "fits": ["editorial", "swiss", "craft", "tech-noir", "playful", "organic", "institutional"],
+  "client": false
+}

@@ -1,0 +1,17 @@
+{
+  "id": "stats",
+  "variant": "figures",
+  "component": "Stats",
+  "title": "Figures",
+  "description": "Display-size numbers over a rule. Proof, not decoration.",
+  "fits": [
+    "swiss",
+    "magazine",
+    "institutional",
+    "tech-noir",
+    "editorial",
+    "brutalist",
+    "kinetic-type"
+  ],
+  "client": false
+}

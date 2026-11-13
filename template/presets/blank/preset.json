@@ -1,0 +1,4 @@
+{
+  "description": "One page with a hero. Start here for a bespoke structure.",
+  "pages": [{ "route": "/", "name": "home", "sections": ["hero"] }]
+}

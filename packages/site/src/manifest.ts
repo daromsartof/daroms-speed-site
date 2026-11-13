@@ -109,6 +109,9 @@ export type Manifest = z.infer<typeof ManifestSchema>
 export type ManifestInput = z.input<typeof ManifestSchema>
 export type Page = z.infer<typeof PageSchema>
 
+/** The raw input is kept (non-enumerable) so the CLI can rewrite the file without expanding defaults. */
+export const MANIFEST_INPUT = Symbol.for('dss.manifest.input')
+
 /** `site.manifest.ts`: `export default defineManifest({...})`. Validated at import time. */
 export function defineManifest(input: ManifestInput): Manifest {
   const result = ManifestSchema.safeParse(input)

@@ -1,6 +1,7 @@
 // Node-safe entry (no JSX, explicit .ts imports): imported by next.config.ts, site.manifest.ts and the CLI.
 export {
   defineManifest,
+  MANIFEST_INPUT,
   ManifestSchema,
   PageSchema,
   OrganizationSchema,

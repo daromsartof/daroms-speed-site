@@ -1,0 +1,9 @@
+{
+  "id": "testimonials",
+  "variant": "quotes",
+  "component": "Testimonials",
+  "title": "Lead quote + quotes",
+  "description": "One display-size quote, then a two-column list. No avatars or stars by default.",
+  "fits": ["editorial", "luxury", "craft", "institutional", "magazine", "organic", "architectural"],
+  "client": false
+}

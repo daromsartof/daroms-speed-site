@@ -1,0 +1,17 @@
+{
+  "id": "services",
+  "variant": "rows",
+  "component": "Services",
+  "title": "Service rows",
+  "description": "Full-width ruled rows with optional links and prices. Good for agencies, trades, clinics, restaurants (as a menu).",
+  "fits": [
+    "editorial",
+    "craft",
+    "institutional",
+    "swiss",
+    "luxury",
+    "architectural",
+    "retro-print"
+  ],
+  "client": false
+}

@@ -1,0 +1,13 @@
+export default {
+  eyebrow: '[How it works]',
+  title: '[From first contact to result, in N steps]',
+  steps: [
+    {
+      title: '[Step 1]',
+      body: '[What happens and what the client provides.]',
+      duration: '[day 1]',
+    },
+    { title: '[Step 2]', body: '[What happens.]', duration: '[week 1]' },
+    { title: '[Step 3]', body: '[What the client receives.]', duration: '[week 2]' },
+  ],
+}

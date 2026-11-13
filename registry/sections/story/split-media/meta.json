@@ -1,0 +1,9 @@
+{
+  "id": "story",
+  "variant": "split-media",
+  "component": "Story",
+  "title": "Story with photo",
+  "description": "Portrait photo beside a short narrative. Needs a real photo before launch.",
+  "fits": ["editorial", "craft", "organic", "luxury", "architectural", "institutional"],
+  "client": false
+}
