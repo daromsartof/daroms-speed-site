@@ -222,3 +222,19 @@ export function designRead(dna: Dna): string {
     `${dna.motion} motion, 3D ${dna.three}, imagery ${dna.imagery}`,
   ].join('; ')
 }
+
+/** `app/icon.svg`: monogram on the accent, corner radius from the DNA. Replace with a real logo when there is one. */
+export function renderIconSvg(dna: Dna, siteName: string): string {
+  const colors = colorTokens(dna)
+  const letter = (siteName.match(/[\p{L}\p{N}]/u)?.[0] ?? 'S').toUpperCase()
+  const radius = { none: 0, subtle: 6, soft: 14, pill: 32 }[dna.radius]
+  const serif = SERIF.test(fontPair(dna.fonts).display.family)
+  const family = serif ? 'Georgia, serif' : 'Helvetica, Arial, sans-serif'
+  return [
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">',
+    `<rect width="64" height="64" rx="${radius}" fill="${oklchToHex(colors.accent)}"/>`,
+    `<text x="32" y="44" text-anchor="middle" font-family="${family}" font-size="38" font-weight="600" fill="${oklchToHex(colors['accent-ink'])}">${letter}</text>`,
+    '</svg>',
+    '',
+  ].join('')
+}

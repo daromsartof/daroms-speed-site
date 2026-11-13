@@ -174,3 +174,13 @@ describe('catalogs', () => {
     }
   })
 })
+
+describe('icon', () => {
+  it('renders an escaped monogram with DNA colors', async () => {
+    const { renderIconSvg } = await import('../src/index.ts')
+    const svg = renderIconSvg(rollDna({ seed: 'icon' }), '<atelier')
+    expect(svg).toMatch(/^<svg/)
+    expect(svg).toContain('>A</text>')
+    expect(svg).not.toContain('<atelier')
+  })
+})
