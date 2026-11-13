@@ -72,7 +72,9 @@ function candidate(rng: Rng, opts: RollOptions, industry: Industry, moods: reado
   const r1 = (v: number) => Math.round(v * 10) / 10
   const r3 = (v: number) => Math.round(v * 1000) / 1000
   const hue = r1(lock.hue ?? pickHue(rng, industry))
-  const neutralHue = r1(rng() < 0.25 ? (hue + 180) % 360 : (hue + between(rng, [-20, 20]) + 360) % 360)
+  const neutralHue = r1(
+    rng() < 0.25 ? (hue + 180) % 360 : (hue + between(rng, [-20, 20]) + 360) % 360,
+  )
   return DnaSchema.parse({
     version: 1,
     seed: opts.seed,
