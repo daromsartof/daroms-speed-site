@@ -74,3 +74,13 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
   sitemap and llms.txt entries, CSP presets and the analytics script are served; the form returns field errors from the
   server and a generic failure without email credentials (real browser); removing blog and analytics rebuilds green;
   libSQL and local D1 migrations apply.
+- AimKit 0.3.0 vendored in `packages/aimkit` (bridge, MCP server, Chrome extension; `scripts/vendor-aimkit.mjs`,
+  provenance in VENDOR.md). Upstream in domtake (branch `feat/english-default`): bridge CLI, MCP descriptions and
+  instructions, skill text and messages in English; `context.md` always written in English for the agent while the
+  extension UI keeps its language; unit tests and e2e expectations updated.
+- Sites: `@dss/aimkit` in the workspace, `.aimkit.json`, `aimkit` MCP entry; `dss dev` runs the bridge next to `next dev`
+  (`--no-aimkit` to skip); `dss aimkit setup|token|init`; `/dss-edit` reads the context labels directly.
+- `dss mcp list|add|remove` with verified opt-in recipes: MotionSites (OAuth), 60fps (licence, iOS motion references),
+  Context7, Playwright MCP, gbrain.
+- Verified: in a generated site, `dss dev` serves Next and starts the bridge on 7457 (unsigned requests refused); the
+  aimkit MCP server answers `tools/list` and returns the latest context (request and exact source line) in English.

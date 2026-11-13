@@ -49,7 +49,8 @@ everything repetitive; the site writes only what is specific to it. Never edit `
 
 ## Commands
 `pnpm dss`: `new`, `dev`, `doctor [--quick --strict]`, `dna show|roll`, `theme`, `g page|section`, `add list|section|scene`,
-`module list|add|remove` (forms, legal, analytics, blog), `db init`, `catalog`, `sync-ai`, `cost`. Skills: `/dss-site` (whole site, step by step), `/dss-brief`, `/dss-dna`, `/dss-sitemap`, `/dss-copy`,
+`module list|add|remove` (forms, legal, analytics, blog), `db init`, `mcp list|add`, `aimkit setup|token`, `catalog`,
+`sync-ai`, `cost`. Skills: `/dss-site` (whole site, step by step), `/dss-brief`, `/dss-dna`, `/dss-sitemap`, `/dss-copy`,
 `/dss-page`, `/dss-section`, `/dss-seo`, `/dss-check`, `/dss-polish`, `/dss-deploy`, `/dss-edit`, `/dss-fix`, `/dss-learn`, `/dss-commit`.
 
 ## Answer style

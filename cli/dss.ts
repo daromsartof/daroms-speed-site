@@ -49,6 +49,11 @@ const COMMANDS: Record<string, Command> = {
       'db init [--driver d1|libsql|postgres]: Drizzle schema, client, config, migrations scripts',
     run: async (a) => (await import('./commands/db.ts')).db(a),
   },
+  mcp: {
+    describe:
+      'mcp list | add <motionsites|60fps|context7|playwright|gbrain> | remove <name>: opt-in MCP servers in .mcp.json',
+    run: async (a) => (await import('./commands/mcp.ts')).mcp(a),
+  },
   aimkit: {
     describe:
       'aimkit setup | token | init: install the Chrome extension once, pair it, print the token (vendored AimKit)',

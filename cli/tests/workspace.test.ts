@@ -29,3 +29,16 @@ describe('ensureCorePackage', () => {
     expect(pkg.devDependencies).toMatchObject({ '@types/three': '0.187.0' })
   })
 })
+
+describe('MCP recipes', () => {
+  it('only ship complete configs', async () => {
+    const { MCP_RECIPES } = await import('../commands/mcp.ts')
+    for (const [name, recipe] of Object.entries(MCP_RECIPES)) {
+      expect(recipe.config.url ?? recipe.config.command, name).toBeTruthy()
+      if (recipe.config.url) expect(recipe.config.url, name).toMatch(/^https:\/\//)
+      for (const arg of recipe.config.args ?? [])
+        if (arg.startsWith('@')) expect(arg, `${name} pins a version`).toMatch(/@\d/)
+      expect(recipe.setup.length, name).toBeGreaterThan(20)
+    }
+  })
+})
