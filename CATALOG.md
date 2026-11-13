@@ -44,7 +44,7 @@ Read this file, never the core sources. Site sections: `grep -h @catalog compone
 | CountUp (client): animates a number from 0 when it enters the viewport; renders the final value without JS or with reduced motion. Keep the label outside. | value (number), prefix?, suffix?, duration? (ms) |
 | Marquee: infinite horizontal loop in CSS (pauses on hover, static when motion is off). Logos, kinetic words. | children (one sequence; it is duplicated), label (accessible name), className |
 | SplitWords: headline revealed word by word in CSS (server-rendered, no JS). Use once per page, on the hero. | text, as (h1 \| h2 \| p...), className |
-| Scene (client): lazy three.js canvas with poster fallback; never the LCP element. Use inside components/3d only. | load, poster, label, className, dpr |
+| Scene (client): lazy three.js canvas with poster fallback; never the LCP element. Use inside components/3d only. | load, poster, label, className, dpr, minWidth (default 768: phones keep the poster) |
 
 Scenes (`pnpm dss add scene <id>`, copied into components/3d/, poster fallback, skipped when DNA three is none):
 

@@ -19,6 +19,7 @@ describe('@dss/three', () => {
     expect(canRunScene()).toBe(false)
     document.documentElement.dataset.three = 'hero'
     expect(canRunScene()).toBe(false) // jsdom has no WebGL
+    expect(canRunScene(window, 99_999)).toBe(false) // phones keep the poster
   })
 
   it('renders the poster and never loads the scene when it cannot run', () => {

@@ -1,7 +1,7 @@
 'use client'
 import type { Canvas as FiberCanvas } from '@react-three/fiber'
 import { useEffect, useRef, useState, type ComponentType, type ReactNode } from 'react'
-import { canRunScene } from './support.ts'
+import { canRunScene, whenIdle } from './support.ts'
 
 type CanvasType = typeof FiberCanvas
 type Loaded = { Canvas: CanvasType; Content: ComponentType }
@@ -16,13 +16,22 @@ export type SceneProps = {
   className?: string
   /** Device pixel ratio clamp. */
   dpr?: [number, number]
+  /** Smallest viewport width that runs the scene; below it the poster stays (0 = always run). */
+  minWidth?: number
 }
 
 /**
  * @catalog Scene (client): lazy three.js canvas with poster fallback; never the LCP element. Use inside components/3d only.
- * @props load, poster, label, className, dpr
+ * @props load, poster, label, className, dpr, minWidth (default 768: phones keep the poster)
  */
-export function Scene({ load, poster, label, className, dpr = [1, 1.75] }: SceneProps) {
+export function Scene({
+  load,
+  poster,
+  label,
+  className,
+  dpr = [1, 1.75],
+  minWidth = 768,
+}: SceneProps) {
   const host = useRef<HTMLDivElement>(null)
   const [loaded, setLoaded] = useState<Loaded | null>(null)
   const [onScreen, setOnScreen] = useState(false)
@@ -30,17 +39,21 @@ export function Scene({ load, poster, label, className, dpr = [1, 1.75] }: Scene
 
   useEffect(() => {
     const node = host.current
-    if (!node || !canRunScene()) return
+    if (!node || !canRunScene(window, minWidth)) return
     let cancelled = false
     let requested = false
+    let cancelIdle = () => {}
     const observer = new IntersectionObserver(
       ([entry]) => {
         const visible = Boolean(entry?.isIntersecting)
         setOnScreen(visible)
         if (visible && !requested) {
           requested = true
-          void Promise.all([import('@react-three/fiber'), load()]).then(([fiber, mod]) => {
-            if (!cancelled) setLoaded({ Canvas: fiber.Canvas, Content: mod.default })
+          // Wait for an idle main thread: the renderer never competes with first paint and hydration.
+          cancelIdle = whenIdle(() => {
+            void Promise.all([import('@react-three/fiber'), load()]).then(([fiber, mod]) => {
+              if (!cancelled) setLoaded({ Canvas: fiber.Canvas, Content: mod.default })
+            })
           })
         }
       },
@@ -49,9 +62,10 @@ export function Scene({ load, poster, label, className, dpr = [1, 1.75] }: Scene
     observer.observe(node)
     return () => {
       cancelled = true
+      cancelIdle()
       observer.disconnect()
     }
-  }, [load])
+  }, [load, minWidth])
 
   const Canvas = loaded?.Canvas
   const Content = loaded?.Content
