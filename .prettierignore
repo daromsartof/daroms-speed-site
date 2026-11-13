@@ -7,3 +7,7 @@ generators/**/files/**
 **/app/fonts.ts
 **/app/theme.css
 **/app/theme.ts
+# AI layer: hand-tuned Markdown and compact JSON (token budget), vendored skills kept byte-identical
+_ai/**/*.md
+_ai/context/*.json
+_ai/skills/vendor/**

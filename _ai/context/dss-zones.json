@@ -1,0 +1,70 @@
+{
+  "zones": [
+    {
+      "name": "design DNA and theme",
+      "keywords": ["color", "colour", "palette", "font", "fonts", "typography", "theme", "dark", "light", "style", "look", "brand", "dna", "accent", "radius", "texture"],
+      "paths": ["design.dna.ts", "app/theme.css (generated)", "app/fonts.ts (generated)"],
+      "notes": "Never edit generated theme files: change design.dna.ts then `pnpm dss theme`, or `pnpm dss dna roll --lock...`."
+    },
+    {
+      "name": "copy and text",
+      "keywords": ["text", "copy", "wording", "headline", "title", "typo", "sentence", "rewrite", "translate", "tone"],
+      "paths": ["content/<page>.ts", "content/site.ts"],
+      "notes": "All visible text lives in content/. Specific facts beat adjectives; the slop gate refuses cliches."
+    },
+    {
+      "name": "header, navigation, footer",
+      "keywords": ["header", "nav", "navigation", "menu", "footer", "logo", "navbar"],
+      "paths": ["components/site/header.tsx", "components/site/footer.tsx", "content/site.ts"],
+      "notes": "Nav items come from site.manifest.ts pages (nav: true) and labels from content/site.ts nav."
+    },
+    {
+      "name": "SEO and structured data",
+      "keywords": ["seo", "meta", "metadata", "sitemap", "robots", "schema", "jsonld", "canonical", "og", "opengraph", "llms", "google", "ranking", "geo"],
+      "paths": ["site.manifest.ts (seo)", "content/<page>.ts (meta)", "app/layout.tsx"],
+      "notes": "pageMetadata/rootMetadata and JSON-LD builders from @dss/seo; never hand-write <meta>. /dss-seo."
+    },
+    {
+      "name": "security headers and CSP",
+      "keywords": ["csp", "security", "headers", "hsts", "cors", "xss", "iframe", "embed", "turnstile", "captcha"],
+      "paths": ["site.manifest.ts (security.csp)", "next.config.ts"],
+      "notes": "Add third-party origins through security.csp presets or sources in the manifest, never in next.config.ts."
+    },
+    {
+      "name": "deployment",
+      "keywords": ["deploy", "deployment", "cloudflare", "vercel", "docker", "domain", "dns", "hosting", "production", "preview", "wrangler"],
+      "paths": ["site.manifest.ts (deploy)", "wrangler.jsonc", "Dockerfile", "open-next.config.ts"],
+      "notes": "/dss-deploy. Previews are noindexed automatically (DSS_ENV=preview)."
+    },
+    {
+      "name": "pages and routes",
+      "keywords": ["page", "pages", "route", "url", "slug", "redirect", "404"],
+      "paths": ["site.manifest.ts (pages, redirects)", "app/"],
+      "notes": "New page: `pnpm dss g page /route --sections hero,faq,cta`. Redirects belong in the manifest."
+    },
+    {
+      "name": "sections and layout blocks",
+      "keywords": ["section", "block", "hero", "testimonial", "testimonials", "faq", "cta", "pricing", "features", "gallery", "team"],
+      "paths": ["components/sections/", "core/CATALOG.md (registry)"],
+      "notes": "Registry first: `pnpm dss add list`, `pnpm dss add section <id> --page /route`; bespoke: `pnpm dss g section <name>`."
+    },
+    {
+      "name": "3D and WebGL",
+      "keywords": ["3d", "three", "webgl", "shader", "scene", "model", "glb", "canvas"],
+      "paths": ["components/3d/", "design.dna.ts (three)"],
+      "notes": "three.js only inside components/3d, rendered through <Scene> (lazy, poster fallback, reduced motion)."
+    },
+    {
+      "name": "motion and animation",
+      "keywords": ["animation", "animate", "motion", "transition", "scroll", "parallax", "reveal", "hover"],
+      "paths": ["design.dna.ts (motion)", "components/"],
+      "notes": "Motion (motion/react) and CSS; composite-only properties; respect prefers-reduced-motion. No GSAP."
+    },
+    {
+      "name": "visual edit from the browser (AimKit)",
+      "keywords": ["aimkit", "selected", "clicked", "element", "this button", "this block", "context md"],
+      "paths": [".claude-context/"],
+      "notes": "Read the latest capture with the aimkit MCP get_context (with_images false first). /dss-edit."
+    }
+  ]
+}

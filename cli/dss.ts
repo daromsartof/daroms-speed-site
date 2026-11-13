@@ -39,6 +39,14 @@ const COMMANDS: Record<string, Command> = {
       'add list | add section <id[/variant]> [--page /route --force]: copy a registry section into the site',
     run: async (a) => (await import('./commands/add.ts')).add(a),
   },
+  catalog: {
+    describe: 'catalog: regenerate core/CATALOG.md and _ai/digest.md (core repository)',
+    run: async (a) => (await import('./commands/ai.ts')).catalog(a),
+  },
+  'sync-ai': {
+    describe: 'sync-ai: copy core/_ai into .claude/ and rebuild the routing index',
+    run: async (a) => (await import('./commands/ai.ts')).syncAi(a),
+  },
 }
 
 function help() {

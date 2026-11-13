@@ -57,10 +57,12 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest run",
-    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test",
+    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm test:hooks",
     "format:check": "prettier --check .",
     "build:cli": "node scripts/build-cli.mjs",
-    "prepublishOnly": "pnpm check && pnpm build:cli"
+    "prepublishOnly": "pnpm check && pnpm build:cli",
+    "catalog": "node cli/dss.ts catalog",
+    "test:hooks": "python3 -m unittest discover -s _ai/hooks/tests"
   },
   "devDependencies": {
     "@dss/config": "workspace:*",

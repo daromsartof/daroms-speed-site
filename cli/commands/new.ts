@@ -119,6 +119,7 @@ export async function newSite(args: Args) {
   copyDir(join(CORE_DIR, 'template'), dest, (rel) => TEMPLATE_SKIP.test(rel))
   renameSync(join(dest, 'gitignore'), join(dest, '.gitignore'))
   renameSync(join(dest, 'npmrc'), join(dest, '.npmrc'))
+  renameSync(join(dest, 'mcp.json'), join(dest, '.mcp.json'))
   const git = !bool(args, 'no-git')
   if (git) await run(['git', 'init', '-q', '-b', 'main'], { cwd: dest })
   await attachCore(dest, args)
@@ -154,13 +155,11 @@ export async function newSite(args: Args) {
 
   for (const page of preset.pages) await generatePage(dest, page, dna.archetype, true)
 
-  if (existsSync(join(CORE_DIR, '_ai', 'hooks', 'dss-sync.py'))) {
-    await run(['python3', join(dest, 'core/_ai/hooks/dss-sync.py'), '--force'], {
-      cwd: dest,
-      allowFailure: true,
-      quiet: true,
-    })
-  }
+  // AI layer: .claude/ from core/_ai, then the routing index. CLAUDE_PROJECT_DIR must be the new site,
+  // not a Claude Code session the CLI may run in.
+  const ai = { cwd: dest, allowFailure: true, quiet: true, env: { CLAUDE_PROJECT_DIR: dest } }
+  await run(['python3', join(dest, 'core/_ai/hooks/dss-sync.py'), '--force'], ai)
+  await run(['python3', join(dest, '.claude/hooks/dss-context.py'), 'build'], ai)
   if (git) {
     await run(['git', 'add', '-A'], { cwd: dest, quiet: true })
     await run(
