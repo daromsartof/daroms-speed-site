@@ -29,4 +29,3 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
   - `@dss/data`: Drizzle on SQLite (D1 binding, libSQL), id/timestamp columns, drizzle-kit config per driver.
 - Template now uses the manifest, the DNA and the packages. Golden page: Lighthouse mobile 96 performance,
   100 accessibility, 100 best practices, 100 SEO; OpenNext build green.
-
