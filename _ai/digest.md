@@ -18,6 +18,7 @@ On-demand rules: read `.claude/rules-ondemand/<name>.md` when the topic comes up
 - **dss-sections**: Sections are owned code: typed props from content/, @dss/ui primitives, DNA tokens; first line stamp, then a @catalog JSDoc.
 - **dss-seo**: Metadata, canonical, robots, sitemap, llms.txt and JSON-LD come from @dss/seo and the manifest; previews are noindexed automatically.
 - **dss-styles**: Only DNA token classes: no hex/rgb, no arbitrary colors, no default Tailwind palette (bg-slate-900, text-indigo-500), no inline style.
+- **dss-tests**: Pure logic in `lib/` and `server/` gets a `*.test.ts` next to it, run by `pnpm test` (Node's built-in runner).
 - **dss-three**: three/@react-three only in components/3d, client-only, lazy, rendered through <Scene> with a poster fallback; never the LCP.
 - **dss-cms** (on demand): Default: content/ files edited through Claude or Git; client editing via the cms-keystatic module (Git-based, free).
 - **dss-copywriting** (on demand): Voice from site.spec.md; specific, verifiable, plain; one idea per sentence; no generated-copy tells.

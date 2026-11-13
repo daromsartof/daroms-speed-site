@@ -63,6 +63,11 @@ class CheckRulesTest(unittest.TestCase):
         self.assertFalse(self.problems("content/home.ts", "  title: 'Forty tables a year, from one workshop in Lyon',"))
         self.assertTrue(self.problems("content/home.ts", "  title: 'Built to last — really',"))
 
+    def test_any_rule_ignores_copy(self):
+        self.assertTrue(self.problems("lib/x.ts", "const a: any = 'x'"))
+        self.assertTrue(self.problems("lib/x.ts", "const b = value as any"))
+        self.assertFalse(self.problems("content/scams.ts", "  title: 'Fake sites: any payment is a scam',"))
+
     def test_escape_and_scope(self):
         self.assertFalse(self.problems("components/x.tsx", "const c = '#fff' // dss-ignore: favicon"))
         self.assertFalse(rules.applies("core/packages/ui/src/a.tsx"))

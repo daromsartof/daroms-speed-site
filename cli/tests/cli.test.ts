@@ -213,8 +213,16 @@ describe('factory and upgrade helpers', () => {
     )
     const cmd = agentCommand(site, 'Acme', '50')
     expect(cmd.slice(0, 3)).toEqual(['claude', '-p', '/dss-site --auto Acme'])
-    expect(cmd).toContain('--allowedTools=Bash(pnpm dss:*),Bash(git status:*)')
+    expect(cmd).toContain('--allowedTools=Bash(pnpm dss:*),Bash(git status:*),WebFetch')
     expect(cmd[cmd.indexOf('--max-turns') + 1]).toBe('50')
+  })
+
+  it('flags agent runs that stopped early', async () => {
+    const { agentFailed } = await import('../commands/factory.ts')
+    expect(agentFailed({ result: "You've hit your 5-hour limit · resets 3pm" })).toBe(true)
+    expect(agentFailed({ subtype: 'error_max_turns' })).toBe(true)
+    expect(agentFailed({ is_error: true })).toBe(true)
+    expect(agentFailed({ subtype: 'success', result: 'Site ready; step 13 done.' })).toBe(false)
   })
 
   it('aligns only shared, non-workspace dependencies', async () => {

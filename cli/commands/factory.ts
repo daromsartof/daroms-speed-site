@@ -27,11 +27,29 @@ export function parseBrief(text: string, fallbackSlug: string): Brief {
   return { ...meta, slug: meta.slug ?? fallbackSlug, body: (match?.[2] ?? text).trim() } as Brief
 }
 
-type AgentResult = { cost?: number; turns?: number; result?: string }
+type AgentResult = { cost?: number; turns?: number; result?: string; failed?: boolean }
+
+type AgentJson = {
+  total_cost_usd?: number
+  num_turns?: number
+  result?: string
+  is_error?: boolean
+  subtype?: string
+}
+
+/** A headless run that stopped early: an error, max turns, or a usage limit (reported as a plain result). */
+export function agentFailed(json: AgentJson): boolean {
+  return (
+    json.is_error === true ||
+    (json.subtype ?? '').startsWith('error') ||
+    /\b(?:hit your|reached your) .*limit\b/i.test(json.result ?? '')
+  )
+}
 
 /**
  * The headless Claude command for one site. A fresh folder is not a trusted workspace, so Claude ignores the
  * project's `permissions.allow`: the same rules are passed on the command line, with the brain as an extra dir.
+ * WebFetch is added for any domain: /dss-research opens competitor sites and nobody is there to approve each one.
  */
 export function agentCommand(site: string, name: string, maxTurns: string): string[] {
   const settings = [join(site, '.claude/settings.json'), join(site, 'core/_ai/settings.json')].find(
@@ -41,6 +59,7 @@ export function agentCommand(site: string, name: string, maxTurns: string): stri
     ? ((JSON.parse(readFileSync(settings, 'utf8')) as { permissions?: { allow?: string[] } })
         .permissions?.allow ?? [])
     : []
+  const tools = [...new Set([...allow, 'WebFetch'])]
   return [
     'claude',
     '-p',
@@ -52,7 +71,7 @@ export function agentCommand(site: string, name: string, maxTurns: string): stri
     '--output-format',
     'json',
     ...(existsSync(brainDir()) ? ['--add-dir', brainDir()] : []),
-    ...(allow.length ? [`--allowedTools=${allow.join(',')}`] : []),
+    `--allowedTools=${tools.join(',')}`,
   ]
 }
 
@@ -65,16 +84,13 @@ async function runAgent(site: string, name: string, maxTurns: string): Promise<A
     .split('\n')
     .reverse()
     .find((l) => l.startsWith('{'))
-  if (!json) return { result: result.out.slice(-500) }
-  const parsed = JSON.parse(json) as {
-    total_cost_usd?: number
-    num_turns?: number
-    result?: string
-  }
+  if (!json) return { result: result.out.slice(-500), failed: true }
+  const parsed = JSON.parse(json) as AgentJson
   return {
     cost: parsed.total_cost_usd,
     turns: parsed.num_turns,
     result: parsed.result?.slice(0, 500),
+    failed: agentFailed(parsed),
   }
 }
 
@@ -121,11 +137,19 @@ export async function factory(args: Args) {
       ? await runAgent(site, brief.name ?? brief.slug, flag(args, 'max-turns') ?? '120')
       : {}
     const seconds = Math.round((Date.now() - started) / 1000)
+    const { failed, ...details } = agent as AgentResult
+    const status = failed ? 'agent-stopped' : 'ok'
     appendFileSync(
       logFile,
-      `${JSON.stringify({ slug: brief.slug, status: 'ok', seconds, ...agent })}\n`,
+      `${JSON.stringify({ slug: brief.slug, status, seconds, ...details })}\n`,
     )
-    log.ok(`${brief.slug} ready${agent.cost !== undefined ? ` ($${agent.cost.toFixed(2)})` : ''}`)
+    const cost = details.cost !== undefined ? ` ($${details.cost.toFixed(2)})` : ''
+    if (failed) {
+      log.warn(`${brief.slug}: agent stopped early${cost}: ${details.result ?? 'no result'}`)
+      log.warn(
+        `resume in ${site}: claude -p "/dss-site --auto ${brief.name ?? brief.slug}. Resume from the Journal."`,
+      )
+    } else log.ok(`${brief.slug} ready${cost}`)
   }
   log.info(`log: ${logFile}`)
 }

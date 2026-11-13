@@ -107,3 +107,8 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
   cache.
 - `dss factory run --agent` passes the site's permission rules to headless Claude Code (untrusted folders ignore project
   `permissions.allow`, which blocked every `pnpm dss` command) and adds the brain directory.
+- Found by the first full agent demo (Clear to Board): sites get `pnpm test` (Node's built-in runner, no dependency,
+  run in site CI and by /dss-check) with a `dss-tests` rule; site permissions allow the local checks /dss-check needs
+  (`pnpm start`, Lighthouse, `curl` on localhost, `pnpm cf:build`, wrangler dry run); the `any` rule ignores string
+  literals (copy like "Fake sites: any payment" was refused); `factory run` reports a run stopped by an error, max
+  turns or a usage limit instead of "ready", and allows WebFetch so headless research can open competitor sites.

@@ -26,6 +26,10 @@ PALETTE = "slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emer
 UTILS = "bg|text|border|from|via|to|ring|fill|stroke|outline|decoration|divide|shadow|accent|caret|placeholder"
 EMOJI = re.compile("[\U0001F300-\U0001FAFF\U00002600-\U000027BF\U0001F1E6-\U0001F1FF]")
 
+# Type rule, matched on code only: copy such as "Fake sites: any payment" is not a type annotation.
+ANY = re.compile(r"(?::\s*any\b|\bas\s+any\b|<any>|\bany\[\])")
+CODE_ONLY = (ANY,)
+
 # (pattern, message, suffixes, path prefixes or None for every checked file)
 LINE_RULES: list[tuple[re.Pattern[str], str, tuple[str, ...], tuple[str, ...] | None]] = [
     (re.compile(r"""['"`]#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})['"`]"""),
@@ -34,7 +38,7 @@ LINE_RULES: list[tuple[re.Pattern[str], str, tuple[str, ...], tuple[str, ...] | 
     (re.compile(rf"\b(?:{UTILS})-\[(?:#|rgb|hsl|oklch|color)"), "arbitrary color value: use a DNA token class", TS, None),
     (re.compile(rf"\b(?:{UTILS})-(?:{PALETTE})-(?:50|[1-9]00|950)\b"),
      "default Tailwind palette color (a generated-site tell): use DNA tokens (CATALOG.md > Tokens)", TS, None),
-    (re.compile(r"(?::\s*any\b|\bas\s+any\b|<any>|\bany\[\])"), "`any`: type precisely (unknown + zod when parsing)", TS, None),
+    (ANY, "`any`: type precisely (unknown + zod when parsing)", TS, None),
     (re.compile(r"\bstyle=\{\{(?!\s*['\"]--)"), "inline style: Tailwind token classes (CSS variables only: style={{ '--x': v }})", TSX, None),
     (re.compile(r"<img\b"), "<img>: use Media from @dss/ui (next/image: sizes, AVIF, lazy loading)", TSX, None),
     (re.compile(r"<a\s[^>]*href=[\"'{`]+/(?!/)"), "internal <a href>: use next/link (or ButtonLink)", TSX, None),
@@ -102,8 +106,10 @@ def check(rel: str, text: str, full: str | None = None) -> list[str]:
         stripped = line.strip()
         if stripped.startswith(("//", "*", "/*")) or "dss-ignore" in line:
             continue
+        code = STRING.sub(lambda m: m.group(1) * 2, line)
         for pattern, message, suffixes, prefixes in LINE_RULES:
-            if suffix in suffixes and (prefixes is None or rel.startswith(prefixes)) and pattern.search(line):
+            target = code if pattern in CODE_ONLY else line
+            if suffix in suffixes and (prefixes is None or rel.startswith(prefixes)) and pattern.search(target):
                 problems.append(f"line {number}: {message}")
         if EMOJI.search(line) and rel.startswith(("content/", "app/", "components/")):
             problems.append(f"line {number}: emoji in site copy or UI: remove it")

@@ -31,4 +31,5 @@ jobs:
       - run: pnpm dss doctor --quick
       - run: pnpm lint
       - run: pnpm typecheck
+      - run: pnpm test
       - run: pnpm build
