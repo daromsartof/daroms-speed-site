@@ -1,4 +1,11 @@
-import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
@@ -12,7 +19,8 @@ import {
   setNavLabel,
 } from '../lib/codegen.ts'
 import { pascal, kebab, render } from '../lib/fsx.ts'
-import { listSections, resolveSection } from '../lib/registry.ts'
+import { listScenes, listSections, resolveSection } from '../lib/registry.ts'
+import { CORE_DIR } from '../lib/paths.ts'
 import { toTs } from '../lib/serialize.ts'
 
 describe('args', () => {
@@ -134,8 +142,34 @@ describe('registry', () => {
     }
   })
 
-  it('prefers a variant that fits the archetype', () => {
-    expect(resolveSection('hero', 'craft').id).toBe('hero')
+  it('picks a fitting variant with the seed and respects the DNA 3D level', () => {
+    expect(resolveSection('hero', 'craft').fits).toContain('craft')
+    expect(resolveSection('hero', 'tech-noir', 'seed-a', false).needs?.scenes ?? []).toEqual([])
+    const picks = new Set(
+      Array.from({ length: 20 }, (_, i) => resolveSection('hero', 'tech-noir', `s${i}`).variant),
+    )
+    expect(picks.size).toBeGreaterThan(1)
     expect(() => resolveSection('nope')).toThrow(/unknown section/)
+  })
+
+  it('declares only scenes that exist, and every scene file exists', () => {
+    const scenes = listScenes()
+    for (const s of listSections())
+      for (const id of s.needs?.scenes ?? []) expect(scenes.map((x) => x.id)).toContain(id)
+    for (const scene of scenes)
+      for (const f of scene.files) expect(existsSync(join(scene.dir, f)), f).toBe(true)
+  })
+
+  it('every preset only uses registry sections', () => {
+    const ids = new Set(listSections().map((s) => s.id))
+    const dir = join(CORE_DIR, 'template/presets')
+    for (const preset of readdirSync(dir)) {
+      const data = JSON.parse(readFileSync(join(dir, preset, 'preset.json'), 'utf8')) as {
+        pages: { sections: string[] }[]
+      }
+      for (const page of data.pages)
+        for (const id of page.sections)
+          expect(ids.has(id.split('/')[0] as string), `${preset}: ${id}`).toBe(true)
+    }
   })
 })

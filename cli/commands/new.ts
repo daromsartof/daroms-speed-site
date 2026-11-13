@@ -7,6 +7,7 @@ import { copyDir, readJson, writeJson } from '../lib/fsx.ts'
 import { color, fail, log } from '../lib/log.ts'
 import { generatePage, type PageSpec } from '../lib/pages.ts'
 import { CORE_DIR } from '../lib/paths.ts'
+import { ensureCorePackage } from '../lib/workspace.ts'
 import {
   loadDna,
   readHistory,
@@ -153,7 +154,14 @@ export async function newSite(args: Args) {
   if (!bool(args, 'no-history')) recordHistory(slug, dna)
   log.ok(designRead(dna))
 
-  for (const page of preset.pages) await generatePage(dest, page, dna.archetype, true)
+  const needed = new Set<string>()
+  for (const page of preset.pages) {
+    for (const name of await generatePage(dest, page, dna, true)) needed.add(name)
+  }
+  if ([...needed].some((name) => ensureCorePackage(dest, name))) {
+    log.step(`adding core packages: ${[...needed].join(', ')} (pnpm install)`)
+    await run(['pnpm', 'install'], { cwd: dest, quiet: !bool(args, 'verbose') })
+  }
 
   // AI layer: .claude/ from core/_ai, then the routing index. CLAUDE_PROJECT_DIR must be the new site,
   // not a Claude Code session the CLI may run in.

@@ -1,0 +1,9 @@
+{
+  "id": "team",
+  "variant": "portraits",
+  "component": "Team",
+  "title": "Team portraits",
+  "description": "Portrait grid with roles and one-line bios. Real photos only.",
+  "fits": ["editorial", "craft", "institutional", "organic", "architectural", "luxury", "swiss"],
+  "client": false
+}

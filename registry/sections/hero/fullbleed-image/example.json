@@ -1,0 +1,7 @@
+{
+  "title": "[The outcome you deliver, in under ten words]",
+  "body": "[Two sentences with one proof.]",
+  "image": { "src": "/placeholders/wide.svg", "alt": "[Describe the real photo]" },
+  "primary": { "label": "[Main action]", "href": "/contact" },
+  "caption": "[Optional: project name, place, year]"
+}

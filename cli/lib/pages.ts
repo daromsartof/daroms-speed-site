@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
-import type { ArchetypeId } from '../../packages/design/src/index.ts'
+import type { Dna } from '../../packages/design/src/index.ts'
 import {
   contentFile,
   pageFile,
@@ -13,7 +13,7 @@ import {
 } from './codegen.ts'
 import { writeFile } from './fsx.ts'
 import { fail, log } from './log.ts'
-import { installSection, resolveSection, sectionExample } from './registry.ts'
+import { installedVariant, installSection, resolveSection, sectionExample } from './registry.ts'
 import { loadManifest, saveManifest } from './site.ts'
 
 export type PageSpec = {
@@ -36,9 +36,9 @@ const PAGE_META = {
 export async function generatePage(
   root: string,
   spec: PageSpec,
-  archetype: ArchetypeId,
+  dna: Pick<Dna, 'archetype' | 'seed' | 'three'>,
   force = false,
-) {
+): Promise<string[]> {
   if (!/^\/[a-z0-9/-]*$/.test(spec.route))
     fail(`route "${spec.route}": lowercase, digits, dashes, starting with /`)
   const page = join(root, pageFile(spec.route))
@@ -49,9 +49,15 @@ export async function generatePage(
   const keys = sectionKeys(spec.sections)
   const parts: PageSection[] = []
   const blocks: { key: string; value: unknown }[] = []
+  const packages: string[] = []
   for (const [i, sectionSpec] of spec.sections.entries()) {
-    const meta = resolveSection(sectionSpec, archetype)
+    const id = sectionSpec.split('/')[0] as string
+    const chosen = sectionSpec.includes('/')
+      ? sectionSpec
+      : (installedVariant(root, id) ?? sectionSpec)
+    const meta = resolveSection(chosen, dna.archetype, dna.seed, dna.three !== 'none')
     const installed = installSection(root, meta)
+    packages.push(...installed.packages)
     if (installed.status === 'added')
       log.ok(`section ${meta.id}/${meta.variant} -> ${installed.file}`)
     const key = keys[i] as string
@@ -78,4 +84,5 @@ export async function generatePage(
   )
   writeMetaIndex(root, input.pages)
   log.ok(`page ${spec.route} -> ${pageFile(spec.route)} + ${contentFile(spec.name)}`)
+  return [...new Set(packages)]
 }

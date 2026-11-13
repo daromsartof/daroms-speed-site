@@ -1,0 +1,9 @@
+{
+  "id": "features",
+  "variant": "bento",
+  "component": "Features",
+  "title": "Bento features",
+  "description": "Uneven tile grid (one large tile, optional metrics), staggered reveal. Products and studios.",
+  "fits": ["tech-noir", "playful", "kinetic-type", "brutalist"],
+  "client": false
+}

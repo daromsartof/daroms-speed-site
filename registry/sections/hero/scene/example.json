@@ -1,0 +1,8 @@
+{
+  "eyebrow": "[Who it is for]",
+  "title": "[The outcome you deliver, in under ten words]",
+  "body": "[Two sentences: what the product does and one concrete proof.]",
+  "primary": { "label": "[Main action]", "href": "/contact" },
+  "secondary": { "label": "[Second action]", "href": "/#features" },
+  "sceneLabel": "[What the animation suggests, e.g. data flowing through the platform]"
+}

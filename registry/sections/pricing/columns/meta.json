@@ -1,0 +1,17 @@
+{
+  "id": "pricing",
+  "variant": "columns",
+  "component": "Pricing",
+  "title": "Pricing columns",
+  "description": "Joined columns on hairlines, one featured plan. Products, memberships, packages.",
+  "fits": [
+    "swiss",
+    "tech-noir",
+    "playful",
+    "minimal-mono",
+    "institutional",
+    "editorial",
+    "organic"
+  ],
+  "client": false
+}

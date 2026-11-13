@@ -1,11 +1,14 @@
 @import 'tailwindcss' source(none);
 @import './theme.css';
+@import '../core/packages/motion/src/motion.css';
 
 /* Explicit sources: never scan core/ (templates, registry, generators). */
 @source '../app';
 @source '../components';
 @source '../content';
 @source '../core/packages/ui/src';
+@source '../core/packages/motion/src';
+@source '../core/packages/three/src';
 
 @layer base {
   html {

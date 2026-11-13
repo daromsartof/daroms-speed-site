@@ -2,6 +2,7 @@
 packages:
   - core/packages/config
   - core/packages/design
+  - core/packages/motion
   - core/packages/security
   - core/packages/seo
   - core/packages/site

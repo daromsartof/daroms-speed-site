@@ -1,0 +1,10 @@
+{
+  "id": "hero",
+  "variant": "scene",
+  "component": "Hero",
+  "title": "Hero with 3D panel",
+  "description": "Text left, a lazy three.js shader panel right (poster fallback). For DNA three level hero or immersive.",
+  "fits": ["tech-noir", "kinetic-type", "playful"],
+  "client": false,
+  "needs": { "scenes": ["gradient"] }
+}

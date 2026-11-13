@@ -1,0 +1,9 @@
+{
+  "id": "hero",
+  "variant": "mono-index",
+  "component": "Hero",
+  "title": "Mono index hero",
+  "description": "Monospace statement, factual lines and a numbered link index. Portfolios, consultants, studios.",
+  "fits": ["minimal-mono", "swiss", "tech-noir", "brutalist"],
+  "client": false
+}

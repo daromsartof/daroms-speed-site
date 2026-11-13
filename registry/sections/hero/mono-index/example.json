@@ -1,0 +1,9 @@
+{
+  "title": "[Name], [what you do] in [place].",
+  "lines": ["[Fact: years, clients or specialty]", "[Fact: availability or location]"],
+  "links": [
+    { "label": "[Work]", "href": "/#work", "meta": "[count]" },
+    { "label": "[About]", "href": "/about", "meta": "[since year]" },
+    { "label": "[Contact]", "href": "/contact", "meta": "[reply time]" }
+  ]
+}

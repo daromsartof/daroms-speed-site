@@ -1,0 +1,32 @@
+{
+  "eyebrow": "[Pricing]",
+  "title": "[Clear prices, no surprises]",
+  "note": "[Taxes, billing period, what is not included]",
+  "plans": [
+    {
+      "name": "[Plan]",
+      "price": "[Price]",
+      "period": "[per month]",
+      "summary": "[Who it is for]",
+      "features": ["[Feature]", "[Feature]", "[Feature]"],
+      "action": { "label": "[Action]", "href": "/contact" }
+    },
+    {
+      "name": "[Plan]",
+      "price": "[Price]",
+      "period": "[per month]",
+      "summary": "[Who it is for]",
+      "features": ["[Feature]", "[Feature]", "[Feature]"],
+      "action": { "label": "[Action]", "href": "/contact" },
+      "featured": true
+    },
+    {
+      "name": "[Plan]",
+      "price": "[Price]",
+      "period": "[per month]",
+      "summary": "[Who it is for]",
+      "features": ["[Feature]", "[Feature]", "[Feature]"],
+      "action": { "label": "[Action]", "href": "/contact" }
+    }
+  ]
+}

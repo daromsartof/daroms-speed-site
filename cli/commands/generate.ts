@@ -5,6 +5,8 @@ import { appendSection } from '../lib/codegen.ts'
 import { camel, kebab, pascal, render, writeFile } from '../lib/fsx.ts'
 import { fail, log } from '../lib/log.ts'
 import { generatePage } from '../lib/pages.ts'
+import { run } from '../lib/exec.ts'
+import { ensureCorePackage } from '../lib/workspace.ts'
 import { CORE_DIR, siteRoot } from '../lib/paths.ts'
 import { loadDna, loadManifest } from '../lib/site.ts'
 
@@ -20,7 +22,7 @@ export async function generate(args: Args) {
       (route === '/' ? 'home' : kebab(route.split('/').filter(Boolean).join('-')))
     const sections = list(args, 'sections')
     const dna = await loadDna(root)
-    await generatePage(
+    const needed = await generatePage(
       root,
       {
         route,
@@ -29,9 +31,13 @@ export async function generate(args: Args) {
         sections: sections.length ? sections : ['hero', 'cta'],
         nav: !bool(args, 'no-nav'),
       },
-      dna.archetype,
+      dna,
       bool(args, 'force'),
     )
+    if (needed.some((name) => ensureCorePackage(root, name))) {
+      log.step('installing new core packages (pnpm install)')
+      await run(['pnpm', 'install'], { cwd: root, quiet: true })
+    }
     return
   }
   if (kind === 'section') {

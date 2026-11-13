@@ -1,0 +1,11 @@
+{
+  "eyebrow": "[Capabilities]",
+  "title": "[What the product does better, in one line]",
+  "items": [
+    { "title": "[Main capability]", "body": "[What it means for the user.]", "detail": "[metric]" },
+    { "title": "[Capability]", "body": "[One sentence.]" },
+    { "title": "[Capability]", "body": "[One sentence.]" },
+    { "title": "[Capability]", "body": "[One sentence.]", "detail": "[metric]" },
+    { "title": "[Capability]", "body": "[One sentence.]" }
+  ]
+}

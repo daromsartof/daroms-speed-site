@@ -1,0 +1,9 @@
+{
+  "id": "projects",
+  "variant": "index",
+  "component": "Projects",
+  "title": "Projects index",
+  "description": "Lead project with a wide image, then a ruled table. Architects, agencies, builders, portfolios.",
+  "fits": ["architectural", "editorial", "swiss", "minimal-mono", "brutalist", "craft"],
+  "client": false
+}

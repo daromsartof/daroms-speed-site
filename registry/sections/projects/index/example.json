@@ -1,0 +1,27 @@
+{
+  "eyebrow": "[Selected work]",
+  "title": "[Projects that prove the claim]",
+  "items": [
+    {
+      "name": "[Project]",
+      "type": "[Type]",
+      "place": "[Place]",
+      "year": "[Year]",
+      "image": { "src": "/placeholders/wide.svg", "alt": "[Real photo]" }
+    },
+    {
+      "name": "[Project]",
+      "type": "[Type]",
+      "place": "[Place]",
+      "year": "[Year]",
+      "image": { "src": "/placeholders/wide.svg", "alt": "[Real photo]" }
+    },
+    {
+      "name": "[Project]",
+      "type": "[Type]",
+      "place": "[Place]",
+      "year": "[Year]",
+      "image": { "src": "/placeholders/wide.svg", "alt": "[Real photo]" }
+    }
+  ]
+}

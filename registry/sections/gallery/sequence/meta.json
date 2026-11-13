@@ -1,0 +1,9 @@
+{
+  "id": "gallery",
+  "variant": "sequence",
+  "component": "Gallery",
+  "title": "Image sequence",
+  "description": "Scroll-snap strip of captioned photos. Needs real images.",
+  "fits": ["architectural", "craft", "luxury", "editorial", "organic", "magazine"],
+  "client": false
+}

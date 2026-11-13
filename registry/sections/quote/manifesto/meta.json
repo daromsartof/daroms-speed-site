@@ -1,0 +1,9 @@
+{
+  "id": "quote",
+  "variant": "manifesto",
+  "component": "Manifesto",
+  "title": "Manifesto statement",
+  "description": "Display-size belief statement with one accent phrase. Brand pause between dense sections.",
+  "fits": ["editorial", "luxury", "craft", "architectural", "kinetic-type", "organic", "magazine"],
+  "client": false
+}

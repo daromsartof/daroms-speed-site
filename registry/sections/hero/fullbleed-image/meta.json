@@ -1,0 +1,9 @@
+{
+  "id": "hero",
+  "variant": "fullbleed-image",
+  "component": "Hero",
+  "title": "Full-bleed photo hero",
+  "description": "Edge-to-edge photo with an ink scrim; text bottom left. Needs one excellent real photo.",
+  "fits": ["architectural", "luxury", "organic", "craft", "editorial"],
+  "client": false
+}

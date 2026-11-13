@@ -1,0 +1,7 @@
+{
+  "id": "particles",
+  "component": "ParticlesScene",
+  "title": "Particle field",
+  "description": "1,400 points on a sphere shell in the DNA accent, pointer parallax. Poster: surface-2 with texture-halftone.",
+  "files": ["particles.tsx", "particles-content.tsx"]
+}

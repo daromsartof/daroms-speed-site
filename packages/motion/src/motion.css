@@ -1,0 +1,124 @@
+/*
+ * @dss/motion utilities. Imported by app/globals.css after theme.css.
+ * Content is visible by default: animations only run when the browser supports scroll timelines,
+ * the visitor allows motion, and the DNA motion profile is not "none" (html[data-motion]).
+ */
+
+@keyframes dss-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--dss-rise, 1.5rem));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes dss-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes dss-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes dss-drift {
+  from {
+    transform: translateY(calc(var(--dss-depth, 8) * 1%));
+  }
+  to {
+    transform: translateY(calc(var(--dss-depth, 8) * -1%));
+  }
+}
+@keyframes dss-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes dss-word {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@utility reveal {
+  --dss-motion-name: dss-rise;
+}
+@utility reveal-fade {
+  --dss-motion-name: dss-fade;
+}
+@utility reveal-scale {
+  --dss-motion-name: dss-scale;
+}
+@utility parallax {
+  --dss-parallax: 1;
+}
+@utility marquee {
+  display: flex;
+  width: max-content;
+}
+@utility split-words {
+  --dss-split: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    html:not([data-motion='none']) :where(.reveal, .reveal-fade, .reveal-scale) {
+      animation: var(--dss-motion-name) linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 30%;
+    }
+    html:not([data-motion='none']) :where(.reveal-stagger > *) {
+      animation: dss-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(5% + var(--i, 0) * 4%) cover calc(30% + var(--i, 0) * 4%);
+    }
+    html:not([data-motion='none']) .parallax {
+      animation: dss-drift linear both;
+      animation-timeline: view();
+    }
+  }
+  html:not([data-motion='none']) .marquee {
+    animation: dss-marquee var(--dss-marquee-duration, 40s) linear infinite;
+  }
+  html:not([data-motion='none']) .marquee:hover {
+    animation-play-state: paused;
+  }
+  html:not([data-motion='none']) .split-words > span {
+    display: inline-block;
+    animation: dss-word var(--duration-brand, 600ms) var(--ease-brand, ease-out) both;
+    animation-delay: calc(var(--i, 0) * 45ms);
+  }
+}
+
+/* Profile tuning: subtle moves less, cinematic moves more and slower. */
+html[data-motion='subtle'] {
+  --dss-rise: 0.75rem;
+  --dss-depth: 4;
+}
+html[data-motion='expressive'] {
+  --dss-rise: 2rem;
+  --dss-depth: 10;
+}
+html[data-motion='cinematic'] {
+  --dss-rise: 3rem;
+  --dss-depth: 14;
+  --dss-marquee-duration: 60s;
+}

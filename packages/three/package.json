@@ -1,0 +1,21 @@
+{
+  "name": "@dss/three",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "three.js for dss sites: <Scene> loads the renderer and the scene only near the viewport, pauses offscreen, falls back to a server-rendered poster (no WebGL, reduced motion, DNA three: none). Added by `dss add scene`.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.8.2",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@types/three": "0.187.0"
+  },
+  "peerDependencies": {
+    "react": ">=19 <19.4",
+    "react-dom": ">=19 <19.4"
+  }
+}

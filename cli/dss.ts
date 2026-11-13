@@ -36,7 +36,7 @@ const COMMANDS: Record<string, Command> = {
   },
   add: {
     describe:
-      'add list | add section <id[/variant]> [--page /route --force]: copy a registry section into the site',
+      'add list | add section <id[/variant]> [--page /route --force] | add scene <id>: copy registry code into the site',
     run: async (a) => (await import('./commands/add.ts')).add(a),
   },
   catalog: {

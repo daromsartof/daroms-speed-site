@@ -14,6 +14,8 @@ Read this file, never the core sources. Site sections: `grep -h @catalog compone
   `rounded-media`; rules `rule-t`, `rule-b` (width and color from the DNA).
 - Motion: `duration-(--duration-brand) ease-brand`. Textures: `texture-grain`, `texture-halftone`, `texture-grid`, `texture-mesh`.
 - <html> carries `data-archetype`, `data-motion`, `data-three`, `data-texture`, `data-radius` for variant styling.
+- Scroll motion (pure CSS, off for reduced motion and DNA motion none): `reveal`, `reveal-fade`, `reveal-scale`,
+  `reveal-stagger` (children; index via `style={stagger(i)}` from @dss/motion), `parallax`, `marquee`, `split-words`.
 
 ## @dss/ui (`import { Heading } from '@dss/ui'`; client: `@dss/ui/accordion`)
 
@@ -35,21 +37,46 @@ Read this file, never the core sources. Site sections: `grep -h @catalog compone
 | Eyebrow: small label above a heading. Sentence case by default (all-caps eyebrows are a generated-site tell). | caps (opt-in uppercase with tracking) |
 | Prose: long-form rich text (MDX, legal pages) at reading measure. |  |
 
+## Motion and 3D (`@dss/motion`, client `@dss/motion/count-up`; `@dss/three` only in components/3d)
+
+| Component | Props |
+|---|---|
+| CountUp (client): animates a number from 0 when it enters the viewport; renders the final value without JS or with reduced motion. Keep the label outside. | value (number), prefix?, suffix?, duration? (ms) |
+| Marquee: infinite horizontal loop in CSS (pauses on hover, static when motion is off). Logos, kinetic words. | children (one sequence; it is duplicated), label (accessible name), className |
+| SplitWords: headline revealed word by word in CSS (server-rendered, no JS). Use once per page, on the hero. | text, as (h1 \| h2 \| p...), className |
+| Scene (client): lazy three.js canvas with poster fallback; never the LCP element. Use inside components/3d only. | load, poster, label, className, dpr |
+
+Scenes (`pnpm dss add scene <id>`, copied into components/3d/, poster fallback, skipped when DNA three is none):
+
+- `gradient` (GradientScene): Full-canvas shader in DNA colors, very light GPU cost. Poster: surface-2 with texture-mesh.
+- `particles` (ParticlesScene): 1,400 points on a sphere shell in the DNA accent, pointer parallax. Poster: surface-2 with texture-halftone.
+
 ## Registry sections (`pnpm dss add section <id>/<variant> --page /route`)
 
-Without a variant, the first one that fits the DNA archetype is used. Props mirror `example.json`.
+Without a variant, a variant that fits the DNA archetype is picked with the site seed (one variant per id per site). Props mirror `example.json`.
 
 | Section | Component | Use | Fits |
 |---|---|---|---|
 | contact/details | Contact | Channels as a definition list plus hours. Page-level h1 (use on the contact page). | editorial, swiss, craft, institutional, organic, luxury, architectural, minimal-mono |
 | cta/band | Cta | Ink background, one line, one button. Ends a page. | editorial, swiss, brutalist, institutional, magazine, tech-noir, kinetic-type, craft |
 | faq/accordion | Faq | Radix accordion with FAQPage structured data. | editorial, swiss, institutional, organic, playful, tech-noir, minimal-mono, craft |
+| features/bento | Features | Uneven tile grid (one large tile, optional metrics), staggered reveal. Products and studios. | tech-noir, playful, kinetic-type, brutalist |
 | features/numbered | Features | Ruled, numbered list beside a title column. Avoids the three-equal-cards pattern. | editorial, swiss, institutional, minimal-mono, magazine, tech-noir |
+| gallery/sequence | Gallery | Scroll-snap strip of captioned photos. Needs real images. | architectural, craft, luxury, editorial, organic, magazine |
+| hero/fullbleed-image | Hero | Edge-to-edge photo with an ink scrim; text bottom left. Needs one excellent real photo. | architectural, luxury, organic, craft, editorial |
+| hero/kinetic | Hero | Giant looping words (CSS marquee) over a ruled statement. Agencies, music, events, bold brands. | kinetic-type, brutalist, magazine, playful |
+| hero/mono-index | Hero | Monospace statement, factual lines and a numbered link index. Portfolios, consultants, studios. | minimal-mono, swiss, tech-noir, brutalist |
+| hero/scene | Hero | Text left, a lazy three.js shader panel right (poster fallback). For DNA three level hero or immersive. | tech-noir, kinetic-type, playful |
 | hero/split-editorial | Hero | Oversized display title left, body and actions right. Text-led, no image required. | editorial, craft, institutional, architectural, luxury, swiss |
+| logos/marquee | Logos | Real clients or partners only. Monochrome SVG logos or names in the display face. | swiss, tech-noir, magazine, kinetic-type, playful, brutalist, institutional, editorial |
+| pricing/columns | Pricing | Joined columns on hairlines, one featured plan. Products, memberships, packages. | swiss, tech-noir, playful, minimal-mono, institutional, editorial, organic |
+| projects/index | Projects | Lead project with a wide image, then a ruled table. Architects, agencies, builders, portfolios. | architectural, editorial, swiss, minimal-mono, brutalist, craft |
+| quote/manifesto | Manifesto | Display-size belief statement with one accent phrase. Brand pause between dense sections. | editorial, luxury, craft, architectural, kinetic-type, organic, magazine |
 | services/rows | Services | Full-width ruled rows with optional links and prices. Good for agencies, trades, clinics, restaurants (as a menu). | editorial, craft, institutional, swiss, luxury, architectural, retro-print |
 | stats/figures | Stats | Display-size numbers over a rule. Proof, not decoration. | swiss, magazine, institutional, tech-noir, editorial, brutalist, kinetic-type |
 | steps/timeline | Steps | Horizontal timeline with accent dots. Only for real sequences. | editorial, swiss, craft, tech-noir, playful, organic, institutional |
 | story/split-media | Story | Portrait photo beside a short narrative. Needs a real photo before launch. | editorial, craft, organic, luxury, architectural, institutional |
+| team/portraits | Team | Portrait grid with roles and one-line bios. Real photos only. | editorial, craft, institutional, organic, architectural, luxury, swiss |
 | testimonials/quotes | Testimonials | One display-size quote, then a two-column list. No avatars or stars by default. | editorial, luxury, craft, institutional, magazine, organic, architectural |
 
 ## Archetypes (design.dna.ts `archetype`)

@@ -1,0 +1,18 @@
+{
+  "id": "logos",
+  "variant": "marquee",
+  "component": "Logos",
+  "title": "Logos marquee",
+  "description": "Real clients or partners only. Monochrome SVG logos or names in the display face.",
+  "fits": [
+    "swiss",
+    "tech-noir",
+    "magazine",
+    "kinetic-type",
+    "playful",
+    "brutalist",
+    "institutional",
+    "editorial"
+  ],
+  "client": false
+}

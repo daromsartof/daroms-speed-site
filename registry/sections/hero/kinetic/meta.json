@@ -1,0 +1,9 @@
+{
+  "id": "hero",
+  "variant": "kinetic",
+  "component": "Hero",
+  "title": "Kinetic type hero",
+  "description": "Giant looping words (CSS marquee) over a ruled statement. Agencies, music, events, bold brands.",
+  "fits": ["kinetic-type", "brutalist", "magazine", "playful"],
+  "client": false
+}

@@ -1,0 +1,7 @@
+{
+  "id": "gradient",
+  "component": "GradientScene",
+  "title": "Flowing gradient field",
+  "description": "Full-canvas shader in DNA colors, very light GPU cost. Poster: surface-2 with texture-mesh.",
+  "files": ["gradient.tsx", "gradient-content.tsx"]
+}

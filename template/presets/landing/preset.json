@@ -1,11 +1,11 @@
 {
-  "description": "Single conversion page for a product, offer or event: hero, proof, features, process, FAQ, CTA.",
+  "description": "Single conversion page for a product, offer or event: hero, proof, features, process, pricing, FAQ, CTA.",
   "pages": [
     {
       "route": "/",
       "name": "home",
       "label": "Home",
-      "sections": ["hero", "stats", "features", "steps", "testimonials", "faq", "cta"]
+      "sections": ["hero", "logos", "features", "steps", "stats", "testimonials", "pricing", "faq", "cta"]
     }
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "name": "@dss/motion",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Motion with almost no JavaScript: CSS scroll-driven reveals, split text, marquee and count-up utilities driven by the DNA motion profile, reduced-motion safe. Server components unless marked client.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./count-up": "./src/count-up.tsx",
+    "./motion.css": "./src/motion.css"
+  },
+  "peerDependencies": {
+    "react": ">=19"
+  }
+}

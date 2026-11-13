@@ -1,0 +1,10 @@
+{
+  "eyebrow": "[Work]",
+  "title": "[A sequence that shows how you work]",
+  "images": [
+    { "src": "/placeholders/landscape.svg", "alt": "[Real photo 1]", "caption": "[Caption]" },
+    { "src": "/placeholders/landscape.svg", "alt": "[Real photo 2]", "caption": "[Caption]" },
+    { "src": "/placeholders/landscape.svg", "alt": "[Real photo 3]", "caption": "[Caption]" },
+    { "src": "/placeholders/landscape.svg", "alt": "[Real photo 4]", "caption": "[Caption]" }
+  ]
+}

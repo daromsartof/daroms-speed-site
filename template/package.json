@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@dss/design": "workspace:*",
+    "@dss/motion": "workspace:*",
     "@dss/security": "workspace:*",
     "@dss/seo": "workspace:*",
     "@dss/site": "workspace:*",

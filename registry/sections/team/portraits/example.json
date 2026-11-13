@@ -1,0 +1,18 @@
+{
+  "eyebrow": "[Team]",
+  "title": "[The people who do the work]",
+  "people": [
+    {
+      "name": "[Full name]",
+      "role": "[Role]",
+      "bio": "[One line: background or specialty]",
+      "image": { "src": "/placeholders/portrait.svg", "alt": "[Portrait of name]" }
+    },
+    {
+      "name": "[Full name]",
+      "role": "[Role]",
+      "bio": "[One line]",
+      "image": { "src": "/placeholders/portrait.svg", "alt": "[Portrait of name]" }
+    }
+  ]
+}

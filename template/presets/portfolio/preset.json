@@ -1,0 +1,8 @@
+{
+  "description": "Work-led site for architects, photographers, designers, makers: projects first, a belief, the people, contact.",
+  "pages": [
+    { "route": "/", "name": "home", "label": "Home", "sections": ["hero", "projects", "quote", "gallery", "cta"] },
+    { "route": "/about", "name": "about", "label": "About", "sections": ["hero", "story", "team", "cta"] },
+    { "route": "/contact", "name": "contact", "label": "Contact", "sections": ["contact"] }
+  ]
+}
