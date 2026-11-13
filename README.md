@@ -13,6 +13,9 @@ cd atelier-nord && pnpm dev
 # then in Claude Code:  /dss-site A furniture workshop in Lyon that makes forty solid-wood tables a year
 ```
 
+**Demo:** [Clear to Board](https://clear-to-board.romeoerika-razaka.workers.dev/), an ETIAS scam-checker site built by the
+agent from one brief in 24 minutes ([how it was made](https://daromsartof.github.io/daroms-speed-site/demo/)).
+
 ## Why it is different
 
 - **Varied by construction.** Every site rolls a Design DNA (14 archetypes, 42 font pairings, OKLCH palettes with WCAG

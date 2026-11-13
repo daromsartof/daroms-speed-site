@@ -20,6 +20,7 @@ sites and want each one to look designed for its business, rank, load fast and s
 ## Pages
 
 - [Getting started](getting-started.md)
+- [Demo: Clear to Board](demo.md)
 - [For AI agents](agents.md)
 - [Architecture](architecture.md)
 - [Design DNA](design-dna.md)

@@ -6,6 +6,7 @@
 
 - [daroms-speed-site](https://daromsartof.github.io/daroms-speed-site/index.md): A Next.js framework and Claude Code workflow that turns a brief into a varied, production-grade website at low token cost.
 - [Getting started](https://daromsartof.github.io/daroms-speed-site/getting-started.md): Create a site with one command, open it in Claude Code, and let the /dss-site skill take it from brief to deploy.
+- [Demo: Clear to Board](https://daromsartof.github.io/daroms-speed-site/demo.md): A real site built by the dss agent from one brief: an independent guide to Europe's ETIAS and EES rules, with an in-browser checker that spots fake ETIAS websites.
 - [For AI agents](https://daromsartof.github.io/daroms-speed-site/agents.md): The operating manual for an agent (Claude Code or any coding agent): what to read, how to start a site, the contract every site follows and the checks to run before saying done.
 - [Architecture](https://daromsartof.github.io/daroms-speed-site/architecture.md): Versioned infrastructure in core packages, owned visual code in the site, data files the CLI rewrites, generated files nobody edits.
 - [Design DNA](https://daromsartof.github.io/daroms-speed-site/design-dna.md): Each site rolls a deterministic, accessible design identity that avoids the combinations of recent sites and the usual generated-site tells.

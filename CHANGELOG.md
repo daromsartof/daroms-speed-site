@@ -122,3 +122,4 @@ All notable changes to daroms-speed-site. Versions follow `VERSION`.
   point to those twins; new "For AI agents" page; catalog generator no longer emits raw `<html>`/`<slug>` tags.
 - Repository: SECURITY.md (private vulnerability reporting), CONTRIBUTING.md, issue and pull request templates,
   Dependabot, CODEOWNERS; npm metadata (homepage, author, public access).
+- Docs: a Demo page (Clear to Board, live preview link, how it was built, results), linked from the README.

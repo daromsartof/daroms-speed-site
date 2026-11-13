@@ -11,6 +11,7 @@ export function docPages(docs: string): string[] {
   const order = [
     'index.md',
     'getting-started.md',
+    'demo.md',
     'agents.md',
     'architecture.md',
     'design-dna.md',
