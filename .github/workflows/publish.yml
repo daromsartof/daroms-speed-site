@@ -1,0 +1,57 @@
+# Publishes @daromsart/daroms-speed-site to npm on every vX.Y.Z tag (created by `dss release-core`).
+# Auth: npm trusted publishing (OIDC) once configured on npmjs.com, otherwise the NPM_TOKEN secret.
+name: publish
+
+on:
+  push:
+    tags: ['v*.*.*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Recent npm (trusted publishing needs npm >= 11.5.1)
+        run: npm install -g npm@11
+      - name: Tag = VERSION = package.json
+        run: |
+          version="$(cat VERSION)"
+          pkg="$(node -p "require('./package.json').version")"
+          tag="${GITHUB_REF_NAME#v}"
+          echo "VERSION=$version package.json=$pkg tag=$tag"
+          test "$version" = "$pkg"
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then test "$tag" = "$version"; fi
+      - name: Already on npm?
+        id: npm
+        run: |
+          name="$(node -p "require('./package.json').name")"
+          if npm view "$name@$(cat VERSION)" version >/dev/null 2>&1; then
+            echo "already=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::$name@$(cat VERSION) is already published"
+          fi
+      - name: Install
+        if: steps.npm.outputs.already != 'true'
+        run: pnpm install --frozen-lockfile
+      - name: Publish (prepublishOnly runs pnpm check and the CLI bundle)
+        if: steps.npm.outputs.already != 'true'
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

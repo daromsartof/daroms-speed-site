@@ -50,7 +50,9 @@
     "VERSION",
     "CHANGELOG.md",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "docs",
+    "CATALOG.md"
   ],
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
@@ -63,7 +65,8 @@
     "prepublishOnly": "pnpm check && pnpm build:cli",
     "catalog": "node cli/dss.ts catalog",
     "test:hooks": "python3 -m unittest discover -s _ai/hooks/tests",
-    "verify:registry": "node scripts/verify-registry.mjs"
+    "verify:registry": "node scripts/verify-registry.mjs",
+    "docs": "node cli/dss.ts docs"
   },
   "devDependencies": {
     "@dss/config": "workspace:*",

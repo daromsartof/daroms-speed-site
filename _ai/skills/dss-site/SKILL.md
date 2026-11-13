@@ -10,6 +10,7 @@ disable-model-invocation: true
 Idea: $ARGUMENTS
 
 Run the steps below. After each: a summary of at most 3 lines, then **ask for validation** (AskUserQuestion: Continue / Adjust / Stop). Never skip a checkpoint.
+With `--auto` (factory runs): no checkpoints; record each decision in `site.spec.md > Journal`, stop before step 12.
 
 | # | Step | Skill | Deliverable |
 |---|---|---|---|

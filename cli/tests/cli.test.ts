@@ -173,3 +173,52 @@ describe('registry', () => {
     }
   })
 })
+
+describe('release-core', () => {
+  it('bumps versions and groups commits', async () => {
+    const { bumpVersion, changelogSection } = await import('../commands/core.ts')
+    expect(bumpVersion('0.1.0', 'patch')).toBe('0.1.1')
+    expect(bumpVersion('0.1.9', 'minor')).toBe('0.2.0')
+    expect(bumpVersion('1.2.3', 'major')).toBe('2.0.0')
+    const section = changelogSection('0.2.0', '2026-11-13', [
+      'feat(cli): dss deploy',
+      'fix: theme drift',
+      'chore: deps',
+    ])
+    expect(section).toContain('## v0.2.0 (2026-11-13)')
+    expect(section).toContain('### Features\n- dss deploy')
+    expect(section).toContain('### Fixes\n- theme drift')
+    expect(section).toContain('### Other\n- deps')
+  })
+})
+
+describe('factory and upgrade helpers', () => {
+  it('parses briefs with front matter', async () => {
+    const { parseBrief } = await import('../commands/factory.ts')
+    const text =
+      '---\nslug: sole\nname: Trattoria Sole\nmood: warm, rustic\n---\n# Site brief\n\n## Pitch\nPasta.'
+    const brief = parseBrief(text, 'x')
+    expect(brief).toMatchObject({ slug: 'sole', name: 'Trattoria Sole', mood: 'warm, rustic' })
+    expect(brief.body.startsWith('# Site brief')).toBe(true)
+    expect(parseBrief('# No front matter', 'fallback').slug).toBe('fallback')
+  })
+
+  it('aligns only shared, non-workspace dependencies', async () => {
+    const { alignVersions } = await import('../commands/upgrade.ts')
+    const site = {
+      dependencies: { next: '16.4.5', zod: '4.6.7', '@dss/ui': 'workspace:*', extra: '1.0.0' },
+      devDependencies: { wrangler: '4.150.0' },
+    }
+    const changed = alignVersions(site, {
+      dependencies: { next: '16.4.6', zod: '4.6.7', '@dss/ui': 'workspace:*' },
+      devDependencies: { wrangler: '4.161.0' },
+      packageManager: 'pnpm@9.7.0',
+    })
+    expect(changed).toEqual([
+      'next 16.4.5 -> 16.4.6',
+      'wrangler 4.150.0 -> 4.161.0',
+      'packageManager -> pnpm@9.7.0',
+    ])
+    expect(site.dependencies.extra).toBe('1.0.0')
+  })
+})

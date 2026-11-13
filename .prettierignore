@@ -14,3 +14,6 @@ _ai/skills/vendor/**
 # Vendored AimKit build
 packages/aimkit/dist/**
 packages/aimkit/extension/**
+docs/llms.txt
+docs/llms-full.txt
+docs/cli.md
