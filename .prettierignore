@@ -1,0 +1,5 @@
+pnpm-lock.yaml
+_ai/digest.md
+**/CATALOG.md
+template/**/*.json
+generators/**/files/**

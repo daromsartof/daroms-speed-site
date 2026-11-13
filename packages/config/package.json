@@ -1,0 +1,18 @@
+{
+  "name": "@dss/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared TypeScript, ESLint, Prettier and Vitest configuration for daroms-speed-site core and sites.",
+  "exports": {
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./tsconfig.node.json": "./tsconfig.node.json",
+    "./eslint": "./eslint.js",
+    "./prettier": "./prettier.json"
+  },
+  "peerDependencies": {
+    "@eslint/js": ">=9",
+    "eslint": ">=9",
+    "typescript-eslint": ">=8"
+  }
+}
