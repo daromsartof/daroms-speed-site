@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Drizzle ORM on SQLite: Cloudflare D1 in production on Workers, libSQL/SQLite elsewhere, one schema. Postgres comes as a separate entry. Added to a site by `dss db init`.",
+  "description": "Drizzle ORM: SQLite (Cloudflare D1 binding, libSQL) with one schema, or Postgres (postgres.js). Added to a site by `dss db init`.",
   "exports": {
     ".": "./src/index.ts",
+    "./pg": "./src/pg-columns.ts",
     "./d1": "./src/d1.ts",
     "./libsql": "./src/libsql.ts",
+    "./postgres": "./src/postgres.ts",
     "./config": "./src/drizzle-config.ts"
   },
   "dependencies": {
@@ -16,7 +18,8 @@
   "peerDependencies": {
     "@libsql/client": ">=0.17",
     "@opennextjs/cloudflare": ">=1.20",
-    "server-only": "*"
+    "server-only": "*",
+    "postgres": ">=3.4"
   },
   "peerDependenciesMeta": {
     "@libsql/client": {
@@ -24,9 +27,13 @@
     },
     "@opennextjs/cloudflare": {
       "optional": true
+    },
+    "postgres": {
+      "optional": true
     }
   },
   "devDependencies": {
-    "@libsql/client": "0.18.0"
+    "@libsql/client": "0.18.0",
+    "postgres": "4.1.1"
   }
 }

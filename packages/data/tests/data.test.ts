@@ -54,3 +54,22 @@ describe('dssDrizzleConfig', () => {
     expect(() => dssDrizzleConfig({ db: { driver: 'none' } })).toThrow(/dss db init/)
   })
 })
+
+describe('postgres', () => {
+  it('requires a url without connecting', async () => {
+    const { postgresDb } = await import('../src/postgres-client.ts')
+    const previous = process.env.DATABASE_URL
+    delete process.env.DATABASE_URL
+    expect(() => postgresDb({})).toThrow(/DATABASE_URL/)
+    if (previous) process.env.DATABASE_URL = previous
+  })
+
+  it('builds pg columns', async () => {
+    const { pgTable, text } = await import('drizzle-orm/pg-core')
+    const { id, timestamps } = await import('../src/pg-columns.ts')
+    const table = pgTable('t', { id: id(), name: text('name'), ...timestamps() })
+    expect(Object.keys(table)).toEqual(
+      expect.arrayContaining(['id', 'name', 'createdAt', 'updatedAt']),
+    )
+  })
+})

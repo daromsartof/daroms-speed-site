@@ -44,6 +44,11 @@ const COMMANDS: Record<string, Command> = {
       'module list | add <slug> [--config k=v --page /route] | remove <slug>: forms, legal, analytics, blog...',
     run: async (a) => (await import('./commands/module.ts')).moduleCommand(a),
   },
+  db: {
+    describe:
+      'db init [--driver d1|libsql|postgres]: Drizzle schema, client, config, migrations scripts',
+    run: async (a) => (await import('./commands/db.ts')).db(a),
+  },
   catalog: {
     describe: 'catalog: regenerate core/CATALOG.md and _ai/digest.md (core repository)',
     run: async (a) => (await import('./commands/ai.ts')).catalog(a),

@@ -9,6 +9,7 @@ import { CORE_DIR } from './paths.ts'
  */
 const SITE_LIBRARIES: Record<string, { deps: string[]; devDeps: string[] }> = {
   three: { deps: ['three', '@react-three/fiber'], devDeps: ['@types/three'] },
+  data: { deps: ['drizzle-orm'], devDeps: [] },
 }
 
 function corePackageJson(name: string): {

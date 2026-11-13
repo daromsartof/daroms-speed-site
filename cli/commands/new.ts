@@ -1,9 +1,10 @@
-import { existsSync, readFileSync, realpathSync, renameSync, rmSync, symlinkSync } from 'node:fs'
+import { existsSync, readFileSync, renameSync } from 'node:fs'
 import { basename, join, resolve } from 'node:path'
 import { rollDna, designRead, type Dna } from '../../packages/design/src/index.ts'
 import { bool, flag, list, type Args } from '../lib/args.ts'
-import { capture, run } from '../lib/exec.ts'
-import { copyDir, readJson, writeJson } from '../lib/fsx.ts'
+import { run } from '../lib/exec.ts'
+import { attachCore } from '../lib/attach.ts'
+import { copyDir, readJson, writeFile, writeJson } from '../lib/fsx.ts'
 import { color, fail, log } from '../lib/log.ts'
 import { generatePage, type PageSpec } from '../lib/pages.ts'
 import { CORE_DIR } from '../lib/paths.ts'
@@ -18,9 +19,6 @@ import {
   writeTheme,
 } from '../lib/site.ts'
 
-const DEFAULT_CORE_URL = 'https://github.com/daromsartof/daroms-speed-site.git'
-const CORE_SKIP =
-  /^(node_modules|\.git|\.dss|dist|coverage|test-results|docs\/dist|docs\/\.astro)(\/|$)|\/node_modules(\/|$)/
 const TEMPLATE_SKIP =
   /^(presets|node_modules|\.next|\.open-next|\.wrangler)(\/|$)|next-env\.d\.ts$|tsbuildinfo$/
 
@@ -30,77 +28,6 @@ function loadPreset(name: string): Preset {
   const file = join(CORE_DIR, 'template', 'presets', name, 'preset.json')
   if (!existsSync(file)) fail(`unknown preset "${name}" (template/presets/)`)
   return readJson<Preset>(file)
-}
-
-async function coreIsCheckout(): Promise<boolean> {
-  const { code, out } = await capture(['git', '-C', CORE_DIR, 'rev-parse', '--show-toplevel'])
-  return code === 0 && realpathSync(out.trim()) === realpathSync(CORE_DIR)
-}
-
-async function attachCore(dest: string, args: Args) {
-  if (bool(args, 'link')) {
-    symlinkSync(CORE_DIR, join(dest, 'core'), 'dir')
-    return log.ok('core linked (symlink, for framework development)')
-  }
-  const copy = () => copyDir(CORE_DIR, join(dest, 'core'), (rel) => CORE_SKIP.test(rel))
-  if (bool(args, 'copy')) {
-    copy()
-    return log.ok('core copied (self-contained snapshot, for client handoff)')
-  }
-  const checkout = await coreIsCheckout()
-  const url = flag(args, 'core') ?? (checkout ? await checkoutUrl() : DEFAULT_CORE_URL)
-  const added = await run(
-    ['git', '-c', 'protocol.file.allow=always', 'submodule', 'add', '-q', url, 'core'],
-    {
-      cwd: dest,
-      allowFailure: true,
-      quiet: true,
-      env: { GIT_TERMINAL_PROMPT: '0' },
-    },
-  )
-  if (added !== 0) {
-    log.warn(
-      `${url} unreachable: copying the installed core instead (pass --core <url> for a submodule)`,
-    )
-    // A failed clone leaves core/.git and .git/modules/core behind: git would see an empty submodule.
-    for (const leftover of ['core', '.git/modules/core', '.gitmodules']) {
-      rmSync(join(dest, leftover), { recursive: true, force: true })
-    }
-    copy()
-    return
-  }
-  const tag = `v${readFileSync(join(CORE_DIR, 'VERSION'), 'utf8').trim()}`
-  if (checkout) {
-    // From a working copy: pin the submodule to the exact commit that created the site.
-    const { out } = await capture(['git', '-C', CORE_DIR, 'rev-parse', 'HEAD'])
-    await run(['git', '-C', 'core', 'checkout', '-q', out.trim()], {
-      cwd: dest,
-      allowFailure: true,
-      quiet: true,
-    })
-    return log.ok(`core added as a submodule (${url}, ${out.trim().slice(0, 7)})`)
-  }
-  const pinned = await run(['git', '-C', 'core', 'checkout', '-q', tag], {
-    cwd: dest,
-    allowFailure: true,
-    quiet: true,
-  })
-  log.ok(
-    pinned === 0
-      ? `core submodule pinned to ${tag}`
-      : `core submodule on default branch (${tag} not found)`,
-  )
-}
-
-/** The origin remote when it already has HEAD; otherwise the local checkout (unpushed core work). */
-async function checkoutUrl(): Promise<string> {
-  const origin = await capture(['git', '-C', CORE_DIR, 'remote', 'get-url', 'origin'])
-  const pushed = await capture(['git', '-C', CORE_DIR, 'branch', '-r', '--contains', 'HEAD'])
-  if (origin.code === 0 && pushed.code === 0 && pushed.out.trim()) return origin.out.trim()
-  log.warn(
-    'core HEAD is not pushed: the submodule points to the local checkout (pass --core <url> before sharing)',
-  )
-  return CORE_DIR
 }
 
 /** dss new <slug>: a complete site, installed, themed from a fresh DNA, pages generated from a preset. */
@@ -141,6 +68,16 @@ export async function newSite(args: Args) {
   const pkgFile = join(dest, 'package.json')
   const pkg = readJson<Record<string, unknown>>(pkgFile)
   writeJson(pkgFile, { ...pkg, name: slug })
+  // One Worker per site: the template name would make every site deploy over the same Worker.
+  const wranglerFile = join(dest, 'wrangler.jsonc')
+  writeFile(
+    wranglerFile,
+    readFileSync(wranglerFile, 'utf8').replaceAll('"dss-site"', JSON.stringify(slug)),
+  )
+  writeFile(
+    pkgFile,
+    readFileSync(pkgFile, 'utf8').replace('docker build -t dss-site', `docker build -t ${slug}`),
+  )
 
   log.step('installing dependencies (pnpm install)')
   await run(['pnpm', 'install'], { cwd: dest, quiet: !bool(args, 'verbose') })
