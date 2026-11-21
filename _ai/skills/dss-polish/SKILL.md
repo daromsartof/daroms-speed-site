@@ -9,9 +9,9 @@ effort: medium
 
 # /dss-polish: does not look generated
 
-1. Build and serve (`pnpm build && pnpm start`), then capture each page at 1440 and 390 wide:
-   `google-chrome --headless=new --hide-scrollbars --window-size=1440,2400 --screenshot=.dss/shots/<page>.png http://localhost:3000<route>`.
-2. Ask the `dss-critic` agent (captures + `site.spec.md > Design` + `core/CATALOG.md > Archetypes`) for at most 10 fixes ranked by impact.
-3. Ask the `dss-designer` agent for hierarchy, spacing, states and accessibility issues (at most 10).
-4. Apply fixes with DNA tokens and owned sections; no new dependency. Re-capture changed pages. At most two rounds.
-5. **Stop**: fixes applied, one line each.
+1. Capture each page at 1440 and 390 wide: `pnpm dss shot <route> --capture` (captures in `.dss/shots/`). Keep the `measure` lines.
+2. Measures first: fix every failing measure (a count is not up for debate), unless `site.spec.md > Design` records the exception.
+3. Ask the `dss-critic` agent (captures, remaining measures, `site.spec.md > Design`, `core/CATALOG.md > Archetypes`) for at most 10 fixes ranked by impact.
+4. Ask the `dss-designer` agent for hierarchy, spacing, states and accessibility issues (at most 10).
+5. Apply fixes with DNA tokens and owned sections; no new dependency. Re-run `pnpm dss shot` on changed pages until measures are ok. At most two rounds.
+6. **Stop**: fixes applied, one line each.

@@ -37,3 +37,33 @@ Text tokens are pushed in lightness until they meet WCAG minimums on both surfac
 The rule hook refuses default Tailwind palette classes, raw colors, emoji in copy, em dashes and generated-copy
 cliches in `content/` (elevate, seamless, unlock, cutting-edge...). The `dss-critic` agent reviews captures against the
 DNA and the avoid lists.
+
+## Taste measures
+
+The hook reads source; `pnpm dss shot <route>` counts on the rendered page, at 1440 and 390 wide, what gives a generated
+site away. A number cannot be argued with, while "make it look better" only invites a new set of defaults. The
+reference is the generated `app/theme.css`, so a measure fails when the page drifts from its DNA.
+
+| Measure                         | Max                 | What is counted                                                                                       |
+| ------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------- |
+| off-palette hues                | 0                   | vivid colors whose hue matches no DNA color token                                                     |
+| radii off the DNA scale         | 0                   | radii other than `--radius-card`, `-control`, `-media` (pills and elements under 24 px skipped)       |
+| type sizes                      | DNA scale + 3       | distinct font sizes on the page                                                                       |
+| font families                   | display, body, mono | families rendered                                                                                     |
+| colourful gradients             | 0                   | gradients with saturated stops; DNA textures and neutral scrims over images are fine                  |
+| emoji                           | 0                   | emoji in rendered text, data included                                                                 |
+| one destination, several labels | 0                   | links in `<main>` to one page under different labels (hero "Book a visit", footer CTA "Get in touch") |
+| one label, several destinations | 0                   | the same label to different pages ("Learn more" three times)                                          |
+| actions without a name          | 0                   | links and buttons with no text and no `aria-label`                                                    |
+| targets < 24px                  | 0                   | WCAG 2.5.8 minimum, with its spacing exception; inline text links exempt                              |
+
+```text
+/ [390] 200: ok
+  headings: h1 "Forty solid-wood tables a year" · 5 h2
+  measure radii off the DNA scale: 1 (max 0) 6px: Get a quote
+  measure one label, several destinations: 1 (max 0) "learn more": /services / /about
+```
+
+The report also lists console errors, horizontal overflow and the h1 count. Measures do not fail the command;
+`/dss-section`, `/dss-check` and `/dss-polish` fix them, unless `site.spec.md > Design` records the exception.
+`dss shot` starts `next dev` on port 3123 the first time and reuses it (`--stop` ends it, `--url` targets any server).

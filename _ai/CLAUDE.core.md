@@ -45,11 +45,11 @@ everything repetitive; the site writes only what is specific to it. Never edit `
 
 ## Work loop
 - Write; hooks check rules before the write and types/lint after it (short message: fix, never work around).
-- Visual check: `pnpm dss shot /route` when available, otherwise `pnpm build` + review. Visual edits from the browser: /dss-edit.
+- Visual check: `pnpm dss shot /route` (errors, overflow at 1440 and 390, taste measures); fix every `measure` line. Visual edits: /dss-edit.
 - Before handing back: `pnpm dss doctor` (theme, pages, placeholders, types, lint). End of task: /dss-learn then /dss-commit.
 
 ## Commands
-`pnpm dss`: `new`, `dev`, `doctor [--quick --strict]`, `dna show|roll`, `theme`, `g page|section`, `add list|section|scene`,
+`pnpm dss`: `new`, `dev`, `doctor [--quick --strict]`, `shot`, `dna show|roll`, `theme`, `g page|section`, `add list|section|scene`,
 `module list|add|remove` (forms, legal, analytics, blog), `db init`, `mcp list|add`, `aimkit setup|token`, `catalog`,
 `sync-ai`, `cost`. Skills: `/dss-site` (whole site, step by step), `/dss-brief`, `/dss-dna`, `/dss-sitemap`, `/dss-copy`,
 `/dss-page`, `/dss-section`, `/dss-seo`, `/dss-check`, `/dss-polish`, `/dss-deploy`, `/dss-edit`, `/dss-fix`, `/dss-learn`, `/dss-commit`.
