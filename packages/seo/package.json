@@ -1,6 +1,6 @@
 {
   "name": "@dss/seo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "SEO and GEO from the site manifest: page metadata (canonical, hreflang, noindex on previews), JSON-LD graph builders, robots, sitemap and llms.txt.",

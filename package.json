@@ -1,6 +1,6 @@
 {
   "name": "@daromsart/daroms-speed-site",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Next.js website framework built for Claude Code: design DNA, sections, SEO, security, data, deploy adapters, the dss CLI and a low-token AI layer to produce varied, production-grade sites on a line.",
   "license": "MIT",
   "author": "Daroms'Art (https://daromsart.xyz/)",

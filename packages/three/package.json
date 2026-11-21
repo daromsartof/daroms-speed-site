@@ -1,6 +1,6 @@
 {
   "name": "@dss/three",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "three.js for dss sites: <Scene> loads the renderer and the scene only near the viewport, pauses offscreen, falls back to a server-rendered poster (no WebGL, reduced motion, DNA three: none). Added by `dss add scene`.",

@@ -2,7 +2,7 @@
 
 All notable changes to daroms-speed-site. Versions follow `VERSION`.
 
-## Unreleased
+## 0.2.0 (2026-11-21)
 
 - `dss shot <route>`: render report at 1440 and 390 wide through a reusable `next dev` (console errors, horizontal
   overflow, h1 count) plus taste measures counted on the rendered page against `app/theme.css`: off-palette hues,

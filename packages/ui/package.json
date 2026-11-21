@@ -1,6 +1,6 @@
 {
   "name": "@dss/ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "Token-driven UI primitives. They read Design DNA tokens (app/theme.css), so the same component looks different on every site. Server components unless marked client.",

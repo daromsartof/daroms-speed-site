@@ -1,6 +1,6 @@
 {
   "name": "@dss/data",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "Drizzle ORM: SQLite (Cloudflare D1 binding, libSQL) with one schema, or Postgres (postgres.js). Added to a site by `dss db init`.",

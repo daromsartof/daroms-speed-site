@@ -1,6 +1,6 @@
 {
   "name": "@dss/design",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "Design DNA: archetypes, type pairings, OKLCH palettes with contrast guarantees, a deterministic anti-repetition roller and generators for theme.css / fonts.ts. Node-safe (used by the CLI).",
