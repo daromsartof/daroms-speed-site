@@ -13,4 +13,6 @@ Use when a vendored design skill or an external snippet suggests something; appl
 - Spacing scales -> `py-section`, `px-gutter`, gaps from Stack/Cluster/Grid; type scales -> `text-display-*`, `text-heading`.
 - Components from shadcn or other kits -> @dss/ui primitives or a registry section; build bespoke only for the signature moment.
 - "Make it bolder" -> one place: hero scale, a texture, an image sequence or a 3D accent according to the DNA level.
+- "Make it look better", "more modern" -> never as such (it invites a new set of defaults): a failing `dss shot` measure, or a
+  pattern from a reference in `site.spec.md > Inspiration`.
 - Planning advice (palettes of 4-6 named colors, wireframes) -> write it in `site.spec.md > Design`, then express it with tokens.

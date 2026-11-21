@@ -18,6 +18,11 @@ export const COMMANDS: Record<string, Command> = {
       'doctor [--quick --strict]: manifest, DNA, theme files, pages, placeholders, types, lint',
     run: async (a) => (await import('./commands/doctor.ts')).doctor(a),
   },
+  shot: {
+    describe:
+      'shot <route> [--width 1440,390 --capture --url <base> --port 3123 --stop]: render report (errors, overflow, taste measures), capture if useful',
+    run: async (a) => (await import('./commands/shot.ts')).shot(a),
+  },
   dna: {
     describe:
       'dna show | dna roll [--industry --mood a,b --archetype --mode --hue --fonts --seed --dry]',

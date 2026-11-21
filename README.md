@@ -37,13 +37,13 @@ Cloudflare Workers (OpenNext), Vercel or Docker. AimKit for visual edits from th
 
 ## In the box
 
-| Area     | What                                                                                                                                                                              |
-| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CLI      | `dss new`, `dev`, `doctor`, `dna`, `theme`, `g page/section`, `add section/scene`, `module`, `db init`, `deploy`, `sites`, `brain`, `mcp`, `aimkit`, `upgrade`, `factory`, `cost` |
-| Registry | 26 section variants (heroes, services, features, stories, testimonials, pricing, projects, team, gallery, FAQ, CTA...) and 2 three.js scenes                                      |
-| Modules  | forms (Resend, Turnstile), legal (GDPR, nLPD), analytics (cookieless), blog (Markdown, RSS, JSON-LD)                                                                              |
-| AI layer | 24 dss skills, 5 agents, 11 vendored community skills (name-only), 6 Python hooks, factory brain                                                                                  |
-| MCP      | aimkit and next-devtools by default; opt-in MotionSites, 60fps, Context7, Playwright, gbrain                                                                                      |
+| Area     | What                                                                                                                                                                                      |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CLI      | `dss new`, `dev`, `doctor`, `shot`, `dna`, `theme`, `g page/section`, `add section/scene`, `module`, `db init`, `deploy`, `sites`, `brain`, `mcp`, `aimkit`, `upgrade`, `factory`, `cost` |
+| Registry | 26 section variants (heroes, services, features, stories, testimonials, pricing, projects, team, gallery, FAQ, CTA...) and 2 three.js scenes                                              |
+| Modules  | forms (Resend, Turnstile), legal (GDPR, nLPD), analytics (cookieless), blog (Markdown, RSS, JSON-LD)                                                                                      |
+| AI layer | 24 dss skills, 5 agents, 11 vendored community skills (name-only), 6 Python hooks, factory brain                                                                                          |
+| MCP      | aimkit and next-devtools by default; opt-in MotionSites, 60fps, Context7, Playwright, gbrain                                                                                              |
 
 ## Docs
 

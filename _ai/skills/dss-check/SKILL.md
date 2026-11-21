@@ -12,6 +12,7 @@ effort: medium
 1. `pnpm dss doctor --strict` (fails on placeholders: list them as open facts instead of inventing), and
    `python3 .claude/hooks/dss-check-rules.py --all`.
 2. `pnpm test` (unit tests of `lib/` and `server/` logic), then `pnpm build`: all routes static unless the plan needs otherwise; read the size table for heavy pages.
+   Every page in the manifest: `pnpm dss shot <route>`; errors, overflow and `measure` lines are failures.
 3. `pnpm start` in the background, then Lighthouse mobile on the home page and the heaviest page:
    `npx -y lighthouse@13 http://localhost:3000<route> --form-factor=mobile --only-categories=performance,accessibility,best-practices,seo --quiet --output=json`
    Budgets: performance >= 90, others >= 95 (`.claude/rules-ondemand/dss-performance-budget.md`).

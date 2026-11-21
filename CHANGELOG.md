@@ -2,6 +2,17 @@
 
 All notable changes to daroms-speed-site. Versions follow `VERSION`.
 
+## Unreleased
+
+- `dss shot <route>`: render report at 1440 and 390 wide through a reusable `next dev` (console errors, horizontal
+  overflow, h1 count) plus taste measures counted on the rendered page against `app/theme.css`: off-palette hues,
+  radii off the DNA scale, type sizes, font families, colourful gradients, emoji, link labels per destination, unnamed
+  actions, targets under 24 px (WCAG 2.5.8). `/dss-section`, `/dss-check`, `/dss-polish` and `dss-critic` fix failing
+  measures first; `/dss-polish` no longer shells out to `google-chrome`. `playwright-core` joins the site template.
+- `dss-critic` scores six dimensions out of 10 on an anchored scale (DNA fidelity, hook, composition, finish, copy,
+  character), lists critical items and at least one fix that raises the hook; `/dss-polish` runs a second round while a
+  score stays under 7 and reports scores before and after. Rubric adapted from mg-styles-15 (MIT).
+
 ## 0.1.0 (2026-11-13)
 
 - Repository skeleton: pnpm workspace, `@dss/config` (strict TypeScript base with type-stripping-safe flags,

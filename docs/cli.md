@@ -8,6 +8,7 @@
 | `dss new` | new <slug> [--name --preset vitrine\|landing\|blank --industry --mood a,b --seed --url --target --modules a,b --copy\|--link\|--core <url>] |
 | `dss dev` | dev [--port 3000 --https --no-aimkit]: next dev + AimKit bridge (element picker) |
 | `dss doctor` | doctor [--quick --strict]: manifest, DNA, theme files, pages, placeholders, types, lint |
+| `dss shot` | shot <route> [--width 1440,390 --capture --url <base> --port 3123 --stop]: render report (errors, overflow, taste measures), capture if useful |
 | `dss dna` | dna show \| dna roll [--industry --mood a,b --archetype --mode --hue --fonts --seed --dry] |
 | `dss theme` | theme: regenerate theme.css, fonts.ts, theme.ts from design.dna.ts |
 | `dss g` | g page <route> [--name --label --sections a,b --no-nav --force] \| g section <name> [--page /route] |

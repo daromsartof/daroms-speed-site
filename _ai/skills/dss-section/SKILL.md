@@ -13,8 +13,9 @@ effort: medium
 Target: $ARGUMENTS
 
 1. Read `core/CATALOG.md > Registry sections` and `site.spec.md > Design`.
-2. Registry fits: `pnpm dss add section <id>/<variant> --page <route>`. Otherwise `pnpm dss g section <name> --page <route>`.
+2. Registry fits: `pnpm dss add section <id>/<variant> --page <route>`. Otherwise `pnpm dss g section <name> --page <route>`;
+   an open layout decision gets one targeted reference (`site.spec.md > Inspiration` or an allow-listed gallery): one is enough, a model with no example falls back on its most common pattern.
 3. Write the component: exported `XProps` + `X`, server component, @dss/ui primitives, DNA token classes, layout from the DNA grid.
    Interactivity in a small client child. Keep the `@catalog` line true (one sentence + props).
 4. Put the copy in the page's content file under the section key (placeholders if facts are missing).
-5. `pnpm dss doctor`. **Stop**: file path and one line on the layout idea.
+5. `pnpm dss doctor`, then `pnpm dss shot <page>`: fix overflow and `measure` lines. **Stop**: file path and one line on the layout idea.
